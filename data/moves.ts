@@ -18548,6 +18548,30 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Fairy",
 	},
+	starblazing: {
+		num: 1002,
+		accuracy: 100,
+		basePower: 90,
+		category: "Special",
+		name: "Star Blazing",
+		pp: 10,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, metronome: 1 },
+		secondary: {
+			chance: 20,
+			status: 'brn',
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (target.status || target.hasAbility('comatose')) {
+				return this.chainModify(1.5);
+			}
+		},
+		shortDesc: "20% chance to burn the target. Power increases 50% if the target has a status ailment",
+		desc: "Has a 20% chance to burn the target. Power increases 50% if the target has a non-volatile status condition",
+		target: "normal",
+		type: "Fairy",
+		contestType: "Beautiful",
+	},
 	stealthrock: {
 		num: 446,
 		accuracy: true,
