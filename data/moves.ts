@@ -10027,6 +10027,56 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		zMove: { boost: { spa: 1 } },
 		contestType: "Clever",
 	},
+	inverseroom: {
+		num: 1001,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Inverse Room",
+		pp: 5,
+		priority: 0,
+		flags: { mirror: 1, metronome: 1 },
+		pseudoWeather: 'inverseroom',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', '[move] Inverse Room');
+					return 7;
+				}
+				return 5;
+			},
+			onFieldStart(target, source) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`, '[persistent]');
+				} else {
+					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`);
+				}
+			},
+			onFieldRestart(target, source) {
+				this.field.removePseudoWeather('inverseroom');
+			},
+			// Speed modification is changed in Pokemon.getActionSpeed() in sim/pokemon.js
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 1,
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Inverse Room');
+			},
+			onEffectivenessPriority: 1,
+			onEffectiveness(typeMod, target, type, move) {
+				// The effectiveness of Freeze Dry on Water isn't reverted
+				if (move && move.id === 'freezedry' && type === 'Water') return;
+				if (move && !this.dex.getImmunity(move, type)) return 1;
+				// Ignore normal effectiveness, prevents bug with Tera Shell
+				if (typeMod) return -typeMod;
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Fairy",
+		zMove: { boost: { accuracy: 1 } },
+		contestType: "Clever",
+	},
 	iondeluge: {
 		num: 569,
 		accuracy: true,

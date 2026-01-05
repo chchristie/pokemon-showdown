@@ -70874,6 +70874,7 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			hiddenpower: ["7M", "6M"],
 			hyperbeam: ["9M", "8M", "7M", "6M"],
 			hypnosis: ["9L1", "8L1", "7L18", "6L18"],
+			inverseroom: ["9M", "8M", "7M", "6M"],
 			knockoff: ["9M", "7T", "6T", "6S0"],
 			lashout: ["9M", "8T"],
 			lightscreen: ["9M", "8M", "7M", "7L31", "6M", "6L31"],
