@@ -10037,7 +10037,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { mirror: 1, metronome: 1 },
 		pseudoWeather: 'inverseroom',
-		desc: 'For 5 turns, all type matchups are reversed.',
+		shortDesc: 'For 5 turns, all type matchups are reversed.',
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
