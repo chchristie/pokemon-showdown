@@ -36524,6 +36524,7 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			sunnyday: ["9M", "8M", "7M", "6M", "5M", "4M"],
 			swagger: ["7M", "6M", "5M", "4M"],
 			swift: ["9M", "8M", "4T"],
+			swordofdamocles: ["9M"],
 			swordsdance: ["9M", "9L35", "8M", "8L35", "7M", "7L26", "6M", "6L26", "5M", "5L31", "4M", "4L25"],
 			takedown: ["9M"],
 			taunt: ["9M", "8M", "7M", "6M", "5M", "4M"],

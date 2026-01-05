@@ -18566,8 +18566,8 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				return this.chainModify(1.5);
 			}
 		},
-		shortDesc: "20% chance to burn the target. Power increases 50% if the target has a status ailment",
-		desc: "Has a 20% chance to burn the target. Power increases 50% if the target has a non-volatile status condition",
+		shortDesc: "20% burn chance. 1.5x power if target statused.",
+		desc: "Has a 20% chance to burn the target. Power increases 50% if the target has a non-volatile status condition.",
 		target: "normal",
 		type: "Fairy",
 		contestType: "Beautiful",
@@ -19487,6 +19487,47 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Dark",
 		zMove: { boost: { spe: 2 } },
 		contestType: "Clever",
+	},
+	swordofdamocles: {
+		num: 1003,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Sword of Damocles",
+		pp: 20,
+		priority: 0,
+		flags: { snatch: 1, metronome: 1 },
+		volatileStatus: 'swordofdamocles',
+		condition: {
+			duration: 4,
+			onStart(pokemon) {
+				if (!pokemon.volatiles['swordofdamocles']) {
+					pokemon.addVolatile('swordofdamocles');
+					this.add('-start', pokemon, 'swordofdamocles3', '[silent]');
+				}
+			},
+			onResidualOrder: 24,
+			onResidual(pokemon) {
+				const duration = pokemon.volatiles['swordofdamocles'].duration;
+				this.add('-start', pokemon, `swordofdamocles${duration}`);
+			},
+			onEnd(target) {
+				this.add('-start', target, 'swordofdamocles0');
+				target.faint();
+			},
+		},
+		boosts: {
+			atk: 1,
+			def: 1,
+			spa: 1,
+			spd: 1,
+			spe: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
+		zMove: { effect: 'clearnegativeboost' },
+		contestType: "Beautiful",
 	},
 	swordsdance: {
 		num: 14,
@@ -21224,7 +21265,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		category: "Special",
 		name: "Venoshock",
 		pp: 10,
-		priority: 0,
+		priority: 0, 
 		flags: { protect: 1, mirror: 1, metronome: 1 },
 		onBasePower(basePower, pokemon, target) {
 			if (target.status === 'psn' || target.status === 'tox') {
