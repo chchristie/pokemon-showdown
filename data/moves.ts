@@ -9710,6 +9710,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Inverse Room');
 			},
+			onNegateImmunity: false,
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
 				// The effectiveness of Freeze Dry on Water isn't reverted
