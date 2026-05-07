@@ -167,7 +167,19 @@ function getSets(species: string | Species, format: string | Format = 'gen9rando
 			.readIfExistsSync() || '{}'
 	);
 	const data = setsFile[species.id];
-	if (!data?.sets?.length) return null;
+	// Temporarily modified for Mega Invasion randomized spotlight
+	if (!data?.sets?.length) {
+		if (format.mod === 'gen9' && !isDoubles) {
+			const megaSetsFile = JSON.parse(
+				FS(`data/random-battles/${folderName}/sets-megainvasion.json`)
+					.readIfExistsSync() || '{}'
+			);
+			const megaData = megaSetsFile[species.id];
+			if (!megaData?.sets?.length) return null;
+			return megaData;
+		}
+		return null;
+	}
 	return data;
 }
 
@@ -210,6 +222,24 @@ function getLevel(species: string | Species, format: string | Format): number {
 			Uber: 61,
 		};
 		return levelScale[species.tier] || 80;
+	case 'gen8bdsprandombattle':
+		const tierScale: Partial<Record<Species['tier'], number>> = {
+			Uber: 76, Unreleased: 76,
+			OU: 80,
+			UUBL: 81,
+			UU: 82,
+			RUBL: 83,
+			RU: 84,
+			NUBL: 85,
+			NU: 86,
+			PUBL: 87,
+			PU: 88, "(PU)": 88, NFE: 88,
+		};
+		const customScale: { [k: string]: number } = {
+			delibird: 100, dugtrio: 76, glalie: 76, luvdisc: 100, spinda: 100, unown: 100,
+		};
+
+		return customScale[species.id] || tierScale[species.tier] || 80;
 	}
 	return 0;
 }
@@ -257,21 +287,21 @@ function getLetsGoMoves(species: string | Species) {
 	return data.moves.map(formatMove).sort().join(`, `);
 }
 
-function battleFactorySets(species: string | Species, tier: string | null, gen = 'gen9', isBSS = false) {
+function battleFactorySets(species: string | Species, tier: string | null, gen = 'gen9', isBSS = false, is1v1 = false) {
 	species = Dex.species.get(species);
 	if (typeof species.battleOnly === 'string') {
 		species = Dex.species.get(species.battleOnly);
 	}
 	gen = toID(gen);
 	const genNum = parseInt(gen[3]);
-	if (isNaN(genNum) || genNum < 6 || (isBSS && genNum < 7)) return null;
+	if (isNaN(genNum) || genNum < 6 || (isBSS && genNum < 7) || (is1v1 && genNum < 9)) return null;
 	const statsFile = JSON.parse(
-		FS(`data/random-battles/gen${genNum}/${isBSS ? `bss-` : ``}factory-sets.json`).readIfExistsSync() ||
+		FS(`data/random-battles/gen${genNum}/${isBSS ? `bss-` : is1v1 ? `1v1-` : ``}factory-sets.json`).readIfExistsSync() ||
 		"{}"
 	);
 	if (!Object.keys(statsFile).length) return null;
 	let buf = ``;
-	if (!isBSS) {
+	if (!isBSS && !is1v1) {
 		if (!tier) throw new Chat.ErrorMessage(`Please provide a valid tier.`);
 		if (!(toID(tier) in TIERS)) throw new Chat.ErrorMessage(`That tier isn't supported.`);
 		if (!(TIERS[toID(tier)] in statsFile)) {
@@ -330,19 +360,26 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 			buf += `</ul></details>`;
 		}
 	} else {
-		const format = Dex.formats.get(`${gen}bssfactory`);
-		if (!(species.id in statsFile)) throw new Chat.ErrorMessage(`${species.name} doesn't have any sets in ${format.name}.`);
-		const setObj = statsFile[species.id];
+		const format = Dex.formats.get(`${gen}${is1v1 ? '1v1' : 'bss'}factory`);
+		if (!((is1v1 ? species.name : species.id) in statsFile))
+			throw new Chat.ErrorMessage(`${species.name} doesn't have any sets in ${format.name}.`);
+		const setObj = statsFile[is1v1 ? species.name : species.id];
 		if (genNum >= 9) {
 			buf += `Species rarity: ${setObj.weight} (higher is more common, max 10)<br />`;
 			buf += `Sets for ${species.name} in ${format.name}:<br />`;
 			for (const [i, set] of setObj.sets.entries()) {
 				buf += `<details class="details"><summary>Set ${i + 1} (${set.weight}%)</summary>`;
 				buf += `<ul style="list-style-type:none;padding-left:0;">`;
-				buf += `<li>${Dex.forFormat(format).species.get(set.species).name} @ ${set.item.map(formatItem).join(" / ")}</li>`;
-				buf += `<li>Ability: ${set.ability.map(formatAbility).join(" / ")}</li>`;
-				buf += `<li>Level: 50</li>`;
-				buf += `<li>Tera Type: ${set.teraType.map(formatType).join(' / ')}</li>`;
+				const item = !Array.isArray(set.item) ? [set.item] : set.item;
+				buf += `<li>${Dex.forFormat(format).species.get(set.species).name} @ ${item.map(formatItem).join(" / ")}</li>`;
+				const ability = !Array.isArray(set.ability) ? [set.ability] : set.ability;
+				buf += `<li>Ability: ${ability.map(formatAbility).join(" / ")}</li>`;
+				if (isBSS) {
+					buf += `<li>Level: 50</li>`;
+				} else if (set.level) {
+					buf += `<li>Level: ${set.level}</li>`;
+				}
+				if (!is1v1) buf += `<li>Tera Type: ${set.teraType.map(formatType).join(' / ')}</li>`;
 				if (set.evs) {
 					buf += `<li>EVs: `;
 					const evs: string[] = [];
@@ -353,7 +390,8 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 					}
 					buf += `${evs.join(" / ")}</li>`;
 				}
-				buf += `<li>${formatNature(set.nature)} Nature</li>`;
+				const nature = !Array.isArray(set.nature) ? [set.nature] : set.nature;
+				buf += `<li>${nature.map(formatNature).join(" / ")} Nature</li>`;
 				if (set.ivs) {
 					buf += `<li>IVs: `;
 					const ivs: string[] = [];
@@ -484,11 +522,13 @@ export const commands: Chat.ChatCommands = {
 		let isBaby = cmd === 'babyrandombattle' || cmd === 'babyrands';
 		let isFFA = cmd === 'freeforallrandombattle' || cmd === 'ffarands' || cmd === 'randffats' || cmd === 'randffa';
 		let isNoDMax = cmd.includes('nodmax');
+		let isMegaInvasion = false;
 		if (battle) {
 			if (battle.format.includes('nodmax')) isNoDMax = true;
 			if (battle.gameType === 'doubles') isDoubles = true;
 			if (battle.format.includes('baby')) isBaby = true;
 			if (battle.gameType === 'freeforall') isFFA = true;
+			if (battle.format.includes('megainvasion')) isMegaInvasion = true;
 		}
 
 		const args = target.split(',');
@@ -496,6 +536,7 @@ export const commands: Chat.ChatCommands = {
 
 		const { dex } = this.splitFormat(target, true);
 		const isLetsGo = (dex.currentMod === 'gen7letsgo');
+		const isBDSP = (dex.currentMod === 'gen8bdsp');
 
 		const searchResults = dex.dataSearch(args[0], ['Pokedex']);
 
@@ -508,7 +549,8 @@ export const commands: Chat.ChatCommands = {
 			inexactMsg = `No Pok\u00e9mon named '${args[0]}' was found${Dex.gen > dex.gen ? ` in Gen ${dex.gen}` : ""}. Searching for '${searchResults[0].name}' instead.`;
 		}
 		const species = dex.species.get(searchResults[0].name);
-		const extraFormatModifier = isLetsGo ? 'letsgo' : (dex.currentMod === 'gen8bdsp' ? 'bdsp' : '');
+		if (species.isMega || species.forme === 'Primal') isMegaInvasion = true;
+		const extraFormatModifier = isLetsGo ? 'letsgo' : (isBDSP ? 'bdsp' : '');
 		const babyModifier = isBaby ? 'baby' : '';
 		const doublesModifier = isDoubles ? 'doubles' : '';
 		const freeForAllModifier = isFFA ? (dex.gen !== 9 ? 'doubles' : 'freeforall') : '';
@@ -534,56 +576,52 @@ export const commands: Chat.ChatCommands = {
 			}
 			movesets.push(`<span class="gray">Moves for ${species.name} in ${format.name}:</span><br />${lgpeMoves}`);
 			setCount = 1;
+		} else if (isBDSP) {
+			const setsToCheck = [species];
+			if (species.otherFormes) setsToCheck.push(...species.otherFormes.map(pkmn => dex.species.get(pkmn)));
+			for (const pokemon of setsToCheck) {
+				const data = getData(pokemon, format.name);
+				if (!data) continue;
+				if (!data.moves || pokemon.isNonstandard === 'Future') continue;
+				const randomMoves = data.moves;
+				const level = data.level || getLevel(pokemon, format);
+				const m = randomMoves.slice().sort().map(formatMove);
+				movesets.push(
+					`<details class="details">` +
+					`<summary><span class="gray">Moves for ${pokemon.name} in ${format.name}:</span></summary>` +
+					(level ? `<b>Level</b>: ${level}<br>` : '') +
+					`${m.join(`, `)}</details>`
+				);
+				setCount++;
+			}
 		} else {
 			const setsToCheck = [species];
 			if (dex.gen >= 8 && !isNoDMax) setsToCheck.push(dex.species.get(`${args[0]}gmax`));
 			if (species.otherFormes) setsToCheck.push(...species.otherFormes.map(pkmn => dex.species.get(pkmn)));
-			if ([2, 3, 4, 5, 6, 7, 9].includes(dex.gen)) {
-				for (const pokemon of setsToCheck) {
-					const data = getSets(pokemon, format.id);
-					if (!data) continue;
-					const sets = data.sets;
-					const level = data.level || getLevel(pokemon, format);
-					let buf = `<span class="gray">Moves for ${pokemon.name} in ${format.name}:</span><br/>`;
-					buf += `<b>Level</b>: ${level}`;
-					for (const set of sets) {
-						buf += `<details class="details"><summary>${set.role}</summary>`;
-						if (dex.gen === 9) {
-							buf += `<b>Tera Type${Chat.plural(set.teraTypes)}</b>: ${set.teraTypes.join(', ')}<br/>`;
-						} else if (([2, 3, 4, 5, 6, 7].includes(dex.gen)) && set.preferredTypes) {
-							buf += `<b>Preferred Type${Chat.plural(set.preferredTypes)}</b>: ${set.preferredTypes.join(', ')}<br/>`;
-						}
-						buf += `<b>Moves</b>: ${set.movepool.sort().map(formatMove).join(', ')}<br/>`;
-						if (set.abilities) {
-							buf += `<b>Abilit${Chat.plural(set.abilities, 'ies', 'y')}</b>: ${set.abilities.sort().join(', ')}`;
-						}
-						buf += '</details>';
-						setCount++;
+			for (const pokemon of setsToCheck) {
+				// For Gen 9, only show megas/primals if they were the argument or the command was used in a mega invasion battle room
+				if (dex.gen === 9 && (pokemon.isMega || pokemon.forme === 'Primal') && !isMegaInvasion) continue;
+				const data = getSets(pokemon, format.id);
+				if (!data) continue;
+				const sets = data.sets;
+				const level = data.level || getLevel(pokemon, format);
+				let buf = `<span class="gray">Moves for ${pokemon.name} in ${format.name}:</span><br/>`;
+				buf += `<b>Level</b>: ${level}`;
+				for (const set of sets) {
+					buf += `<details class="details"><summary>${set.role}</summary>`;
+					if (dex.gen === 9) {
+						buf += `<b>Tera Type${Chat.plural(set.teraTypes)}</b>: ${set.teraTypes.join(', ')}<br/>`;
+					} else if (set.preferredTypes) {
+						buf += `<b>Preferred Type${Chat.plural(set.preferredTypes)}</b>: ${set.preferredTypes.join(', ')}<br/>`;
 					}
-					movesets.push(buf);
-				}
-			} else {
-				for (let pokemon of setsToCheck) {
-					let data = getData(pokemon, format.name);
-					if (!data && isNoDMax) {
-						pokemon = dex.species.get(pokemon.id + 'gmax');
-						data = getData(pokemon, format.name);
+					buf += `<b>Moves</b>: ${set.movepool.sort().map(formatMove).join(', ')}<br/>`;
+					if (set.abilities) {
+						buf += `<b>Abilit${Chat.plural(set.abilities, 'ies', 'y')}</b>: ${set.abilities.sort().join(', ')}`;
 					}
-					if (!data) continue;
-					if (!data.moves || pokemon.isNonstandard === 'Future') continue;
-					let randomMoves = data.moves;
-					const level = data.level || getLevel(pokemon, format);
-					if (isDoubles && data.doublesMoves) randomMoves = data.doublesMoves;
-					if (isNoDMax && data.noDynamaxMoves) randomMoves = data.noDynamaxMoves;
-					const m = randomMoves.slice().sort().map(formatMove);
-					movesets.push(
-						`<details class="details">` +
-						`<summary><span class="gray">Moves for ${pokemon.name} in ${format.name}:</span></summary>` +
-						(level ? `<b>Level</b>: ${level}<br>` : '') +
-						`${m.join(`, `)}</details>`
-					);
+					buf += '</details>';
 					setCount++;
 				}
+				movesets.push(buf);
 			}
 		}
 
@@ -601,12 +639,15 @@ export const commands: Chat.ChatCommands = {
 	randombattleshelp: [
 		`/randombattles OR /randbats [pokemon], [gen] - Displays a Pok\u00e9mon's Random Battle Moves. Defaults to Gen 9. If used in a battle, defaults to the gen of that battle.`,
 		`/randomdoublesbattle OR /randdubs [pokemon], [gen] - Same as above, but instead displays Random Doubles Battle moves.`,
+		'/randffats [pokemon] - (Gen 9 only) Shows the potential moves for a Pok\u00e9mon in Free-For-All Random Battle.',
 	],
 
+	'1v1factory': 'battlefactory',
 	bssfactory: 'battlefactory',
 	battlefactory(target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		const isBSS = cmd === 'bssfactory';
+		const is1v1 = cmd === '1v1factory';
 		if (isBSS) {
 			const args = target.split(',');
 			if (!args[0]) return this.parse(`/help battlefactory`);
@@ -619,6 +660,15 @@ export const commands: Chat.ChatCommands = {
 			const bssSets = battleFactorySets(species, null, mod, true);
 			if (!bssSets) return this.parse(`/help battlefactory`);
 			return this.sendReplyBox(bssSets);
+		} else if (is1v1) {
+			if (!target) return this.parse(`/help battlefactory`);
+			const species = Dex.species.get(target);
+			if (!species.exists) {
+				throw new Chat.ErrorMessage(`Error: Pok\u00e9mon '${target.trim()}' not found.`);
+			}
+			const onevoneSets = battleFactorySets(species, null, 'gen9', false, true);
+			if (!onevoneSets) return this.parse(`/help battlefactory`);
+			return this.sendReplyBox(onevoneSets);
 		} else {
 			const args = target.split(',');
 			if (!args[0]) return this.parse(`/help battlefactory`);

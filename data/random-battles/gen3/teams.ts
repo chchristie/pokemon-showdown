@@ -1,6 +1,6 @@
 import RandomGen4Teams from '../gen4/teams';
 import type { PRNG, PRNGSeed } from '../../../sim/prng';
-import type { MoveCounter } from '../gen8/teams';
+import type { MoveCounter } from '../gen9/teams';
 
 // Moves that restore HP:
 const RECOVERY_MOVES = [
@@ -61,7 +61,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 	}
 
 	override cullMovePool(
-		types: string[],
+		types: Set<string>,
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
@@ -165,7 +165,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 
 	// Generate random moveset for a given species, role, preferred type.
 	override randomMoveset(
-		types: string[],
+		types: Set<string>,
 		abilities: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
@@ -176,7 +176,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 	): Set<string> {
 		const preferredTypes = preferredType ? preferredType.split(',') : [];
 		const moves = new Set<string>();
-		let counter = this.newQueryMoves(moves, species, preferredType, abilities);
+		let counter = this.queryMoves(moves, species, preferredType, abilities);
 		this.cullMovePool(types, moves, abilities, counter, movePool, teamDetails, species, isLead,
 			preferredType, role);
 
@@ -194,7 +194,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		const runEnforcementChecker = (checkerName: string) => {
 			if (!this.moveEnforcementCheckers[checkerName]) return false;
 			return this.moveEnforcementCheckers[checkerName](
-				movePool, moves, abilities, new Set(types), counter, species, teamDetails
+				movePool, moves, abilities, types, counter, species, teamDetails, isLead, false, preferredType, role
 			);
 		};
 
@@ -267,7 +267,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 			for (const moveid of movePool) {
 				const move = this.dex.moves.get(moveid);
 				const moveType = this.getMoveType(move, species, abilities, preferredType);
-				if (!this.noStab.includes(moveid) && (move.basePower || move.basePowerCallback) && types.includes(moveType)) {
+				if (!this.noStab.includes(moveid) && (move.basePower || move.basePowerCallback) && types.has(moveType)) {
 					stabMoves.push(moveid);
 				}
 			}
@@ -392,11 +392,8 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
-		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
-		preferredType: string,
-		role: RandomTeamsTypes.Role
 	) {
 		switch (ability) {
 		case 'Chlorophyll':
@@ -415,11 +412,8 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
-		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
-		preferredType: string,
-		role: RandomTeamsTypes.Role,
 	): string {
 		if (abilities.length <= 1) return abilities[0];
 
@@ -429,9 +423,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		const abilityAllowed: string[] = [];
 		// Obtain a list of abilities that are allowed (not culled)
 		for (const ability of abilities) {
-			if (!this.shouldCullAbility(
-				ability, types, moves, abilities, counter, movePool, teamDetails, species, preferredType, role
-			)) {
+			if (!this.shouldCullAbility(ability, types, moves, abilities, counter, teamDetails, species)) {
 				abilityAllowed.push(ability);
 			}
 		}
@@ -451,7 +443,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 
 	override getItem(
 		ability: string,
-		types: string[],
+		types: Set<string>,
 		moves: Set<string>,
 		counter: MoveCounter,
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -467,16 +459,10 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		if (species.id === 'marowak') return 'Thick Club';
 		if (species.id === 'pikachu') return 'Light Ball';
 		if (species.id === 'shedinja') return 'Lum Berry';
-		if (species.id === 'shuckle') return 'Leftovers';
 		if (species.id === 'unown') return counter.get('Physical') ? 'Choice Band' : 'Twisted Spoon';
 		if (species.id === 'deoxys' || species.id === 'deoxysattack') return 'White Herb';
 
 		if (moves.has('trick')) return 'Choice Band';
-		if (
-			moves.has('rest') && !moves.has('sleeptalk') &&
-			// Altaria wants Chesto Berry on Dragon Dance + Rest
-			(moves.has('dragondance') || !['Early Bird', 'Natural Cure', 'Shed Skin'].includes(ability))
-		) return 'Chesto Berry';
 
 		// Medium priority items
 		if (counter.get('Physical') >= 4) return 'Choice Band';
@@ -543,17 +529,16 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		const evs = { hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85 };
 		const ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 };
 
-		const types = species.types;
+		const types = new Set(species.types);
 		const abilities = set.abilities!;
 
 		// Get moves
 		const moves = this.randomMoveset(types, abilities, teamDetails, species, isLead, movePool,
 			preferredType, role);
-		const counter = this.newQueryMoves(moves, species, preferredType, abilities);
+		const counter = this.queryMoves(moves, species, preferredType, abilities);
 
 		// Get ability
-		ability = this.getAbility(new Set(types), moves, abilities, counter, movePool, teamDetails, species,
-			preferredType, role);
+		ability = this.getAbility(new Set(types), moves, abilities, counter, teamDetails, species);
 
 		// Get items
 		item = this.getItem(ability, types, moves, counter, teamDetails, species, isLead, preferredType, role);
@@ -624,6 +609,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		return {
 			name: species.baseSpecies,
 			species: forme,
+			speciesId: species.id,
 			gender: species.gender,
 			shiny: this.randomChance(1, 1024),
 			level,
@@ -634,6 +620,35 @@ export class RandomGen3Teams extends RandomGen4Teams {
 			item,
 			role,
 		};
+	}
+
+	/**
+	 * Checks if the new species is compatible with the other mons currently on the team.
+	 */
+	override getPokemonCompatibility(
+		species: Species,
+		pokemon: RandomTeamsTypes.RandomSet[],
+	): boolean {
+		const incompatibilityList = [
+			// These Pokemon are incompatible because the presence of one actively harms the other.
+			// Prevent Shedinja + Tyranitar
+			['shedinja', 'tyranitar'],
+			// Prevent Reversal/Flail users + Tyranitar
+			[['dodrio', 'raticate', 'primeape', 'hitmonlee', 'furret', 'yanma', 'heracross', 'blaziken', 'medicham'], 'tyranitar'],
+		];
+
+		for (const pair of incompatibilityList) {
+			const monsArrayA = (Array.isArray(pair[0])) ? pair[0] : [pair[0]];
+			const monsArrayB = (Array.isArray(pair[1])) ? pair[1] : [pair[1]];
+			if (monsArrayB.includes(species.id)) {
+				if (pokemon.some(m => monsArrayA.includes(m.speciesId!))) return false;
+			}
+			if (monsArrayA.includes(species.id)) {
+				if (pokemon.some(m => monsArrayB.includes(m.speciesId!))) return false;
+			}
+		}
+
+		return true;
 	}
 
 	override randomTeam() {
@@ -664,9 +679,6 @@ export class RandomGen3Teams extends RandomGen4Teams {
 
 			// Limit to one of each species (Species Clause)
 			if (baseFormes[species.baseSpecies]) continue;
-
-			// Prevent Shedinja from generating after Tyranitar
-			if (species.name === 'Shedinja' && teamDetails.sand) continue;
 
 			// Limit to one Wobbuffet per battle (not just per team)
 			if (species.name === 'Wobbuffet' && this.battleHasWobbuffet) continue;
@@ -713,6 +725,9 @@ export class RandomGen3Teams extends RandomGen4Teams {
 				if (!this.adjustLevel && (this.getLevel(species) === 100) && numMaxLevelPokemon >= limitFactor) {
 					continue;
 				}
+
+				// Check compatibility with team
+				if (!this.getPokemonCompatibility(species, pokemon)) continue;
 			}
 
 			// Okay, the set passes, add it to our team

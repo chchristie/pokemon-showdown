@@ -48,6 +48,7 @@ function getDefaultStats(): Stats {
 			gen9randomdoublesbattle: { mons: {} },
 			gen9babyrandombattle: { mons: {} },
 			gen9chatbats: { mons: {} },
+			gen9ccapm2025randombattle: { mons: {} },
 			gen9superstaffbrosultimate: { mons: {} },
 			gen8randombattle: { mons: {} },
 			gen7randombattle: { mons: {} },
@@ -134,7 +135,7 @@ export function getSpeciesName(set: PokemonSet, format: Format) {
 	} else if (species === "Groudon" && item.name === "Red Orb") {
 		return "Groudon-Primal";
 	} else if (item.megaStone) {
-		return Array.isArray(item.megaStone) ? item.megaStone[0] : item.megaStone;
+		return Object.values(item.megaStone)[0];
 	} else if (species === "Rayquaza" && moves.includes('Dragon Ascent') && !item.zMove && megaRayquazaPossible) {
 		return "Rayquaza-Mega";
 	} else if (species === "Poltchageist-Artisan") { // Babymons from here on out

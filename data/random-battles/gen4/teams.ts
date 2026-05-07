@@ -1,6 +1,6 @@
 import RandomGen5Teams from '../gen5/teams';
 import type { PRNG } from '../../../sim';
-import type { MoveCounter } from '../gen8/teams';
+import type { MoveCounter } from '../gen9/teams';
 
 // Moves that restore HP:
 const RECOVERY_MOVES = [
@@ -82,7 +82,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 	}
 
 	override cullMovePool(
-		types: string[],
+		types: Set<string>,
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
@@ -210,7 +210,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 
 		for (const pair of incompatiblePairs) this.incompatibleMoves(moves, movePool, pair[0], pair[1]);
 
-		const statusInflictingMoves = ['stunspore', 'thunderwave', 'toxic', 'willowisp', 'yawn'];
+		const statusInflictingMoves = ['hypnosis', 'stunspore', 'thunderwave', 'toxic', 'willowisp', 'yawn'];
 		if (role !== 'Staller') {
 			this.incompatibleMoves(moves, movePool, statusInflictingMoves, statusInflictingMoves);
 		}
@@ -223,7 +223,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 
 	// Generate random moveset for a given species, role, preferred type.
 	override randomMoveset(
-		types: string[],
+		types: Set<string>,
 		abilities: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
@@ -233,7 +233,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		role: RandomTeamsTypes.Role,
 	): Set<string> {
 		const moves = new Set<string>();
-		let counter = this.newQueryMoves(moves, species, preferredType, abilities);
+		let counter = this.queryMoves(moves, species, preferredType, abilities);
 		this.cullMovePool(types, moves, abilities, counter, movePool, teamDetails, species, isLead,
 			preferredType, role);
 
@@ -251,7 +251,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		const runEnforcementChecker = (checkerName: string) => {
 			if (!this.moveEnforcementCheckers[checkerName]) return false;
 			return this.moveEnforcementCheckers[checkerName](
-				movePool, moves, abilities, new Set(types), counter, species, teamDetails
+				movePool, moves, abilities, types, counter, species, teamDetails, isLead, false, preferredType, role
 			);
 		};
 
@@ -300,7 +300,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 			for (const moveid of movePool) {
 				const move = this.dex.moves.get(moveid);
 				const moveType = this.getMoveType(move, species, abilities, preferredType);
-				if (types.includes(moveType) && move.priority > 0 && (move.basePower || move.basePowerCallback)) {
+				if (types.has(moveType) && move.priority > 0 && (move.basePower || move.basePowerCallback)) {
 					priorityMoves.push(moveid);
 				}
 			}
@@ -331,7 +331,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		}
 
 		// Enforce Preferred Type
-		if (!counter.get('preferred')) {
+		if (!counter.get(preferredType)) {
 			const stabMoves = [];
 			for (const moveid of movePool) {
 				const move = this.dex.moves.get(moveid);
@@ -353,7 +353,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 			for (const moveid of movePool) {
 				const move = this.dex.moves.get(moveid);
 				const moveType = this.getMoveType(move, species, abilities, preferredType);
-				if (!this.noStab.includes(moveid) && (move.basePower || move.basePowerCallback) && types.includes(moveType)) {
+				if (!this.noStab.includes(moveid) && (move.basePower || move.basePowerCallback) && types.has(moveType)) {
 					stabMoves.push(moveid);
 				}
 			}
@@ -363,7 +363,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 					movePool, preferredType, role);
 			} else {
 				// If they have no regular STAB move, enforce U-turn on Bug types.
-				if (movePool.includes('uturn') && types.includes('Bug')) {
+				if (movePool.includes('uturn') && types.has('Bug')) {
 					counter = this.addMove('uturn', moves, types, abilities, teamDetails, species, isLead,
 						movePool, preferredType, role);
 				}
@@ -408,7 +408,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		}
 
 		// Enforce a move not on the noSTAB list
-		if (!counter.damagingMoves.size && !(moves.has('uturn') && types.includes('Bug'))) {
+		if (!counter.damagingMoves.size && !(moves.has('uturn') && types.has('Bug'))) {
 			// Choose an attacking move
 			const attackingMoves = [];
 			for (const moveid of movePool) {
@@ -469,11 +469,8 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
-		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
-		preferredType: string,
-		role: RandomTeamsTypes.Role
 	): boolean {
 		switch (ability) {
 		case 'Chlorophyll':
@@ -494,11 +491,8 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		moves: Set<string>,
 		abilities: string[],
 		counter: MoveCounter,
-		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
-		preferredType: string,
-		role: RandomTeamsTypes.Role,
 	): string {
 		if (abilities.length <= 1) return abilities[0];
 
@@ -509,9 +503,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		const abilityAllowed: string[] = [];
 		// Obtain a list of abilities that are allowed (not culled)
 		for (const ability of abilities) {
-			if (!this.shouldCullAbility(
-				ability, types, moves, abilities, counter, movePool, teamDetails, species, preferredType, role
-			)) {
+			if (!this.shouldCullAbility(ability, types, moves, abilities, counter, teamDetails, species)) {
 				abilityAllowed.push(ability);
 			}
 		}
@@ -531,7 +523,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 
 	override getPriorityItem(
 		ability: string,
-		types: string[],
+		types: Set<string>,
 		moves: Set<string>,
 		counter: MoveCounter,
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -573,7 +565,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 
 	override getItem(
 		ability: string,
-		types: string[],
+		types: Set<string>,
 		moves: Set<string>,
 		counter: MoveCounter,
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -612,7 +604,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 			) ? 'Choice Scarf' : 'Choice Band';
 		}
 
-		if (types.includes('Normal') && moves.has('fakeout') && !!counter.get('Normal')) return 'Silk Scarf';
+		if (types.has('Normal') && moves.has('fakeout') && !!counter.get('Normal')) return 'Silk Scarf';
 		if (species.id === 'palkia') return 'Lustrous Orb';
 		if (species.id === 'farfetchd') return 'Stick';
 		if (moves.has('outrage') && counter.get('setup') && !moves.has('sleeptalk')) return 'Lum Berry';
@@ -681,17 +673,16 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		const evs = { hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85 };
 		const ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 };
 
-		const types = species.types;
+		const types = new Set(species.types);
 		const abilities = set.abilities!;
 
 		// Get moves
 		const moves = this.randomMoveset(types, abilities, teamDetails, species, isLead, movePool,
 			preferredType, role);
-		const counter = this.newQueryMoves(moves, species, preferredType, abilities);
+		const counter = this.queryMoves(moves, species, preferredType, abilities);
 
 		// Get ability
-		ability = this.getAbility(new Set(types), moves, abilities, counter, movePool, teamDetails, species,
-			preferredType, role);
+		ability = this.getAbility(new Set(types), moves, abilities, counter, teamDetails, species);
 
 		// Get items
 		item = this.getPriorityItem(ability, types, moves, counter, teamDetails, species, isLead, preferredType, role);
@@ -700,7 +691,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		}
 
 		// For Trick / Switcheroo
-		if (item === 'Leftovers' && types.includes('Poison')) {
+		if (item === 'Leftovers' && types.has('Poison')) {
 			item = 'Black Sludge';
 		}
 
@@ -766,6 +757,7 @@ export class RandomGen4Teams extends RandomGen5Teams {
 		return {
 			name: species.baseSpecies,
 			species: forme,
+			speciesId: species.id,
 			gender: species.gender,
 			shiny: this.randomChance(1, 1024),
 			level,
@@ -776,6 +768,35 @@ export class RandomGen4Teams extends RandomGen5Teams {
 			item,
 			role,
 		};
+	}
+
+	/**
+	 * Checks if the new species is compatible with the other mons currently on the team.
+	 */
+	override getPokemonCompatibility(
+		species: Species,
+		pokemon: RandomTeamsTypes.RandomSet[],
+	): boolean {
+		const incompatibilityList = [
+			// These Pokemon are incompatible because the presence of one actively harms the other.
+			// Prevent Dry Skin + sun setting ability
+			[['parasect', 'toxicroak'], 'groudon'],
+			// Prevent Shedinja + sand/hail setting ability
+			['shedinja', ['tyranitar', 'hippowdon', 'abomasnow']],
+		];
+
+		for (const pair of incompatibilityList) {
+			const monsArrayA = (Array.isArray(pair[0])) ? pair[0] : [pair[0]];
+			const monsArrayB = (Array.isArray(pair[1])) ? pair[1] : [pair[1]];
+			if (monsArrayB.includes(species.id)) {
+				if (pokemon.some(m => monsArrayA.includes(m.speciesId!))) return false;
+			}
+			if (monsArrayA.includes(species.id)) {
+				if (pokemon.some(m => monsArrayB.includes(m.speciesId!))) return false;
+			}
+		}
+
+		return true;
 	}
 }
 
