@@ -18784,7 +18784,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			onStart(pokemon) {
 				if (!pokemon.volatiles['perishsong']) {
 					pokemon.addVolatile('perishsong');
-					this.add('-start', pokemon, 'perish3', '[silent]');
+					this.add('-start', pokemon, 'perish3');
 				}
 			},
 			onResidualOrder: 24,
