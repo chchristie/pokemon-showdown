@@ -9681,6 +9681,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { mirror: 1, metronome: 1 },
 		onPrepareHit(target, source, move) {
 			this.add('-anim', source, 'Trick Room', target);
+			this.attrLastMove('[anim] Trick Room');
 		},
 		pseudoWeather: 'inverseroom',
 		shortDesc: 'For 5 turns, all type matchups are reversed.',
