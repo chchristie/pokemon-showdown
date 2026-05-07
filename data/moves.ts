@@ -9679,6 +9679,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 5,
 		priority: 0,
 		flags: { mirror: 1, metronome: 1 },
+		onPrepareHit(target, source, move) {
+			this.add('-anim', source, 'Trick Room', target);
+		},
 		pseudoWeather: 'inverseroom',
 		shortDesc: 'For 5 turns, all type matchups are reversed.',
 		condition: {
@@ -9715,7 +9718,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				if (typeMod) return -typeMod;
 			},
 		},
-		secondary: null,
 		target: "all",
 		type: "Fairy",
 		zMove: { boost: { accuracy: 1 } },
@@ -18804,7 +18806,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			spd: 1,
 			spe: 1,
 		},
-		secondary: null,
 		target: "self",
 		type: "Steel",
 		zMove: { effect: 'clearnegativeboost' },
