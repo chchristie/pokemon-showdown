@@ -1,6 +1,7 @@
 export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	inverseroom: {
 		num: 1001,
+		isNonstandard: "DigiPen" as "DigiPen",
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -56,6 +57,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	starblazing: {
 		num: 1002,
+		isNonstandard: "DigiPen" as "DigiPen",
 		accuracy: 100,
 		basePower: 90,
 		category: "Special",
@@ -80,6 +82,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	swordofdamocles: {
 		num: 1003,
+		isNonstandard: "DigiPen" as "DigiPen",
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
