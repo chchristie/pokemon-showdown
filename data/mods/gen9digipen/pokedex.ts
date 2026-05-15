@@ -154,6 +154,26 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 
 	// ── Mega Evolutions ─────────────────────────────────────────────
 
+	hydreigonmega: {
+		num: 635,
+		name: "Hydreigon-Mega",
+		baseSpecies: "Hydreigon",
+		forme: "Mega",
+		types: ["Dark", "Dragon"],
+		baseStats: { hp: 92, atk: 145, def: 120, spa: 115, spd: 110, spe: 118 },
+		abilities: { 0: "Mega Launcher" },
+		heightm: 1.6,
+		weightkg: 48.4,
+		color: "Blue",
+		eggGroups: ["Dragon"],
+		requiredItem: "Hydreigite",
+	},
+	hydreigon: {
+		inherit: true,
+		otherFormes: ["Hydreigon-Mega"],
+		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
+	},
+
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
 	abomasnow: {
 		inherit: true,

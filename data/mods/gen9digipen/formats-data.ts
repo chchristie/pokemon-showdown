@@ -52,7 +52,16 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		natDexTier: "DigiPen",
 	},
 
-	// ── Mon Changes ────────────────────────────────────────────────────
+	// ── Mega Evolutions ────────────────────────────────────────────────────
+
+	hydreigonmega: {
+		isNonstandard: "DigiPen",
+		tier: "DigiPen",
+		doublesTier: "DigiPen",
+		natDexTier: "DigiPen",
+	},
+
+	// ── Base-game Pokémon Changes ───────────────────────────────────────
 	// Don't forget to add inherit: true
 	abomasnow: {
 		inherit: true,
