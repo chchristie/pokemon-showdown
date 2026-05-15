@@ -136,6 +136,26 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 
 	// ── Forms/Variants ────────────────────────────────────────────────────
 
+	typhlosiondigipen: {
+		num: 157,
+		name: "Typhlosion-DigiPen",
+		types: ["Fire", "Electric"],
+		genderRatio: { M: 0.875, F: 0.125 },
+		baseStats: { hp: 78, atk: 90, def: 50, spa: 135, spd: 51, spe: 130 },
+		abilities: { 0: "Blaze", H: "Comatose" },
+		heightm: 1.8,
+		weightkg: 59,
+		color: "Yellow",
+		prevo: "Quilava",
+		evoLevel: 36,
+		eggGroups: ["Field"],
+	},
+	typhlosion: {
+		inherit: true,
+		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
+		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
+	},
+
 	// ── Mega Evolutions ─────────────────────────────────────────────
 
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────

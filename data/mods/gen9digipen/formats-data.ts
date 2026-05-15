@@ -21,6 +21,8 @@
 //   garchomp: { inherit: true, tier: "DigiPen Uber" },
 
 export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormatsDataTable = {
+
+	// ── Fakemon (Original) ─────────────────────────────────────────────
 	pootis: {
 		isNonstandard: "DigiPen",
 		tier: "DigiPen LC",
@@ -40,8 +42,18 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		natDexTier: "DigiPen",
 	},
 
-	// ── DigiPen-specific tier overrides for base-game Pokémon ───────────────
+	// ── Fakemon (from Fanart) ─────────────────────────────────────────────
 
+	// ── Forms/Variants ────────────────────────────────────────────────────
+	typhlosiondigipen: {
+		isNonstandard: "DigiPen",
+		tier: "DigiPen",
+		doublesTier: "DigiPen",
+		natDexTier: "DigiPen",
+	},
+
+	// ── Mon Changes ────────────────────────────────────────────────────
+	// Don't forget to add inherit: true
 	abomasnow: {
 		inherit: true,
 		tier: "UU",
