@@ -11,7 +11,6 @@
 //   digipenmon: {
 //     num: 2000,
 //     name: "DigipenMon",
-//     isNonstandard: "DigiPen",
 //     types: ["Fairy", "Steel"],
 //     baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
 //     abilities: { 0: "Levitate", 1: "Technician", H: "Magician" },
@@ -32,7 +31,6 @@
 //   pikachudigipen: {
 //     num: 25,
 //     name: "Pikachu-DigiPen",
-//     isNonstandard: "DigiPen",
 //     baseSpecies: "Pikachu",
 //     forme: "DigiPen",
 //     types: ["Electric", "Fairy"],
@@ -61,7 +59,6 @@
 //   gardevoirmega: {
 //     num: 282,
 //     name: "Gardevoir-Mega",
-//     isNonstandard: "DigiPen",
 //     baseSpecies: "Gardevoir",
 //     forme: "Mega",
 //     types: ["Psychic", "Fairy"],
@@ -90,7 +87,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	pootis: {
 		num: 2001,
 		name: "Pootis",
-		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: {hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35},
@@ -104,7 +100,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	armorobin: {
 		num: 2002,
 		name: "Armorobin",
-		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: {hp: 70, atk: 85, def: 60, spa: 85, spd: 60, spe: 45},
@@ -119,7 +114,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	chickiev: {
 		num: 2003,
 		name: "Chickiev",
-		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: {hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60},
@@ -139,6 +133,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	typhlosiondigipen: {
 		num: 157,
 		name: "Typhlosion-DigiPen",
+		baseSpecies: "Typhlosion",
+		forme: "DigiPen",
 		types: ["Fire", "Electric"],
 		genderRatio: { M: 0.875, F: 0.125 },
 		baseStats: { hp: 78, atk: 90, def: 50, spa: 135, spd: 51, spe: 130 },
