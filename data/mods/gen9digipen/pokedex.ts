@@ -144,11 +144,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		evoLevel: 36,
 		eggGroups: ["Field"],
 	},
-	typhlosion: {
-		inherit: true,
-		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
-		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
-	},
 
 	// ── Mega Evolutions ─────────────────────────────────────────────
 
@@ -166,11 +161,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Dragon"],
 		requiredItem: "Hydreigite",
 	},
-	hydreigon: {
-		inherit: true,
-		otherFormes: ["Hydreigon-Mega"],
-		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
-	},
 
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
 	abomasnow: {
@@ -181,5 +171,49 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	abomasnowmega: {
 		inherit: true,
 		baseStats: {hp: 80, atk: 154, def: 105, spa: 145, spd: 105, spe: 51},
+	},
+	hydreigon: {
+		inherit: true,
+		otherFormes: ["Hydreigon-Mega"],
+		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
+	},
+	typhlosion: {
+		inherit: true,
+		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
+		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
+	},
+
+	// ── Champions Mega Evolutions Abilities ────────────────────────────────────────────────────
+	baxcaliburmega: {
+		inherit: true,
+		abilities: { 0: "Thermal Exchange" },
+	},
+	darkraimega: {
+		inherit: true,
+		abilities: { 0: "Nightmares" },
+	},
+	golisopodmega: {
+		inherit: true,
+		abilities: { 0: "Tough Claws" },
+	},
+	lucariomegaz: {
+		inherit: true,
+		abilities: { 0: "Prankster" },
+	},
+	pyroarmega: {
+		inherit: true,
+		abilities: { 0: "Thermal Boost" },
+	},
+	raichumegax: {
+		inherit: true,
+		abilities: { 0: "Electric Surge" },
+	},
+	staraptormega: {
+		inherit: true,
+		abilities: { 0: "Contrary" },
+	},
+	zeraoramega: {
+		inherit: true,
+		abilities: { 0: "Speed Boost" },
 	},
 };	

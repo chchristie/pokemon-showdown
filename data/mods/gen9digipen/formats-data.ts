@@ -57,12 +57,12 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	hydreigonmega: {
 		isNonstandard: "DigiPen Future",
 		tier: "Illegal",
-		natDexTier: "OU"
+		natDexTier: "DigiPen"
 	},
 
 	// ── Base-game Pokémon Changes ───────────────────────────────────────
-	// Undid post-start of generation bans and added in champions megas to national dex
 	// Don't forget to add inherit: true
+	// Move sufficiently buffed Pokemon to OU 
 	abomasnow: {
 		inherit: true,
 		tier: "UU",
@@ -73,28 +73,15 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
+
+	// ── Champions Mega Evolutions ────────────────────────────────────────────
+	// Added all to NatDex OU except Zygarde-Mega to NatDex Uber
 	absolmegaz: {
 		inherit: true,
 		natDexTier: "OU",
 	},
-	annihilape: {
-		inherit: true,
-		tier: "OU",
-		doublesTier: "DOU",
-		natDexTier: "OU",
-	},
-	archaludon: {
-		inherit: true,
-		tier: "OU",
-		doublesTier: "DOU",
-	},
 	barbaraclemega: {
 		inherit: true,
-		natDexTier: "OU",
-	},
-	baxcalibur: {
-		inherit: true,
-		tier: "OU",
 		natDexTier: "OU",
 	},
 	baxcaliburmega: {
@@ -109,18 +96,8 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	chienpao: {
-		inherit: true,
-		tier: "OU",
-		natDexTier: "OU",
-	},
 	chimechomega: {
 		inherit: true,
-		natDexTier: "OU",
-	},
-	chiyu: {
-		inherit: true,
-		tier: "OU",
 		natDexTier: "OU",
 	},
 	clefablemega: {
@@ -131,24 +108,11 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	darkrai: {
-		inherit: true,
-		tier: "OU",
-		natDexTier: "OU",
-	},
 	darkraimega: {
 		inherit: true,
 		natDexTier: "OU",
 	},
 	delphoxmega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	dragalgemega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	dragapult: {
 		inherit: true,
 		natDexTier: "OU",
 	},
@@ -168,12 +132,6 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	espathra: {
-		inherit: true,
-		tier: "OU",
-		doublesTier: "DOU",
-		natDexTier: "OU",
-	},
 	excadrillmega: {
 		inherit: true,
 		natDexTier: "OU",
@@ -190,21 +148,11 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	fluttermane: {
-		inherit: true,
-		tier: "OU",
-		doublesTier: "DOU",
-		natDexTier: "OU",
-	},
 	froslassmega: {
 		inherit: true,
 		natDexTier: "OU",
 	},
 	garchompmegaz: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	genesect: {
 		inherit: true,
 		natDexTier: "OU",
 	},
@@ -220,11 +168,6 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	gougingfire: {
-		inherit: true,
-		tier: "OU",
-		natDexTier: "OU",
-	},
 	greninjamega: {
 		inherit: true,
 		natDexTier: "OU",
@@ -237,38 +180,15 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	ironbundle: {
-		inherit: true,
-		tier: "OU",
-		natDexTier: "OU",
-	},
-	landorus: {
-		inherit: true,
-		tier: "OU",
-		natDexTier: "OU",
-	},
 	lucariomegaz: {
 		inherit: true,
-		natDexTier: "OU",
-	},
-	magearna: {
-		inherit: true,
-		tier: "OU",
 		natDexTier: "OU",
 	},
 	magearnamega: {
 		inherit: true,
 		natDexTier: "OU",
 	},
-	magearnaoriginalmega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
 	malamarmega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	marshadow: {
 		inherit: true,
 		natDexTier: "OU",
 	},
@@ -281,6 +201,160 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		natDexTier: "OU",
 	},
 	meowsticmmega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	pyroarmega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	raichumegax: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	raichumegay: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	staraptormega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	starmiemega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	tatsugiricurlymega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	tatsugiridroopymega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	tatsugiristretchymega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	victreebelmega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	zeraoramega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	zygardemega: {
+		inherit: true,
+		natDexTier: "Uber",
+	},
+
+	// ── Unbans ────────────────────────────────────────────────────────────
+	// Unbanned all pokemon suspect tested during gen 9
+	alakazammega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	annihilape: {
+		inherit: true,
+		tier: "OU",
+		doublesTier: "DOU",
+		natDexTier: "OU",
+	},
+	archaludon: {
+		inherit: true,
+		tier: "OU",
+		doublesTier: "DOU",
+	},
+	baxcalibur: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	blastoisemega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	blazikenmega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	chienpao: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	chiyu: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	darkrai: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	deoxysspeed: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	dragalgemega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	dragapult: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	espathra: {
+		inherit: true,
+		tier: "OU",
+		doublesTier: "DOU",
+		natDexTier: "OU",
+	},
+	fluttermane: {
+		inherit: true,
+		tier: "OU",
+		doublesTier: "DOU",
+		natDexTier: "OU",
+	},
+	genesect: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	gougingfire: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	ironbundle: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	kangaskhanmega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	landorus: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	lucariomega: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	magearna: {
+		inherit: true,
+		tier: "OU",
+		natDexTier: "OU",
+	},
+	marshadow: {
+		inherit: true,
+		natDexTier: "OU",
+	},
+	metagrossmega: {
 		inherit: true,
 		natDexTier: "OU",
 	},
@@ -302,21 +376,13 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		natDexTier: "OU",
 	},
-	pyroarmega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	raichumegax: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	raichumegay: {
-		inherit: true,
-		natDexTier: "OU",
-	},
 	roaringmoon: {
 		inherit: true,
 		tier: "OU",
+		natDexTier: "OU",
+	},
+	salamencemega: {
+		inherit: true,
 		natDexTier: "OU",
 	},
 	scolipedemega: {
@@ -349,26 +415,6 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "OU",
 		natDexTier: "OU",
 	},
-	staraptormega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	starmiemega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	tatsugiricurlymega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	tatsugiridroopymega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	tatsugiristretchymega: {
-		inherit: true,
-		natDexTier: "OU",
-	},
 	ursalunabloodmoon: {
 		inherit: true,
 		tier: "OU",
@@ -386,23 +432,16 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		doublesTier: "DOU",
 		natDexTier: "OU",
 	},
-	victreebelmega: {
+	walkingwake: {
 		inherit: true,
 		natDexTier: "OU",
 	},
-	walkingwake: {
+	zamazentacrowned: {
 		inherit: true,
-		natDexTier: "Uber",
-	},
-	zeraoramega: {
-		inherit: true,
+		tier: "OU",
 		natDexTier: "OU",
 	},
 	zygarde: {
-		inherit: true,
-		natDexTier: "OU",
-	},
-	zygardemega: {
 		inherit: true,
 		natDexTier: "OU",
 	},
