@@ -31,8 +31,8 @@
 
 export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 
-	// ── Example: Custom Pokémon ─────────────────────────────────────────────
-	// (remove or replace this example)
+	// ── Custom Pokémon ─────────────────────────────────────────────
+	// Example:
 	/*
 	digipenmon: {
 		num: 2000,
@@ -48,7 +48,53 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	*/
 
-	// ── Example: Regional Form ──────────────────────────────────────────────
+	pootis: {
+		num: 2001,
+		name: "Pootis",
+		isNonstandard: "DigiPen",
+		types: ["Fighting"],
+		gender: "M",
+		baseStats: {hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35},
+		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
+		heightm: 0.7,
+		weightkg: 34,
+		color: "Red",
+		evos: ["Armorobin"],
+		eggGroups: ["Flying", "Monster"]
+	},
+	armorobin: {
+		num: 2002,
+		name: "Armorobin",
+		isNonstandard: "DigiPen",
+		types: ["Fighting"],
+		gender: "M",
+		baseStats: {hp: 70, atk: 85, def: 60, spa: 85, spd: 60, spe: 45},
+		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
+		heightm: 1.5,
+		weightkg: 150,
+		color: "Red",
+		prevo: "Pootis",
+		evoLevel: 35,
+		eggGroups: ["Flying", "Monster"]
+	},
+	chickiev: {
+		num: 2003,
+		name: "Chickiev",
+		isNonstandard: "DigiPen",
+		types: ["Fighting"],
+		gender: "M",
+		baseStats: {hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60},
+		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
+		heightm: 1.9,
+		weightkg: 300,
+		color: "Red",
+		prevo: "Armorobin",
+		evoType: "trade",
+		eggGroups: ["Flying", "Monster"]
+	}
+
+	// ── Regional Form ──────────────────────────────────────────────
+	// Example:
 	// Step 1 – add the form entry:
 	/*
 	pikachudigipen: {
@@ -81,7 +127,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	*/
 
-	// ── Example: Mega Evolution ─────────────────────────────────────────────
+	// ── Mega Evolution ─────────────────────────────────────────────
+	// Example:
 	/*
 	gardevoirmega: {
 		num: 282,
