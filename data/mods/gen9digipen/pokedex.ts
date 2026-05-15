@@ -7,16 +7,72 @@
 // All new DigiPen Pokémon MUST include `isNonstandard: "DigiPen"`. This marker
 // ensures they are illegal in every non-DigiPen format.
 //
+// Example:
+//   digipenmon: {
+//     num: 2000,
+//     name: "DigipenMon",
+//     isNonstandard: "DigiPen",
+//     types: ["Fairy", "Steel"],
+//     baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
+//     abilities: { 0: "Levitate", 1: "Technician", H: "Magician" },
+//     heightm: 1.0,
+//     weightkg: 30.0,
+//     color: "Blue",
+//     eggGroups: ["Undiscovered"],
+//   },
+//
 // ── Regional Forms ──────────────────────────────────────────────────────────
 // Regional forms are separate entries whose `baseSpecies` points at the
 // canonical Pokémon and whose `forme` field names the region
 // (e.g. "Alola", "Hisui", "DigiPen"). Remember to add the form ID to the
 // base Pokémon's `otherFormes` / `formeOrder` lists via `inherit: true`.
 //
+// Example:
+// Step 1 – add the form entry:
+//   pikachudigipen: {
+//     num: 25,
+//     name: "Pikachu-DigiPen",
+//     isNonstandard: "DigiPen",
+//     baseSpecies: "Pikachu",
+//     forme: "DigiPen",
+//     types: ["Electric", "Fairy"],
+//     baseStats: { hp: 50, atk: 85, def: 50, spa: 85, spd: 55, spe: 110 },
+//     abilities: { 0: "Lightning Rod" },
+//     heightm: 0.5,
+//     weightkg: 6.5,
+//     color: "Yellow",
+//     eggGroups: ["Undiscovered"],
+//   },
+//
+// Step 2 – patch the base species to advertise the form:
+//   pikachu: {
+//     inherit: true,
+//     otherFormes: ["Pikachu-Original", ..., "Pikachu-DigiPen"],
+//     formeOrder: ["Pikachu", "Pikachu-Original", ..., "Pikachu-DigiPen"],
+//   },
+//
 // ── Mega Evolutions ─────────────────────────────────────────────────────────
 // Mega Evolutions are forme entries with `requiredItem: "<MegaStone>"`.
 // The base Pokémon's entry needs `otherFormes` / `formeOrder` updated
 // (use `inherit: true` to patch the existing entry without overwriting it).
+// Don't forget to patch the base entry with otherFormes/formeOrder.
+//
+// Example:
+//   gardevoirmega: {
+//     num: 282,
+//     name: "Gardevoir-Mega",
+//     isNonstandard: "DigiPen",
+//     baseSpecies: "Gardevoir",
+//     forme: "Mega",
+//     types: ["Psychic", "Fairy"],
+//     baseStats: { hp: 68, atk: 85, def: 65, spa: 165, spd: 135, spe: 100 },
+//     abilities: { 0: "Pixilate" },
+//     heightm: 1.6,
+//     weightkg: 48.4,
+//     color: "White",
+//     eggGroups: ["Amorphous", "Human-Like"],
+//     requiredItem: "Gardevoirite",
+//   },
 //
 // ── Overriding Existing Pokémon ─────────────────────────────────────────────
 // To change how a base-game Pokémon behaves *only* inside DigiPen formats,
@@ -30,24 +86,7 @@
 //   },
 
 export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
-
-	// ── Custom Pokémon ─────────────────────────────────────────────
-	// Example:
-	/*
-	digipenmon: {
-		num: 2000,
-		name: "DigipenMon",
-		isNonstandard: "DigiPen",
-		types: ["Fairy", "Steel"],
-		baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
-		abilities: { 0: "Levitate", 1: "Technician", H: "Magician" },
-		heightm: 1.0,
-		weightkg: 30.0,
-		color: "Blue",
-		eggGroups: ["Undiscovered"],
-	},
-	*/
-
+	// ── Fakemon (Original) ─────────────────────────────────────────────
 	pootis: {
 		num: 2001,
 		name: "Pootis",
@@ -93,59 +132,20 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Flying", "Monster"]
 	},
 
-	// ── Regional Form ──────────────────────────────────────────────
-	// Example:
-	// Step 1 – add the form entry:
-	/*
-	pikachudigipen: {
-		num: 25,
-		name: "Pikachu-DigiPen",
-		isNonstandard: "DigiPen",
-		baseSpecies: "Pikachu",
-		forme: "DigiPen",
-		types: ["Electric", "Fairy"],
-		baseStats: { hp: 50, atk: 85, def: 50, spa: 85, spd: 55, spe: 110 },
-		abilities: { 0: "Lightning Rod" },
-		heightm: 0.5,
-		weightkg: 6.5,
-		color: "Yellow",
-		eggGroups: ["Undiscovered"],
-	},
-	*/
-	// Step 2 – patch the base species to advertise the form:
-	/*
-	pikachu: {
+	// ── Fakemon (from Fanart) ─────────────────────────────────────────────
+
+	// ── Forms/Variants ────────────────────────────────────────────────────
+
+	// ── Mega Evolutions ─────────────────────────────────────────────
+
+	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
+	abomasnow: {
 		inherit: true,
-		otherFormes: ["Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh",
-		              "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola",
-		              "Pikachu-Partner", "Pikachu-Starter", "Pikachu-World",
-		              "Pikachu-DigiPen"],
-		formeOrder: ["Pikachu", "Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh",
-		             "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola",
-		             "Pikachu-Partner", "Pikachu-Starter", "Pikachu-World",
-		             "Pikachu-DigiPen"],
+		abilities: {0: "Snow Warning", 1: "Skill Link", H: "Mountaineer"},
+		baseStats: {hp: 80, atk: 114, def: 75, spa: 105, spd: 85, spe: 81},
 	},
-	*/
-
-	// ── Mega Evolution ─────────────────────────────────────────────
-	// Example:
-	/*
-	gardevoirmega: {
-		num: 282,
-		name: "Gardevoir-Mega",
-		isNonstandard: "DigiPen",
-		baseSpecies: "Gardevoir",
-		forme: "Mega",
-		types: ["Psychic", "Fairy"],
-		baseStats: { hp: 68, atk: 85, def: 65, spa: 165, spd: 135, spe: 100 },
-		abilities: { 0: "Pixilate" },
-		heightm: 1.6,
-		weightkg: 48.4,
-		color: "White",
-		eggGroups: ["Amorphous", "Human-Like"],
-		requiredItem: "Gardevoirite",
+	abomasnowmega: {
+		inherit: true,
+		baseStats: {hp: 80, atk: 154, def: 105, spa: 145, spd: 105, spe: 51},
 	},
-	*/
-	// Don't forget to patch gardevoir's base entry with otherFormes/formeOrder.
-
-};
+};	

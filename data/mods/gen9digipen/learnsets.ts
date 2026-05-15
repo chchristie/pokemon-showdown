@@ -3,6 +3,9 @@
 // inheritance only when learnset validation is not strictly enforced (e.g. formats
 // with officialRater: false). For strict validation, expand these to full learnsets.
 export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTable = {
+
+	// ── Base-game Pokémon ─────────────────────────────────────────────
+	// Remember to add inherit: true to the base-game Pokémon learnsets.
 	beheeyem: {
 		inherit: true,
 		learnset: {
@@ -132,4 +135,37 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			starblazing: ["9M, 8M, 7M, 6M"],
 		},
 	},
+
+	// ── Fakemon (Original) ─────────────────────────────────────────────
+	pootis: {
+		learnset: {
+			recycle: ["9M"],
+		},
+	},
+	armorobin: {
+		learnset: {
+			recycle: ["9M"],
+		},
+	},
+	chickiev: {
+		learnset: {
+			recycle: ["9M"],
+		},
+	},
+
+	// ── Fakemon (from Fanart) ─────────────────────────────────────────────
+
+	// ── Forms/Variants ────────────────────────────────────────────────────
+
+	// ── Mega Evolutions ────────────────────────────────────────────────────
+
+	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
+	abomasnow: {
+		inherit: true,
+		learnset: {
+			freezedry: ["9M"],
+			iciclecrash: ["9M"],
+			rockblast: ["9M"],
+		},
+	}
 };

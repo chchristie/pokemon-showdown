@@ -41,11 +41,17 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	},
 
 	// ── DigiPen-specific tier overrides for base-game Pokémon ───────────────
-	// These only take effect in the gen9digipen mod context. Example:
-	/*
-	garchomp: {
+
+	abomasnow: {
 		inherit: true,
-		tier: "DigiPen Ubers",
+		tier: "DigiPen",
+		doublesTier: "DigiPen",
+		natDexTier: "DigiPen",
 	},
-	*/
+	abomasnowmega: {
+		inherit: true,
+		tier: "Illegal",
+		doublesTier: "Illegal",
+		natDexTier: "DigiPen",
+	},
 };
