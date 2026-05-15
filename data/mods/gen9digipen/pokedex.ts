@@ -91,7 +91,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		prevo: "Armorobin",
 		evoType: "trade",
 		eggGroups: ["Flying", "Monster"]
-	}
+	},
 
 	// ── Regional Form ──────────────────────────────────────────────
 	// Example:
@@ -147,4 +147,34 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	*/
 	// Don't forget to patch gardevoir's base entry with otherFormes/formeOrder.
+
+	// ── TEMPORARY PLACEHOLDER POKÉMON ──────────────────────────────────────────
+	// These exist solely to register tier strings with the server's banlist
+	// validator so that 'DigiPen Uber' and 'DigiPen DUber' are valid banlist
+	// entries in custom-formats.ts. Remove each placeholder once a real DigiPen
+	// Pokémon has been assigned the corresponding tier in formats-data.ts.
+	digipenubertmp: {
+		num: -10001,
+		name: "DigiPen-Uber-Tmp",
+		isNonstandard: "DigiPen",
+		types: ["Normal"],
+		baseStats: { hp: 1, atk: 1, def: 1, spa: 1, spd: 1, spe: 1 },
+		abilities: { 0: "No Ability" },
+		heightm: 0.1,
+		weightkg: 0.1,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
+	digipendubertmp: {
+		num: -10002,
+		name: "DigiPen-DUber-Tmp",
+		isNonstandard: "DigiPen",
+		types: ["Normal"],
+		baseStats: { hp: 1, atk: 1, def: 1, spa: 1, spd: 1, spe: 1 },
+		abilities: { 0: "No Ability" },
+		heightm: 0.1,
+		weightkg: 0.1,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
 };

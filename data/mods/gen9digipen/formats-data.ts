@@ -40,6 +40,21 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		natDexTier: "DigiPen",
 	},
 
+	// ── TEMPORARY: remove when real DigiPen Pokémon use these tiers ────────────
+	// See matching entries in pokedex.ts.
+	digipenubertmp: {
+		isNonstandard: "DigiPen",
+		tier: "DigiPen Uber",
+		doublesTier: "DigiPen DUber",
+		natDexTier: "DigiPen Uber",
+	},
+	digipendubertmp: {
+		isNonstandard: "DigiPen",
+		tier: "DigiPen Uber",
+		doublesTier: "DigiPen DUber",
+		natDexTier: "DigiPen Uber",
+	},
+
 	// ── DigiPen-specific tier overrides for base-game Pokémon ───────────────
 	// These only take effect in the gen9digipen mod context. Example:
 	/*
