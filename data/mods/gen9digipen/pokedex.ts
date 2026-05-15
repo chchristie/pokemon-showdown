@@ -160,7 +160,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		baseSpecies: "Hydreigon",
 		forme: "Mega",
 		types: ["Dark", "Dragon"],
-		baseStats: { hp: 92, atk: 145, def: 120, spa: 115, spd: 110, spe: 118 },
+		baseStats: { hp: 92, atk: 115, def: 120, spa: 145, spd: 110, spe: 118 },
 		abilities: { 0: "Mega Launcher" },
 		heightm: 1.6,
 		weightkg: 48.4,

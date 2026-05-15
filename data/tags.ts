@@ -214,7 +214,7 @@ export const Tags: { [id: IDEntry]: TagData } = {
 	},
 	digipen: {
 		name: "DigiPen",
-		speciesFilter: species => species.tier === 'DigiPen',
+		speciesFilter: species => species.tier === 'DigiPen' || species.isNonstandard === 'DigiPen',
 	},
 	digipennfe: {
 		name: "DigiPen NFE",

@@ -55,6 +55,8 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 
 	// ── Custom Items ─────────────────────────────────────────────────────────
 
+	// -- Buff Items ──────────────────────────────────────────────────────────
+
 	// ── Mega Stones ──────────────────────────────────────────────────────────
 	hydreigite: {
 		name: "Hydreigite",
