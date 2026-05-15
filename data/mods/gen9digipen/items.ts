@@ -68,7 +68,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		num: 20001,
 		gen: 9,
-		isNonstandard: "DigiPen",
+		isNonstandard: "DigiPen Future",
 	},
 
 	// ── Changing Existing Items ─────────────────────────────────────────────

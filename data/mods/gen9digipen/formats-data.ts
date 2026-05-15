@@ -55,10 +55,8 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	// ── Mega Evolutions ────────────────────────────────────────────────────
 
 	hydreigonmega: {
-		isNonstandard: "DigiPen",
-		tier: "DigiPen",
-		doublesTier: "DigiPen",
-		natDexTier: "DigiPen",
+		isNonstandard: "DigiPen Future",
+		tier: "Illegal",
 	},
 
 	// ── Base-game Pokémon Changes ───────────────────────────────────────

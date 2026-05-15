@@ -4,8 +4,6 @@
 //
 // ── Custom Pokémon ──────────────────────────────────────────────────────────
 // Add a new entry keyed by the Pokémon's ID (lowercase, no spaces/punctuation).
-// All new DigiPen Pokémon MUST include `isNonstandard: "DigiPen"`. This marker
-// ensures they are illegal in every non-DigiPen format.
 //
 // Example:
 //   digipenmon: {
