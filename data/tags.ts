@@ -205,6 +205,30 @@ export const Tags: { [id: IDEntry]: TagData } = {
 		speciesFilter: species => species.tier === 'AG',
 	},
 
+	// DigiPen tiers
+	// -------------
+	// These tags make 'DigiPen Uber', 'DigiPen DUber' etc. valid banlist entries in custom-formats.ts. 
+	digipenuber: {
+		name: "DigiPen Uber",
+		speciesFilter: species => species.tier === 'DigiPen Uber',
+	},
+	digipen: {
+		name: "DigiPen",
+		speciesFilter: species => species.tier === 'DigiPen',
+	},
+	digipennfe: {
+		name: "DigiPen NFE",
+		speciesFilter: species => species.tier === 'DigiPen NFE',
+	},
+	digipenlc: {
+		name: "DigiPen LC",
+		speciesFilter: species => species.tier === 'DigiPen LC',
+	},
+	digipenduber: {
+		name: "DigiPen DUber",
+		speciesFilter: species => species.doublesTier === 'DigiPen DUber',
+	},
+
 	// Doubles tiers
 	// -------------
 	duber: {
