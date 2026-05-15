@@ -44,14 +44,12 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 
 	abomasnow: {
 		inherit: true,
-		tier: "DigiPen",
-		doublesTier: "DigiPen",
-		natDexTier: "DigiPen",
+		tier: "UU",
+		doublesTier: "DUU",
+		natDexTier: "UU",
 	},
 	abomasnowmega: {
 		inherit: true,
-		tier: "Illegal",
-		doublesTier: "Illegal",
-		natDexTier: "DigiPen",
+		natDexTier: "OU",
 	},
 };
