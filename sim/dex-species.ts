@@ -16,6 +16,10 @@ export interface SpeciesData extends Partial<Species> {
 	/** National Dex number */
 	num: number;
 	iconnum?: number;
+	/** Client: load battle/teambuilder assets from DigiPen sprite host */
+	digipenSpriteSheet?: boolean;
+	/** Client: icon index on DigiPen `pokemonicons-sheet` */
+	digipenIconnum?: number;
 	types: string[];
 	abilities: SpeciesAbility;
 	baseStats: StatsTable;
@@ -167,6 +171,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * Optional pokemon icon index in a custom sprite sheet used by DigiPen
 	 */
 	readonly iconnum?: number;
+	/** Client: gen5 battle / teambuilder sprites from DigiPen host */
+	readonly digipenSpriteSheet?: boolean;
+	/** Client: icon index on DigiPen `pokemonicons-sheet` */
+	readonly digipenIconnum?: number;
 	/** Abilities. */
 	readonly abilities: SpeciesAbility;
 	/** Types. */
@@ -301,6 +309,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.spriteid = data.spriteid ||
 			(toID(this.baseSpecies) + (this.baseSpecies !== this.name ? `-${toID(this.forme)}` : ''));
 		this.iconnum = data.iconnum;
+		this.digipenSpriteSheet = data.digipenSpriteSheet === true ? true : undefined;
+		this.digipenIconnum = typeof data.digipenIconnum === 'number' ? data.digipenIconnum : undefined;
 		this.abilities = data.abilities || { 0: "" };
 		this.types = data.types || ['???'];
 		this.addedType = data.addedType || undefined;

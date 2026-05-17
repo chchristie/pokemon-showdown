@@ -9,7 +9,8 @@
 //   digipenmon: {
 //     num: 2000,
 //     name: "DigipenMon",
-//     iconnum: 100,
+//     digipenIconnum: 100,
+//     digipenSpriteSheet: true,
 //     isNonstandard: "DigiPen",
 //     types: ["Normal"],
 //     baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
@@ -30,7 +31,8 @@
 //   pikachudigipen: {
 //     num: 25,
 //     name: "Pikachu-DigiPen",
-//     iconnum: 100,
+//     digipenIconnum: 100,
+//     digipenSpriteSheet: true,
 //     baseSpecies: "Pikachu",
 //     forme: "DigiPen",
 //     types: ["Electric", "Fairy"],
@@ -81,6 +83,10 @@
 //     inherit: true,
 //     baseStats: { hp: 60, atk: 75, def: 60, spa: 65, spd: 70, spe: 115 },
 //   },
+//
+// `digipenSpriteSheet: true` — client loads gen5 battle / teambuilder sprites
+// from the DigiPen sprite host (see battle-dex.ts). Use `digipenIconnum` for
+// icons on the DigiPen `pokemonicons-sheet`, not `iconnum`.
 
 export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	// ── Fakemon (Original) ─────────────────────────────────────────────
@@ -88,6 +94,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 2002,
 		name: "Pootis",
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: { hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35 },
@@ -102,6 +109,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 2003,
 		name: "Armorobin",
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: { hp: 70, atk: 85, def: 60, spa: 85, spd: 60, spe: 45} ,
@@ -117,6 +125,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 2004,
 		name: "Chickiev",
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: { hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60 },
@@ -132,6 +141,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 2013,
 		name: "Mojamas",
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		types: ["Normal"],
 		genderRatio: { M: 0.875, F: 0.125 },
 		baseStats: { hp: 95, atk: 55, def: 65, spa: 110, spd: 90, spe: 100 },
@@ -150,6 +160,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 157,
 		name: "Typhlosion-DigiPen",
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		baseSpecies: "Typhlosion",
 		forme: "DigiPen",
 		types: ["Fire", "Electric"],
@@ -169,7 +180,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	hydreigonmega: {
 		num: 635,
 		name: "Hydreigon-Mega",
-		iconnum: 0,
+		digipenIconnum: 0,
+		digipenSpriteSheet: true,
 		isNonstandard: "DigiPen",
 		baseSpecies: "Hydreigon",
 		forme: "Mega",
@@ -212,6 +224,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	darkraimega: {
 		inherit: true,
 		isNonstandard: "DigiPen",
+		digipenSpriteSheet: true,
 		abilities: { 0: "Nightmares" },
 	},
 	golisopodmega: {
@@ -238,4 +251,4 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		inherit: true,
 		abilities: { 0: "Speed Boost" },
 	},
-};	
+};
