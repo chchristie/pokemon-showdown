@@ -21,20 +21,21 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 	procrastinator: {
 		isNonstandard: "DigiPen",
 		onStart(pokemon) {
-			pokemon.removeVolatile('truant');
-			if (pokemon.activeTurns && (pokemon.moveThisTurnResult !== undefined || !this.queue.willMove(pokemon))) {
-				pokemon.addVolatile('truant');
+			pokemon.removeVolatile('procrastinator');
+		},
+		onResidual(pokemon) {
+			if (pokemon.removeVolatile('procrastinator')) {
+				if (pokemon.status && pokemon.status !== 'slp') {
+					this.debug('procrastinator');
+					this.add('-activate', pokemon, 'ability: Procrastinator');
+					pokemon.cureStatus();
+				}
+				pokemon.heal(pokemon.baseMaxhp / 4);
+			}
+			else {
+				pokemon.addVolatile('procrastinator');
 			}
 		},
-		onBeforeMovePriority: 9,
-		onBeforeMove(pokemon, target, move) {
-			if (pokemon.removeVolatile('truant')) {
-				this.add('cant', pokemon, 'ability: Truant');
-				return false;
-			}
-			pokemon.addVolatile('truant');
-		},
-		condition: {},
 		flags: {},
 		name: "Procrastinator",
 		rating: 4,
