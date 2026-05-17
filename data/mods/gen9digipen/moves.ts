@@ -30,6 +30,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 				} else {
 					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`);
 				}
+				this.add('-message', 'It created a bizarre area in which all type matchups are reversed!');
 			},
 			onFieldRestart(target, source) {
 				this.field.removePseudoWeather('inverseroom');
@@ -39,6 +40,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			onFieldResidualSubOrder: 1,
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Inverse Room');
+				this.add('-message', 'Inverse Room wore off, and all type matchups returned to normal!');
 			},
 			onNegateImmunity: false,
 			onEffectivenessPriority: 1,

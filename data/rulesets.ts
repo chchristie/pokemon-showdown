@@ -143,6 +143,8 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 			if (requireObtainable && item.isNonstandard) {
 				if (this.ruleTable.has(`+item:${item.id}`)) return;
+				// Also allow if the item's isNonstandard tag is explicitly unbanned (e.g. +Future).
+				if (this.ruleTable.check('pokemontag:' + this.toID(item.isNonstandard)) === '') return;
 				return [`${set.name}'s item ${item.name} does not exist in Gen ${this.dex.gen}.`];
 			}
 		},

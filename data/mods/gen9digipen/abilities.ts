@@ -51,6 +51,8 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			if (!pokemon.hp) return;
 			for (const target of pokemon.foes()) {
 				if (target.status === 'slp' || target.hasAbility('comatose')) {
+					this.add('-anim', pokemon, 'Nightmare', target);
+					this.add('-message', `The opposing ${target.name} is tormented!`);
 					this.damage(target.baseMaxhp / 4, target, pokemon);
 				}
 			}
@@ -59,6 +61,9 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		name: "Nightmares",
 		rating: 2,
 		num: 2001,
+		shortDesc: "Causes sleeping foes to lose 1/4 of their max HP at the end of each turn.",
+		desc: "Causes opposing Pokemon to lose 1/4 of their maximum HP, rounded down, at the end of each turn if they are asleep.",
+
 	},
 	thermalboost: {
 		onModifyAtkPriority: 5,
@@ -79,6 +84,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		name: "Thermal Boost",
 		rating: 3.5,
 		num: 2002,
+		shortDesc: "This Pokemon's offensive stat is multiplied by 1.5 while using a Fire-type attack.",
 	},
 
 	// ── Overriding Existing Abilities ────────────────────────────────────────────

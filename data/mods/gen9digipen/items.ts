@@ -69,8 +69,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		num: 20001,
 		gen: 9,
 		isNonstandard: "DigiPen Future",
-		shortDesc: "Allows Hydreigon to Mega Evolve.",	
-		desc: "If held by a Hydreigon, this item allows it to Mega Evolve in battle.",
+		shortDesc: "If held by a Hydreigon, this item allows it to Mega Evolve in battle.",
 	},
 
 	// ── Changing Existing Items ─────────────────────────────────────────────

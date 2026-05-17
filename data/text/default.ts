@@ -351,10 +351,6 @@ export const DefaultText: { [id: IDEntry]: DefaultText } = {
 		cant: "[POKEMON] can't use [MOVE] because of gravity!",
 		activate: "[POKEMON] fell from the sky due to the gravity!",
 	},
-	inverseroom: {
-		start: " It created a bizarre area in which all type matchups are reversed!",
-		end: " Inverse Room wore off, and all type matchups returned to normal!",
-	},
 	magicroom: {
 		start: "  It created a bizarre area in which Pok\u00E9mon's held items lose their effects!",
 		end: "  Magic Room wore off, and held items' effects returned to normal!",

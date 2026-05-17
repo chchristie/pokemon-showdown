@@ -183,7 +183,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
 	},
 
-	// ── Champions Mega Evolutions Abilities ────────────────────────────────────────────────────
+	// ── Champions Mega Evolutions "Leaked" Abilities ────────────────────────────────────────────────────
 	baxcaliburmega: {
 		inherit: true,
 		abilities: { 0: "Thermal Exchange" },
