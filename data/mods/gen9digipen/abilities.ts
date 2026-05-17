@@ -6,33 +6,9 @@
 // New DigiPen abilities MUST include `isNonstandard: "DigiPen"` so they are
 // treated as illegal outside DigiPen formats.
 //
-// Example:
-//   starrygaze: {
-//     num: 1000,
-//     name: "Starry Gaze",
-//     isNonstandard: "DigiPen",
-//     shortDesc: "On switch-in, all adjacent foes lose 1/8 of their max HP.",
-//     onStart(pokemon) {
-//       for (const foe of pokemon.side.foes()) {
-//         if (!foe.fainted) this.damage(foe.baseMaxhp / 8, foe, pokemon);
-//       }
-//     },
-//     rating: 2.5,
-//   },
-//
 // ── Overriding Existing Abilities ────────────────────────────────────────────
 // Use `inherit: true` to patch an existing ability without replacing it
 // entirely. Only the fields you specify will differ in DigiPen formats.
-//
-// Example:
-//   pixilate: {
-//     inherit: true,
-//     // In DigiPen formats Pixilate also boosts the converted move's power.
-//     onBasePowerPriority: 23,
-//     onBasePower(basePower, pokemon, target, move) {
-//       if (move.typeChangerBoosted === this.effect) return this.chainModify([4915, 4096]);
-//     },
-//   },
 
 export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTable = {
 
@@ -41,7 +17,35 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		isNonstandard: "DigiPen",
 	},
 	
-	// ── DigiPenCustom Abilities ─────────────────────────────────────────────────────────
+	// ── DigiPen Custom Abilities ─────────────────────────────────────────────────────────
+	procrastinator: {
+		isNonstandard: "DigiPen",
+		onStart(pokemon) {
+			pokemon.removeVolatile('truant');
+			if (pokemon.activeTurns && (pokemon.moveThisTurnResult !== undefined || !this.queue.willMove(pokemon))) {
+				pokemon.addVolatile('truant');
+			}
+		},
+		onBeforeMovePriority: 9,
+		onBeforeMove(pokemon, target, move) {
+			if (pokemon.removeVolatile('truant')) {
+				this.add('cant', pokemon, 'ability: Truant');
+				return false;
+			}
+			pokemon.addVolatile('truant');
+		},
+		condition: {},
+		flags: {},
+		name: "Procrastinator",
+		rating: 4,
+		num: 2058,
+		shortDesc: "Every other turn, this Pokemon cannot attack but heals 1/4 HP and cures its non-sleep status conditions at end of turn. If a Pokemon has the Pressure ability, this Pokemon's moves consume 3 PP instead.",
+		desc: "Every other turn, this Pokemon cannot use attacking moves. At the end of every other turn, \
+			this Pokemon restores 1/4 of its max HP and has its non-volatile status conditions except for sleep \
+			cured. If another Pokemon has the Pressure ability, this Pokemon's moves consume 3 PP instead.",
+	},
+
+	// ── Ability Changes/Buffs ────────────────────────────────────────────────────
 
 	// ── Champions "Leaked" Abilities ─────────────────────────────────────────────────────────
 	nightmares: {
@@ -60,7 +64,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		flags: {},
 		name: "Nightmares",
 		rating: 2,
-		num: 2001,
+		num: 3001,
 		shortDesc: "Causes sleeping foes to lose 1/4 of their max HP at the end of each turn.",
 		desc: "Causes opposing Pokemon to lose 1/4 of their maximum HP, rounded down, at the end of each turn if they are asleep.",
 
@@ -83,7 +87,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		flags: {},
 		name: "Thermal Boost",
 		rating: 3.5,
-		num: 2002,
+		num: 3002,
 		shortDesc: "This Pokemon's offensive stat is multiplied by 1.5 while using a Fire-type attack.",
 	},
 

@@ -15,7 +15,7 @@ export interface SpeciesData extends Partial<Species> {
 	name: string;
 	/** National Dex number */
 	num: number;
-
+	iconnum?: number;
 	types: string[];
 	abilities: SpeciesAbility;
 	baseStats: StatsTable;
@@ -163,6 +163,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * species and forme.
 	 */
 	readonly spriteid: string;
+	/**
+	 * Optional pokemon icon index in a custom sprite sheet used by DigiPen
+	 */
+	readonly iconnum?: number;
 	/** Abilities. */
 	readonly abilities: SpeciesAbility;
 	/** Types. */
@@ -296,6 +300,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.formeOrder = data.formeOrder || undefined;
 		this.spriteid = data.spriteid ||
 			(toID(this.baseSpecies) + (this.baseSpecies !== this.name ? `-${toID(this.forme)}` : ''));
+		this.iconnum = data.iconnum;
 		this.abilities = data.abilities || { 0: "" };
 		this.types = data.types || ['???'];
 		this.addedType = data.addedType || undefined;

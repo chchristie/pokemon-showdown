@@ -9,7 +9,9 @@
 //   digipenmon: {
 //     num: 2000,
 //     name: "DigipenMon",
-//     types: ["Fairy", "Steel"],
+//     iconnum: 100,
+//     isNonstandard: "DigiPen",
+//     types: ["Normal"],
 //     baseStats: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
 //     abilities: { 0: "Levitate", 1: "Technician", H: "Magician" },
 //     heightm: 1.0,
@@ -18,7 +20,6 @@
 //     eggGroups: ["Undiscovered"],
 //   },
 //
-// ── Regional Forms ──────────────────────────────────────────────────────────
 // Regional forms are separate entries whose `baseSpecies` points at the
 // canonical Pokémon and whose `forme` field names the region
 // (e.g. "Alola", "Hisui", "DigiPen"). Remember to add the form ID to the
@@ -29,6 +30,7 @@
 //   pikachudigipen: {
 //     num: 25,
 //     name: "Pikachu-DigiPen",
+//     iconnum: 100,
 //     baseSpecies: "Pikachu",
 //     forme: "DigiPen",
 //     types: ["Electric", "Fairy"],
@@ -83,12 +85,14 @@
 export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	// ── Fakemon (Original) ─────────────────────────────────────────────
 	pootis: {
-		num: 2001,
+		num: 2002,
 		name: "Pootis",
+		iconnum: 100,
+		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
-		baseStats: {hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35},
-		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
+		baseStats: { hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35 },
+		abilities: { 0: "Thick Fat", 1: "Gluttony", H: "Ripen" },
 		heightm: 0.7,
 		weightkg: 34,
 		color: "Red",
@@ -96,12 +100,14 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Flying", "Monster"]
 	},
 	armorobin: {
-		num: 2002,
+		num: 2003,
 		name: "Armorobin",
+		iconnum: 101,
+		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
-		baseStats: {hp: 70, atk: 85, def: 60, spa: 85, spd: 60, spe: 45},
-		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
+		baseStats: { hp: 70, atk: 85, def: 60, spa: 85, spd: 60, spe: 45} ,
+		abilities: { 0: "Thick Fat", 1: "Gluttony", H: "Ripen" },
 		heightm: 1.5,
 		weightkg: 150,
 		color: "Red",
@@ -110,11 +116,13 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Flying", "Monster"]
 	},
 	chickiev: {
-		num: 2003,
+		num: 2004,
 		name: "Chickiev",
+		iconnum: 102,
+		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
-		baseStats: {hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60},
+		baseStats: { hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60 },
 		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
 		heightm: 1.9,
 		weightkg: 300,
@@ -122,6 +130,20 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		prevo: "Armorobin",
 		evoType: "trade",
 		eggGroups: ["Flying", "Monster"]
+	},
+	mojamas: {
+		num: 2013,
+		name: "Mojamas",
+		iconnum: 103,
+		isNonstandard: "DigiPen",
+		types: ["Normal"],
+		genderRatio: { M: 0.875, F: 0.125 },
+		baseStats: { hp: 95, atk: 55, def: 65, spa: 110, spd: 90, spe: 100 },
+		abilities: { 0: "Analytic", 1: "Procrastinator", H: "Unaware" },
+		heightm: 1.8,
+		weightkg: 29,
+		color: "Gray",
+		eggGroups: ["Human-Like", "Fairy"],
 	},
 
 	// ── Fakemon (from Fanart) ─────────────────────────────────────────────
@@ -131,6 +153,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	typhlosiondigipen: {
 		num: 157,
 		name: "Typhlosion-DigiPen",
+		iconnum: 104,
+		isNonstandard: "DigiPen",
 		baseSpecies: "Typhlosion",
 		forme: "DigiPen",
 		types: ["Fire", "Electric"],
@@ -150,6 +174,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	hydreigonmega: {
 		num: 635,
 		name: "Hydreigon-Mega",
+		iconnum: 105,
+		isNonstandard: "DigiPen",
 		baseSpecies: "Hydreigon",
 		forme: "Mega",
 		types: ["Dark", "Dragon"],
@@ -190,6 +216,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	darkraimega: {
 		inherit: true,
+		isNonstandard: "DigiPen",
 		abilities: { 0: "Nightmares" },
 	},
 	golisopodmega: {

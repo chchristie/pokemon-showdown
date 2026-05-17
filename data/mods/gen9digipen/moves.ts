@@ -1,7 +1,7 @@
 export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	inverseroom: {
 		num: 1001,
-		isNonstandard: "DigiPen" as "DigiPen",
+		isNonstandard: "DigiPen",
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -26,9 +26,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			},
 			onFieldStart(target, source) {
 				if (source?.hasAbility('persistent')) {
-					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`, '[persistent]');
+					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`, '[persistent]', '[silent]');
 				} else {
-					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`);
+					this.add('-fieldstart', 'move: Inverse Room', `[of] ${source}`, '[silent]');
 				}
 				this.add('-message', 'It created a bizarre area in which all type matchups are reversed!');
 			},
@@ -39,7 +39,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			onFieldResidualOrder: 27,
 			onFieldResidualSubOrder: 1,
 			onFieldEnd() {
-				this.add('-fieldend', 'move: Inverse Room');
+				this.add('-fieldend', 'move: Inverse Room', '[silent]');
 				this.add('-message', 'Inverse Room wore off, and all type matchups returned to normal!');
 			},
 			onNegateImmunity: false,
@@ -59,7 +59,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	starblazing: {
 		num: 1002,
-		isNonstandard: "DigiPen" as "DigiPen",
+		isNonstandard: "DigiPen",
 		accuracy: 100,
 		basePower: 90,
 		category: "Special",
@@ -67,6 +67,10 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1 },
+		onPrepareHit(target, source, move) {
+			this.add('-anim', source, 'Moonblast', target);
+			this.attrLastMove('[anim] Moonblast');
+		},
 		secondary: {
 			chance: 20,
 			status: 'brn',
@@ -82,9 +86,50 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Fairy",
 		contestType: "Beautiful",
 	},
-	swordofdamocles: {
+	overchoice: {
 		num: 1003,
-		isNonstandard: "DigiPen" as "DigiPen",
+		isNonstandard: "DigiPen",
+		accuracy: 90,
+		basePower: 10,
+		category: "Special",
+		name: "Overchoice",
+		pp: 20,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, metronome: 1 },
+		onPrepareHit(target, source, move) {
+			this.add('-anim', source, 'Supersonic', target);
+			this.attrLastMove('[anim] Supersonic');
+		},
+		self: {
+			boosts: {
+				evasion: -2,
+			},
+		},
+		onModifyMove(move, pokemon, target) {
+			if (target?.hasAbility('pressure')) {
+				move.accuracy = 80;
+			}
+		},
+		basePowerCallback(pokemon, target, move) {
+			if (target?.hasAbility('pressure')) return move.basePower * 10;
+			return move.basePower;
+		},
+		secondary: {
+			chance: 100,
+			onHit(target, source) {
+				target.addVolatile('confusion');
+				target.trySetStatus('par', source);
+			},		
+		},
+		shortDesc: "User -2 Evasion. Paralyzes and confuses the target. If target has Pressure, 80% accuracy and x10 damage.",
+		desc: "Lower's the user's Evasion by 2 stages. Paralyzes and confuses the target. If the target has the Pressure ability, this move's accuracy is 80% and it deals 10x damage",
+		target: "normal",
+		type: "Normal",
+		contestType: "Clever",
+	},
+	swordofdamocles: {
+		num: 1006,
+		isNonstandard: "DigiPen",
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -92,6 +137,10 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		pp: 5,
 		priority: 0,
 		flags: { snatch: 1, metronome: 1 },
+		onPrepareHit(target, source, move) {
+			this.add('-anim', source, 'Swords Dance', source);
+			this.attrLastMove('[anim] Swords Dance');
+		},
 		volatileStatus: "perishsong",
 		condition: {
 			duration: 4,
