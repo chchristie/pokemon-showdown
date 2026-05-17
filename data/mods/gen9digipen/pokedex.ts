@@ -216,6 +216,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	darkraimega: {
 		inherit: true,
+		isNonstandard: "DigiPen",
 		abilities: { 0: "Nightmares" },
 	},
 	golisopodmega: {
