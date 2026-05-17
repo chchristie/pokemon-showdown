@@ -87,7 +87,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	pootis: {
 		num: 2002,
 		name: "Pootis",
-		iconnum: 100,
 		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
@@ -102,7 +101,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	armorobin: {
 		num: 2003,
 		name: "Armorobin",
-		iconnum: 101,
 		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
@@ -118,7 +116,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	chickiev: {
 		num: 2004,
 		name: "Chickiev",
-		iconnum: 102,
 		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
@@ -134,7 +131,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	mojamas: {
 		num: 2013,
 		name: "Mojamas",
-		iconnum: 103,
 		isNonstandard: "DigiPen",
 		types: ["Normal"],
 		genderRatio: { M: 0.875, F: 0.125 },
@@ -153,7 +149,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	typhlosiondigipen: {
 		num: 157,
 		name: "Typhlosion-DigiPen",
-		iconnum: 104,
 		isNonstandard: "DigiPen",
 		baseSpecies: "Typhlosion",
 		forme: "DigiPen",

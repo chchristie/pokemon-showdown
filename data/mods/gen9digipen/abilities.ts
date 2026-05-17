@@ -39,7 +39,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		name: "Procrastinator",
 		rating: 4,
 		num: 2058,
-		shortDesc: "Every other turn, this Pokemon cannot attack but heals 1/4 HP and cures its non-sleep status conditions at end of turn. If a Pokemon has the Pressure ability, this Pokemon's moves consume 3 PP instead.",
+		shortDesc: "Every other turn: can't attack, heals 1/4 HP, cures non-sleep status conditions.",
 		desc: "Every other turn, this Pokemon cannot use attacking moves. At the end of every other turn, \
 			this Pokemon restores 1/4 of its max HP and has its non-volatile status conditions except for sleep \
 			cured. If another Pokemon has the Pressure ability, this Pokemon's moves consume 3 PP instead.",

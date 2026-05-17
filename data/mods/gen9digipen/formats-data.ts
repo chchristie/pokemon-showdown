@@ -110,6 +110,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	},
 	darkraimega: {
 		inherit: true,
+		isNonstandard: "DigiPen",
 		natDexTier: "OU",
 	},
 	delphoxmega: {
