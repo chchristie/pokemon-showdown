@@ -88,6 +88,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		num: 2002,
 		name: "Pootis",
 		iconnum: 100,
+		isNonstandard: "DigiPen",
 		types: ["Fighting"],
 		gender: "M",
 		baseStats: { hp: 50, atk: 60, def: 50, spa: 60, spd: 50, spe: 35 },
@@ -173,7 +174,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	hydreigonmega: {
 		num: 635,
 		name: "Hydreigon-Mega",
-		iconnum: 105,
+		iconnum: 0,
 		isNonstandard: "DigiPen",
 		baseSpecies: "Hydreigon",
 		forme: "Mega",
@@ -190,7 +191,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
 	abomasnow: {
 		inherit: true,
-		isNonstandard: "DigiPen",
 		abilities: {0: "Snow Warning", 1: "Skill Link", H: "Mountaineer"},
 		baseStats: {hp: 80, atk: 114, def: 75, spa: 105, spd: 85, spe: 81},
 	},
@@ -216,7 +216,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	darkraimega: {
 		inherit: true,
-		isNonstandard: "DigiPen",
 		abilities: { 0: "Nightmares" },
 	},
 	golisopodmega: {
