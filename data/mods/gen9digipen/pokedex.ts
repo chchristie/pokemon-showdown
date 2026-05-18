@@ -146,7 +146,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		color: "Red",
 		prevo: "Armorobin",
 		evoType: "trade",
-		evoItem: "Metal Coat",
+		evoCondition: "with a Metal Coat",
 		eggGroups: ["Flying", "Monster"],
 		title: "Mow Down",
 		dexEntry: "With its newfound upgrades, it is able to produce its own sandwiches to its liking. In battle, the speed of the feathers and punches it throws surpass that of bullets.",
