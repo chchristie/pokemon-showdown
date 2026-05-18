@@ -57,6 +57,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Fairy",
 		zMove: { boost: { accuracy: 1 } },
 		contestType: "Clever",
+		dexEntry: "Test dex entry",
+		contributors: ["Jared G."]
 	},
 	starblazing: {
 		num: 1002,
@@ -86,6 +88,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Fairy",
 		contestType: "Beautiful",
+		contributors: ["Jared G."]
 	},
 	overchoice: {
 		num: 1003,
@@ -127,6 +130,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Normal",
 		contestType: "Clever",
+		contributors: ["Logan C."]
 	},
 	swordofdamocles: {
 		num: 1006,
@@ -134,7 +138,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		name: "Sword of Damocles",
+		name: "Damocles",
 		pp: 5,
 		priority: 0,
 		flags: { snatch: 1, metronome: 1 },
@@ -173,7 +177,13 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		zMove: { effect: 'clearnegativeboost' },
 		contestType: "Beautiful",
 		shortDesc: "+1 all stats (not acc/ev). User faints in 3 turns.",
-		desc: "Raises the user's Attack, Defense, Special Attack, Special Defense, and Speed by 1 stage. The user receives a perish count of 4 if it doesn't already have a perish count. At the end of each turn including the turn used, the perish count of the user lowers by 1 and the user faints if the number reaches 0. The perish count is removed from the user if it switches out. If the user uses Baton Pass while it has a perish count, the replacement will gain the perish count and continue to count down.",
+		desc: "Raises the user's Attack, Defense, Special Attack, Special Defense, and Speed by 1 stage. \
+			The user receives a perish count of 4 if it doesn't already have a perish count. At the end of each \
+			turn including the turn used, the perish count of the user lowers by 1 and the user faints if the \
+			number reaches 0. The perish count is removed from the user if it switches out. If the user uses \
+			Baton Pass while it has a perish count, the replacement will gain the perish count and continue to \
+			count down.",
+		contributors: ["Jared G."],
 	},
 
 	/* ----- Modified Moves ───────────────────────────────────────────── */
@@ -181,5 +191,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		inherit: true,
 		modified: "DigiPen",
 		basePower: 65,
+		contributors: ["Bryce G."],
 	}
 };

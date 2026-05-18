@@ -103,7 +103,13 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		weightkg: 34,
 		color: "Red",
 		evos: ["Armorobin"],
-		eggGroups: ["Flying", "Monster"]
+		eggGroups: ["Flying", "Monster"],
+		title: "Punch Baby",
+		dexEntry: "It enjoys punching things, but its damage is limited by its puniness. It has an affinity towards sandwiches.",
+		habitat: "Test habitat",
+		notes: ["Test note 1, Test note 2"],
+		contributors: ["Will T.", "Test contributor"],
+		artSource: { artist: "Test artist", url: "Test source" }
 	},
 	armorobin: {
 		num: 2003,
@@ -120,7 +126,11 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		prevo: "Pootis",
 		evoLevel: 35,
 		evos: ["Chickiev"],
-		eggGroups: ["Flying", "Monster"]
+		eggGroups: ["Flying", "Monster"],
+		title: "Red Army",
+		dexEntry: "Its steel-plated feathers scatter at high speeds when it flaps its wings. If Armorobin aren't fed often, it will throw a dangerous tantrum.",
+		notes: ["Originally named Pootispenser, renamed by Jared G."],
+		contributors: ["Will T."],
 	},
 	chickiev: {
 		num: 2004,
@@ -136,7 +146,12 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		color: "Red",
 		prevo: "Armorobin",
 		evoType: "trade",
-		eggGroups: ["Flying", "Monster"]
+		evoItem: "Metal Coat",
+		eggGroups: ["Flying", "Monster"],
+		title: "Mow Down",
+		dexEntry: "With its newfound upgrades, it is able to produce its own sandwiches to its liking. In battle, the speed of the feathers and punches it throws surpass that of bullets.",
+		notes: ["Originally named Pootispenserheer, rename by Jared G."],
+		contributors: ["Will T."],
 	},
 	mojamas: {
 		num: 2013,
@@ -151,6 +166,10 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		weightkg: 29,
 		color: "Gray",
 		eggGroups: ["Human-Like", "Fairy"],
+		title: "Bored",
+		dexEntry: "Its appearance is tall and lanky. Given its skeletal body, it curls up in soft clothing to keep warm, generally pajamas and robes. Lethargic by nature, it will generally attempt to spend its time pursuing its own immediate interests. If given a task to complete, it will generally wait until it is able to achieve the motivation to do so.",
+		notes: ["Logan's Pokesona"],
+		contributors: ["Logan C."],
 	},
 
 	// ── Fakemon (from Fanart) ─────────────────────────────────────────────
@@ -174,6 +193,10 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		prevo: "Quilava",
 		evoLevel: 36,
 		eggGroups: ["Field"],
+		title: "Hotwire",
+		dexEntry: "Nobody knows where the plug on Typhlosion's face came from, nor where it goes. Despite having the capability of ravaging the battlefield with a storm of both fireballs and lightning strikes, it always seems to be in a state of rest and relaxation.",
+		notes: ["'Typhwire'; Deltarune Werewire reference"],
+		contributors: ["Jared G."],
 	},
 	typhlosion: {
 		inherit: true,
@@ -205,6 +228,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		color: "Blue",
 		eggGroups: ["Dragon"],
 		requiredItem: "Hydreigite",
+		notes: ["Inspired by its commonly used moves, Dragon Pulse and Dark Pulse"],
+		contributors: ["Bryce G."],
 	},
 	hydreigon: {
 		inherit: true,
@@ -219,11 +244,13 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		modified: "DigiPen",
 		abilities: {0: "Snow Warning", 1: "Skill Link", H: "Mountaineer"},
 		baseStats: {hp: 80, atk: 114, def: 75, spa: 105, spd: 85, spe: 81},
+		contributors: ["Bryce G."]
 	},
 	abomasnowmega: {
 		inherit: true,
 		modified: "DigiPen",
 		baseStats: {hp: 80, atk: 154, def: 105, spa: 145, spd: 105, spe: 51},
+		contributors: ["Bryce G."],
 	},
 
 

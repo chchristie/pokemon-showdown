@@ -13,7 +13,7 @@ type SpeciesTag = "Mythical" | "Restricted Legendary" | "Sub-Legendary" | "Ultra
 
 export interface SpeciesData extends Partial<Species> {
 	/** Client dex: offer base vs DigiPen toggle when set */
-	modified?: 'DigiPen';
+	modified?: string;
 	name: string;
 	/** National Dex number */
 	num: number;
@@ -22,6 +22,18 @@ export interface SpeciesData extends Partial<Species> {
 	digipenSprite?: boolean;
 	/** Client: icon index on DigiPen `pokemonicons-sheet` */
 	digipenIconnum?: number;
+	/** Client dex: species category line (e.g. "Punch Baby Pokémon") */
+	title?: string;
+	/** Client dex: custom Pokédex paragraph */
+	dexEntry?: string;
+	/** Client dex: habitat shown next to color */
+	habitat?: string;
+	/** Client dex: flavor-tab bullet notes */
+	notes?: string[];
+	/** Client dex: contributor names (strings; renderer may support objects later) */
+	contributors?: string[];
+	/** Client dex: art credit for acknowledgements */
+	artSource?: { artist?: string; url?: string };
 	types: string[];
 	abilities: SpeciesAbility;
 	baseStats: StatsTable;

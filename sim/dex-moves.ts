@@ -146,6 +146,10 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	name: string;
 	/** Client dex: offer base vs DigiPen toggle when set */
 	modified?: 'DigiPen';
+	/** Client dex: custom Pokédex paragraph */
+	dexEntry?: string;
+	/** Client dex: contributor names */
+	contributors?: string[];
 	/** move index number, used for Metronome rolls */
 	num?: number;
 	condition?: ConditionData;
