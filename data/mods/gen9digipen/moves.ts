@@ -1,4 +1,5 @@
 export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
+	/* ----- DigiPen Custom Moves ───────────────────────────────────────────── */
 	inverseroom: {
 		num: 1001,
 		isNonstandard: "DigiPen",
@@ -174,4 +175,11 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		shortDesc: "+1 all stats (not acc/ev). User faints in 3 turns.",
 		desc: "Raises the user's Attack, Defense, Special Attack, Special Defense, and Speed by 1 stage. The user receives a perish count of 4 if it doesn't already have a perish count. At the end of each turn including the turn used, the perish count of the user lowers by 1 and the user faints if the number reaches 0. The perish count is removed from the user if it switches out. If the user uses Baton Pass while it has a perish count, the replacement will gain the perish count and continue to count down.",
 	},
+
+	/* ----- Modified Moves ───────────────────────────────────────────── */
+	scald: {
+		inherit: true,
+		modified: "DigiPen",
+		basePower: 65,
+	}
 };
