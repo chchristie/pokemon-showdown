@@ -160,7 +160,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	typhlosiondigipen: {
 		num: 157,
 		name: "Typhlosion-DigiPen",
-		modified: "DigiPen",
 		isNonstandard: "DigiPen",
 		digipenSprite: true,
 		baseSpecies: "Typhlosion",
@@ -193,7 +192,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	hydreigonmega: {
 		num: 635,
 		name: "Hydreigon-Mega",
-		modified: "DigiPen",
 		digipenIconnum: 0,
 		digipenSprite: true,
 		isNonstandard: "DigiPen",
@@ -208,6 +206,12 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Dragon"],
 		requiredItem: "Hydreigite",
 	},
+	hydreigon: {
+		inherit: true,
+		modified: "DigiPen",
+		otherFormes: ["Hydreigon-Mega"],
+		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
+	},
 
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
 	abomasnow: {
@@ -221,12 +225,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		modified: "DigiPen",
 		baseStats: {hp: 80, atk: 154, def: 105, spa: 145, spd: 105, spe: 51},
 	},
-	hydreigon: {
-		inherit: true,
-		modified: "DigiPen",
-		otherFormes: ["Hydreigon-Mega"],
-		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
-	},
+
 
 	// ── Champions Mega Evolutions "Leaked" Abilities ────────────────────────────────────────────────────
 	baxcaliburmega: {

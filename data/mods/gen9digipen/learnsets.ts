@@ -283,9 +283,9 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	abomasnow: {
 		inherit: true,
 		learnset: {
-			freezedry: ["9M"],
-			iciclecrash: ["9M"],
-			rockblast: ["9M"],
+			freezedry: ["9L1"],
+			iciclecrash: ["9L53"],
+			rockblast: ["9L1"],
 		},
 	}
 };
