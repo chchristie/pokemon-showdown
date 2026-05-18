@@ -127,7 +127,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		name: "Chickiev",
 		isNonstandard: "DigiPen",
 		digipenSprite: true,
-		types: ["Fighting"],
+		types: ["Fighting", "Steel"],
 		gender: "M",
 		baseStats: { hp: 85, atk: 105, def: 90, spa: 100, spd: 90, spe: 60 },
 		abilities: {0: "Thick Fat", 1: "Gluttony", H: "Ripen"},
@@ -175,6 +175,15 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		evoLevel: 36,
 		eggGroups: ["Field"],
 	},
+	typhlosion: {
+		inherit: true,
+		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
+		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
+	},
+	quilava: {
+		inherit: true,
+		evos: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
+	},
 
 	// ── Mega Evolutions ─────────────────────────────────────────────
 
@@ -210,11 +219,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		inherit: true,
 		otherFormes: ["Hydreigon-Mega"],
 		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
-	},
-	typhlosion: {
-		inherit: true,
-		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
-		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
 	},
 
 	// ── Champions Mega Evolutions "Leaked" Abilities ────────────────────────────────────────────────────
