@@ -30,7 +30,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 					this.add('-activate', pokemon, 'ability: Procrastinator');
 					pokemon.cureStatus();
 				}
-				pokemon.heal(pokemon.baseMaxhp / 4);
+				this.heal(pokemon.baseMaxhp / 4);
 			}
 			else {
 				pokemon.addVolatile('procrastinator');
@@ -40,7 +40,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		name: "Procrastinator",
 		rating: 4,
 		num: 2058,
-		shortDesc: "Every other turn: can't attack, heals 1/4 HP, cures non-sleep status conditions.",
+		shortDesc: "Every other turn: can't attack, heals 1/4 HP, cures non-sleep status conditions. If another Pokemon has Pressure, this Pokemon's moves consume 3 PP instead.",
 		desc: "Every other turn, this Pokemon cannot use attacking moves. At the end of every other turn, \
 			this Pokemon restores 1/4 of its max HP and has its non-volatile status conditions except for sleep \
 			cured. If another Pokemon has the Pressure ability, this Pokemon's moves consume 3 PP instead.",

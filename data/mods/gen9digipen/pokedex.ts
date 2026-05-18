@@ -119,6 +119,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		color: "Red",
 		prevo: "Pootis",
 		evoLevel: 35,
+		evos: ["Chickiev"],
 		eggGroups: ["Flying", "Monster"]
 	},
 	chickiev: {
