@@ -107,7 +107,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		title: "Punch Baby",
 		dexEntry: "It enjoys punching things, but its damage is limited by its puniness. It has an affinity towards sandwiches.",
 		habitat: "Test habitat",
-		notes: ["Test note 1, Test note 2"],
+		notes: ["Test note 1", "Test note 2"],
 		contributors: ["Will T.", "Test contributor"],
 		artSource: { artist: "Test artist", url: "Test source" }
 	},
