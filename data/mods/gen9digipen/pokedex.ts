@@ -230,6 +230,8 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		requiredItem: "Hydreigite",
 		notes: ["Inspired by its commonly used moves, Dragon Pulse and Dark Pulse"],
 		contributors: ["Bryce G."],
+		// Temporary art for testing; source seems untrustworthy too
+		artSource: { artist: "TRXPICS", url: "https://www.pokemonpets.com/Mega-Hydreigon-Pokemon-Pokedex-8635" }
 	},
 	hydreigon: {
 		inherit: true,
