@@ -107,7 +107,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		title: "Punch Baby",
 		dexEntry: "It enjoys punching things, but its damage is limited by its puniness. It has an affinity towards sandwiches.",
 		habitat: "Test habitat",
-		notes: ["Test note 1", "Test note 2"],
+		notes: "Test note.",
 		contributors: ["Will T.", "Test contributor"],
 		artSource: { artist: "Test artist", url: "Test source" }
 	},
@@ -129,7 +129,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Flying", "Monster"],
 		title: "Red Army",
 		dexEntry: "Its steel-plated feathers scatter at high speeds when it flaps its wings. If Armorobin aren't fed often, it will throw a dangerous tantrum.",
-		notes: ["Originally named Pootispenser, renamed by Jared G."],
+		notes: "Originally named Pootispenser, renamed by Jared G.",
 		contributors: ["Will T."],
 	},
 	chickiev: {
@@ -150,7 +150,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Flying", "Monster"],
 		title: "Mow Down",
 		dexEntry: "With its newfound upgrades, it is able to produce its own sandwiches to its liking. In battle, the speed of the feathers and punches it throws surpass that of bullets.",
-		notes: ["Originally named Pootispenserheer, rename by Jared G."],
+		notes: "Originally named Pootispenserheer, rename by Jared G.",
 		contributors: ["Will T."],
 	},
 	mojamas: {
@@ -168,7 +168,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Human-Like", "Fairy"],
 		title: "Bored",
 		dexEntry: "Its appearance is tall and lanky. Given its skeletal body, it curls up in soft clothing to keep warm, generally pajamas and robes. Lethargic by nature, it will generally attempt to spend its time pursuing its own immediate interests. If given a task to complete, it will generally wait until it is able to achieve the motivation to do so.",
-		notes: ["Logan's Pokesona"],
+		notes: "Logan's Pokesona",
 		contributors: ["Logan C."],
 	},
 
@@ -195,7 +195,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		eggGroups: ["Field"],
 		title: "Hotwire",
 		dexEntry: "Nobody knows where the plug on Typhlosion's face came from, nor where it goes. Despite having the capability of ravaging the battlefield with a storm of both fireballs and lightning strikes, it always seems to be in a state of rest and relaxation.",
-		notes: ["'Typhwire'; Deltarune Werewire reference"],
+		notes: "'Typhwire'; Deltarune Werewire reference",
 		contributors: ["Jared G."],
 	},
 	typhlosion: {
@@ -228,7 +228,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		color: "Blue",
 		eggGroups: ["Dragon"],
 		requiredItem: "Hydreigite",
-		notes: ["Inspired by its commonly used moves, Dragon Pulse and Dark Pulse"],
+		notes: "Inspired by its commonly used moves, Dragon Pulse and Dark Pulse",
 		contributors: ["Bryce G."],
 		// Temporary art for testing; source seems untrustworthy too
 		artSource: { artist: "TRXPICS", url: "https://www.pokemonpets.com/Mega-Hydreigon-Pokemon-Pokedex-8635" }

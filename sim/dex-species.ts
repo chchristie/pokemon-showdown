@@ -28,8 +28,8 @@ export interface SpeciesData extends Partial<Species> {
 	dexEntry?: string;
 	/** Client dex: habitat shown next to color */
 	habitat?: string;
-	/** Client dex: flavor-tab bullet notes */
-	notes?: string[];
+	/** Client dex: flavor-tab notes (plain text) */
+	notes?: string;
 	/** Client dex: contributor names (strings; renderer may support objects later) */
 	contributors?: string[];
 	/** Client dex: art credit for acknowledgements */
