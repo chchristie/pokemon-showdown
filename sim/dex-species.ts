@@ -12,6 +12,8 @@ interface SpeciesAbility {
 type SpeciesTag = "Mythical" | "Restricted Legendary" | "Sub-Legendary" | "Ultra Beast" | "Paradox";
 
 export interface SpeciesData extends Partial<Species> {
+	/** Client dex: offer base vs DigiPen toggle when set */
+	modified?: 'DigiPen';
 	name: string;
 	/** National Dex number */
 	num: number;

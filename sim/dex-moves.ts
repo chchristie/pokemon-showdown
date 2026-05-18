@@ -144,6 +144,8 @@ export interface MoveEventMethods {
 
 export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	name: string;
+	/** Client dex: offer base vs DigiPen toggle when set */
+	modified?: 'DigiPen';
 	/** move index number, used for Metronome rolls */
 	num?: number;
 	condition?: ConditionData;

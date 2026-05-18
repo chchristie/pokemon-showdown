@@ -160,6 +160,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	typhlosiondigipen: {
 		num: 157,
 		name: "Typhlosion-DigiPen",
+		modified: "DigiPen",
 		isNonstandard: "DigiPen",
 		digipenSprite: true,
 		baseSpecies: "Typhlosion",
@@ -177,11 +178,13 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	typhlosion: {
 		inherit: true,
+		modified: "DigiPen",
 		otherFormes: ["Typhlosion-Hisui", "Typhlosion-DigiPen"],
 		formeOrder: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
 	},
 	quilava: {
 		inherit: true,
+		modified: "DigiPen",
 		evos: ["Typhlosion", "Typhlosion-Hisui", "Typhlosion-DigiPen"],
 	},
 
@@ -190,6 +193,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	hydreigonmega: {
 		num: 635,
 		name: "Hydreigon-Mega",
+		modified: "DigiPen",
 		digipenIconnum: 0,
 		digipenSprite: true,
 		isNonstandard: "DigiPen",
@@ -208,15 +212,18 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	// ── Mon Changes/Buffs ────────────────────────────────────────────────────
 	abomasnow: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: {0: "Snow Warning", 1: "Skill Link", H: "Mountaineer"},
 		baseStats: {hp: 80, atk: 114, def: 75, spa: 105, spd: 85, spe: 81},
 	},
 	abomasnowmega: {
 		inherit: true,
+		modified: "DigiPen",
 		baseStats: {hp: 80, atk: 154, def: 105, spa: 145, spd: 105, spe: 51},
 	},
 	hydreigon: {
 		inherit: true,
+		modified: "DigiPen",
 		otherFormes: ["Hydreigon-Mega"],
 		formeOrder: ["Hydreigon", "Hydreigon-Mega"],
 	},
@@ -224,35 +231,43 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	// ── Champions Mega Evolutions "Leaked" Abilities ────────────────────────────────────────────────────
 	baxcaliburmega: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Thermal Exchange" },
 	},
 	darkraimega: {
 		inherit: true,
+		modified: "DigiPen",
 		digipenSprite: true,
 		abilities: { 0: "Nightmares" },
 	},
 	golisopodmega: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Tough Claws" },
 	},
 	lucariomegaz: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Prankster" },
 	},
 	pyroarmega: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Thermal Boost" },
 	},
 	raichumegax: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Electric Surge" },
 	},
 	staraptormega: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Contrary" },
 	},
 	zeraoramega: {
 		inherit: true,
+		modified: "DigiPen",
 		abilities: { 0: "Speed Boost" },
 	},
 };
