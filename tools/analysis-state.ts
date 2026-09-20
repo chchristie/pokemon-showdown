@@ -7,6 +7,7 @@
  */
 import { Battle } from '../sim/battle';
 import { Dex, toID } from '../sim/dex';
+import { TeamValidator, Teams } from '../sim';
 import type { PRNGSeed } from '../sim/prng';
 import type { Pokemon } from '../sim/pokemon';
 import { applyAnalysisEdits, type AnalysisAppliedEdits } from './analysis-edits';
@@ -231,6 +232,26 @@ export interface AnalysisSnapshot {
 }
 
 const INPUT_LINE = /^>(p[1-4])\s+(.+)$/;
+
+/**
+ * Validates a packed team, and hands back the **validated sets repacked**.
+ *
+ * Validation is also normalization, and the normalized team is the one the battle has to start from. A
+ * team built around a battle-only forme — Mega Charizard X, Primal Groudon, Ultra Necrozma — is stored by
+ * the teambuilder as that forme, and `validateSet` rewrites it to the forme it actually starts the battle
+ * in, together with the ability that goes with it. The game server keeps that rewrite by repacking the
+ * validated sets (`server/team-validator-async.ts`); throwing them away and building the battle from the
+ * team as typed is what made a Mega set start the battle already Mega Evolved.
+ *
+ * On failure the team is handed back untouched, because a half-normalized team is not worth returning
+ * alongside the problems that stopped the battle being made at all.
+ */
+export function validateAnalysisTeam(format: string, packedTeam: string) {
+	const team = Teams.unpack(packedTeam) || [];
+	if (!team.length) return { problems: ['Team is empty.'], packedTeam };
+	const problems = new TeamValidator(format).validateTeam(team) || [];
+	return { problems, packedTeam: problems.length ? packedTeam : Teams.pack(team) };
+}
 
 export function createAnalysisBattle(options: AnalysisBattleOptions, output?: string[]) {
 	/*

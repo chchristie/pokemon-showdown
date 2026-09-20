@@ -1,11 +1,12 @@
 import { cpus } from 'node:os';
 import { isMainThread, parentPort, Worker, workerData } from 'node:worker_threads';
 import { type Battle, extractChannelMessages } from '../sim/battle';
-import { PRNG, TeamValidator, Teams } from '../sim';
+import { PRNG, Teams } from '../sim';
 import type { PRNGSeed } from '../sim/prng';
 import type { Pokemon } from '../sim/pokemon';
 import {
-	applyInputLog, createAnalysisBattle, replayAnalysisRecords, type AnalysisReplayRecord,
+	applyInputLog, createAnalysisBattle, replayAnalysisRecords, validateAnalysisTeam,
+	type AnalysisReplayRecord,
 } from './analysis-state';
 
 export interface AnalysisBatchRequest {
@@ -365,19 +366,22 @@ export function validateBatchRequest(request: AnalysisBatchRequest) {
 	if (!Array.isArray(request.inputLog) || !request.inputLog.length) {
 		return 'inputLog must contain the choices for both players.';
 	}
-	const team1 = Teams.unpack(request.team1) || [];
-	const team2 = Teams.unpack(request.team2) || [];
 	// a sandbox position's team is deliberately illegal, so only the sim's own "not empty" rule applies
-	const validate = (team: PokemonSet[]) => {
-		if (!team.length) return ['Team is empty.'];
-		if (request.sandbox) return [];
-		return new TeamValidator(request.format).validateTeam(team) || [];
-	};
-	const team1Problems = validate(team1);
-	const team2Problems = validate(team2);
-	if (team1Problems?.length || team2Problems?.length) {
-		return { team1: team1Problems || [], team2: team2Problems || [] };
+	const validate = (packedTeam: string) => request.sandbox ?
+		{ problems: Teams.unpack(packedTeam)?.length ? [] : ['Team is empty.'], packedTeam } :
+		validateAnalysisTeam(request.format, packedTeam);
+	const team1 = validate(request.team1);
+	const team2 = validate(request.team2);
+	if (team1.problems.length || team2.problems.length) {
+		return { team1: team1.problems, team2: team2.problems };
 	}
+	/*
+	 * Validation normalizes the sets (a Mega forme becomes the forme it starts the battle in), and the
+	 * workers have to build their battles from the same team the main line was built from, or a batch
+	 * would be simulating a position the analysis never reached.
+	 */
+	request.team1 = team1.packedTeam;
+	request.team2 = team2.packedTeam;
 	return null;
 }
 

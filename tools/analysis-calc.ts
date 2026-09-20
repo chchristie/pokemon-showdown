@@ -43,11 +43,12 @@ export interface AnalysisCalcTargetResult {
 }
 
 /**
- * The attacker's own transformation this turn: '' (as it is now), or terastallizing / mega evolving.
- * Results are computed for every mode the attacker can still use, so the client can match the
- * move menu's Mega/Tera checkboxes (or the chosen move's modifier) without refetching.
+ * The attacker's own transformation this turn: '' (as it is now), terastallizing, mega evolving, or
+ * spending its Z-Power (`z`, which changes the move rather than the Pokémon). Results are computed for
+ * every mode the attacker can still use, so the client can match the move menu's Mega/Z/Tera checkboxes
+ * (or the chosen move's modifier) without refetching.
  */
-export type AnalysisCalcMode = '' | 'tera' | 'mega' | 'megax' | 'megay';
+export type AnalysisCalcMode = '' | 'tera' | 'mega' | 'megax' | 'megay' | 'z';
 
 export interface AnalysisCalcMoveResult {
 	attacker: AnalysisCalcPokemonRef;
@@ -160,6 +161,7 @@ export function parseDraftChoices(inputLog: string[] | undefined) {
 			for (const token of tokens.slice(2)) {
 				if (/^[+-]?\d+$/.test(token)) choice.targetLoc = Number(token);
 				if (token === 'terastallize') choice.mode = 'tera';
+				if (token === 'zmove') choice.mode = 'z';
 				if (token === 'mega' || token === 'megax' || token === 'megay') choice.mode = token;
 			}
 			return choice;
@@ -204,6 +206,8 @@ function availableModes(pokemon: Pokemon): AnalysisCalcMode[] {
 	if (pokemon.canMegaEvo) modes.push('mega');
 	if (pokemon.canMegaEvoX) modes.push('megax');
 	if (pokemon.canMegaEvoY) modes.push('megay');
+	// the same list the request's Z-Power checkbox comes from; which moves have a Z version is per move
+	if (pokemon.battle.actions.canZMove(pokemon)) modes.push('z');
 	return modes;
 }
 
@@ -409,9 +413,18 @@ function calcMove(
 ): AnalysisCalcMoveResult | null {
 	const move = battle.dex.moves.get(moveId);
 	if (!move.exists || move.category === 'Status') return null;
-	const spread = SPREAD_TARGETS.has(move.target);
-	if (!spread && !SINGLE_TARGETS.has(move.target)) return null;
-	const presentTargets = getTargetCandidates(attacker, move.target)
+	/*
+	 * A Z-move keeps the base move's category but not its target: the generic Z-moves are all
+	 * single-target, so Z-Blizzard hits one Pokémon where Blizzard hits both. Ask the sim for the move it
+	 * would actually run instead of guessing, and drop the move entirely when it has no Z version — the
+	 * mode is per attacker, but the Z-crystal only powers up some of its moves.
+	 */
+	const useZ = mode === 'z';
+	if (useZ && !battle.actions.getZMove(move, attacker, true)) return null;
+	const effectiveMove = useZ ? battle.actions.getActiveZMove(move, attacker) : move;
+	const spread = SPREAD_TARGETS.has(effectiveMove.target);
+	if (!spread && !SINGLE_TARGETS.has(effectiveMove.target)) return null;
+	const presentTargets = getTargetCandidates(attacker, effectiveMove.target)
 		.filter(candidate => !candidate.pokemon.fainted && candidate.pokemon.hp);
 	if (!presentTargets.length) return null;
 	const ref = (pokemon: Pokemon): AnalysisCalcPokemonRef => ({
@@ -429,15 +442,23 @@ function calcMove(
 			const calcAttacker = toCalcPokemon(generation, attacker, mode);
 			const defenderMode = choiceFor(choices, defender)?.mode || '';
 			const calcDefender = toCalcPokemon(generation, defender, defenderMode);
+			/*
+			 * Not for a Z-move: the calc rebuilds the move from the Z-move's own data, which throws
+			 * overrides away. Its base power is fixed anyway, and its target is the one the sim uses.
+			 */
 			const moveOverrides: { target?: string, basePower?: number } = {};
-			// the spread modifier only applies when more than one target is actually present
-			if (spread && presentTargets.length < 2) moveOverrides.target = 'normal';
-			const basePower = variableBasePower(battle, attacker, defender, move);
-			if (basePower !== null) moveOverrides.basePower = basePower;
+			if (!useZ) {
+				// the spread modifier only applies when more than one target is actually present
+				if (spread && presentTargets.length < 2) moveOverrides.target = 'normal';
+				const basePower = variableBasePower(battle, attacker, defender, move);
+				if (basePower !== null) moveOverrides.basePower = basePower;
+			}
 			const calcMoveData = new CalcMove(generation, move.name, {
 				ability: calcAttacker.ability,
 				item: calcAttacker.item,
 				useMax: !!attacker.volatiles['dynamax'],
+				// the calc resolves the Z-move itself (including the signature ones) from the base move and item
+				useZ,
 				overrides: Object.keys(moveOverrides).length ? moveOverrides as any : undefined,
 			});
 			const result = calculate(
@@ -454,7 +475,8 @@ function calcMove(
 		}
 		return entry;
 	});
-	return { attacker: ref(attacker), mode, moveSlot, moveId: move.id, moveName: move.name, targets };
+	// `moveId` stays the base move's: it is what the client's move button and choice line name
+	return { attacker: ref(attacker), mode, moveSlot, moveId: move.id, moveName: effectiveMove.name, targets };
 }
 
 /**

@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process';
 import http from 'node:http';
 import { type Battle, extractChannelMessages } from '../sim/battle';
 import { PRNG, type PRNGSeed } from '../sim/prng';
-import { Dex, TeamValidator, Teams } from '../sim';
+import { Dex, Teams, toID } from '../sim';
 import {
 	groupSimulationResults, runSimulationBatch, validateBatchRequest,
 	type AnalysisBatchRequest,
@@ -11,7 +11,7 @@ import { getAnalysisCalcs } from './analysis-calc';
 import { getFieldEffectOptions } from './analysis-edits';
 import { getPlaceholderTeams } from './analysis-setup';
 import {
-	applyInputLog, createAnalysisBattle, getAnalysisSnapshot, replayAnalysisRecords,
+	applyInputLog, createAnalysisBattle, getAnalysisSnapshot, replayAnalysisRecords, validateAnalysisTeam,
 	type AnalysisReplayRecord,
 } from './analysis-state';
 
@@ -234,23 +234,30 @@ function sendJson(
 	res.end(JSON.stringify(data));
 }
 
-function validateTeam(format: string, packedTeam: string) {
-	const team = Teams.unpack(packedTeam) || [];
-	if (!team.length) return ['Team is empty.'];
-	const problems = new TeamValidator(format).validateTeam(team);
-	return problems || [];
-}
-
-/** An empty team still breaks the sim, so a sandbox request is checked for that and nothing else. */
+/**
+ * An empty team still breaks the sim, so a sandbox request is checked for that and nothing else — which
+ * also means a sandbox team keeps whatever forme it was given, on purpose (an imported replay already
+ * sends base formes, and Set Up Position is meant to be able to start from any state).
+ *
+ * Otherwise the request's teams are replaced with the validated, normalized ones (see
+ * `validateAnalysisTeam`), so everything downstream — the battle, the node replay, the calcs — uses the
+ * same sets. The client's stored team is left alone: it is re-normalized identically on every rebuild.
+ */
 function validateTeams(request: StartRequest) {
-	const team1Problems = request.sandbox ?
-		(Teams.unpack(request.team1)?.length ? [] : ['Team is empty.']) :
-		validateTeam(request.format, request.team1);
-	const team2Problems = request.sandbox ?
-		(Teams.unpack(request.team2)?.length ? [] : ['Team is empty.']) :
-		validateTeam(request.format, request.team2);
-	if (!team1Problems.length && !team2Problems.length) return null;
-	return { team1: team1Problems, team2: team2Problems };
+	if (request.sandbox) {
+		const team1Problems = Teams.unpack(request.team1)?.length ? [] : ['Team is empty.'];
+		const team2Problems = Teams.unpack(request.team2)?.length ? [] : ['Team is empty.'];
+		if (!team1Problems.length && !team2Problems.length) return null;
+		return { team1: team1Problems, team2: team2Problems };
+	}
+	const team1 = validateAnalysisTeam(request.format, request.team1);
+	const team2 = validateAnalysisTeam(request.format, request.team2);
+	if (team1.problems.length || team2.problems.length) {
+		return { team1: team1.problems, team2: team2.problems };
+	}
+	request.team1 = team1.packedTeam;
+	request.team2 = team2.packedTeam;
+	return null;
 }
 
 function getPendingMidTurnSwitches(battle: Battle) {
@@ -279,6 +286,18 @@ function getAnalysisRequests(battle: Battle) {
 		for (const active of (request as AnyObject)?.active || []) {
 			for (const move of active?.moves || []) {
 				move.selfSwitch = !!battle.dex.moves.get(move.id).selfSwitch;
+			}
+			/*
+			 * The client's `BattleChoiceBuilder` reads Z-moves from `active.zMoves`, one entry per move
+			 * slot with `name` and `id` filled in (null where that move has no Z version). The play client
+			 * derives it from `canZMove` in `BattleChoiceBuilder.fixRequest`, which the analysis page can't
+			 * call — it needs a play-client `Battle` and rewrites other fields the tool sets itself — so
+			 * the same shape is handed over from here instead.
+			 */
+			if (active?.canZMove) {
+				active.zMoves = (active.canZMove as (AnyObject | null)[]).map(move => move && {
+					...move, name: move.move, id: toID(move.move),
+				});
 			}
 		}
 	}
