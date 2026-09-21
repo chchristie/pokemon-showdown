@@ -6,15 +6,23 @@ const fs = require("fs");
 const path = require("path");
 
 const serverDir = __dirname;
-const clientDir = path.resolve(serverDir, "../pokemon-showdown-client");
+const CONFIG_FILE = "start-dev-config";
+
+// Shares start-dev's config so the repos don't have to be siblings, but stays usable without it.
+function resolveClientDir() {
+	const configPath = path.join(serverDir, CONFIG_FILE);
+	if (fs.existsSync(configPath)) {
+		const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+		if (config.clientDir) return path.resolve(serverDir, config.clientDir);
+	}
+	return path.resolve(serverDir, "../pokemon-showdown-client");
+}
+
+const clientDir = resolveClientDir();
 const pidFile = path.join(serverDir, ".start-analysis.pids.json");
 const apiPort = 8002;
 const clientPort = 8081;
-
-function run(command, args, cwd, env = process.env) {
-	console.log(`\n> ${command} ${args.join(" ")} (${cwd})`);
-	childProcess.execFileSync(command, args, { cwd, env, stdio: "inherit" });
-}
+const analysisUrl = `http://localhost:${clientPort}/analysis.pokemonshowdown.com/?~~localhost:${apiPort}`;
 
 function killPid(pid, label) {
 	try {
@@ -44,6 +52,16 @@ function stopPrevious() {
 	killPort(clientPort);
 }
 
+function openInBrowser(url) {
+	if (process.platform === "darwin") {
+		childProcess.execSync(`open ${JSON.stringify(url)}`);
+	} else if (process.platform === "win32") {
+		childProcess.execSync(`start ${JSON.stringify(url)}`, { shell: true });
+	} else {
+		childProcess.execSync(`xdg-open ${JSON.stringify(url)}`);
+	}
+}
+
 function start(label, command, args, cwd, env = process.env) {
 	const child = childProcess.spawn(command, args, { cwd, env, detached: true, stdio: "ignore" });
 	child.unref();
@@ -55,10 +73,19 @@ function main() {
 	stopPrevious();
 	if (process.argv.includes("--kill")) return;
 
-	if (!fs.existsSync(clientDir)) throw new Error(`Client directory not found: ${clientDir}`);
+	if (!fs.existsSync(clientDir)) {
+		throw new Error(`Client directory not found: ${clientDir}\nSet clientDir in ${CONFIG_FILE} (see ${CONFIG_FILE}.example).`);
+	}
 
-	run("npm", ["run", "build"], serverDir);
-	run("npm", ["run", "build"], clientDir);
+	// Neither repo is built here: run `npm run build` yourself after changing server or client code.
+	const apiEntry = path.join(serverDir, "dist", "tools", "analysis-server.js");
+	if (!fs.existsSync(apiEntry)) {
+		throw new Error(`Analysis API not built: ${apiEntry}\nRun \`npm run build\` in ${serverDir}.`);
+	}
+	const clientEntry = path.join(clientDir, "analysis.pokemonshowdown.com", "index.html");
+	if (!fs.existsSync(clientEntry)) {
+		throw new Error(`Analysis client not built: ${clientEntry}\nRun \`npm run build\` in ${clientDir}.`);
+	}
 
 	const pids = [
 		start("analysis-api", "node", ["dist/tools/analysis-server.js"], serverDir, {
@@ -68,8 +95,13 @@ function main() {
 		start("analysis-client", "npx", ["http-server", "-p", String(clientPort), "."], clientDir),
 	];
 	fs.writeFileSync(pidFile, JSON.stringify({ startedAt: new Date().toISOString(), pids }, null, "\t"));
-	console.log(`\nAnalysis: http://localhost:${clientPort}/analysis.pokemonshowdown.com/?~~localhost:${apiPort}`);
-	console.log("Stop with: node start-analysis --kill");
+
+	console.log("\nWaiting for servers to come up...");
+	setTimeout(() => {
+		console.log(`Opening Analysis at ${analysisUrl}`);
+		openInBrowser(analysisUrl);
+		console.log("Stop with: node start-analysis --kill");
+	}, 3000);
 }
 
 try {

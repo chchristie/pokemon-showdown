@@ -16,14 +16,17 @@ function loadConfig() {
 		process.exit(1);
 	}
 	const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
-	if (!config.clientDir || !config.dexDir) {
-		console.error(`${CONFIG_FILE} must set clientDir and dexDir.`);
+	if (!config.clientDir) {
+		console.error(`${CONFIG_FILE} must set clientDir.`);
 		process.exit(1);
 	}
 	return config;
 }
 
 const { clientDir, dexDir } = loadConfig();
+
+// The dex is optional: with no dexDir, or one that isn't there, start-dev runs the server and client only.
+const dexEnabled = Boolean(dexDir) && fs.existsSync(dexDir);
 
 const PID_FILE = path.join(serverDir, ".start-dev.pids.json");
 
@@ -153,11 +156,14 @@ async function main() {
 		return;
 	}
 
-	for (const [name, dir] of [["client", clientDir], ["dex", dexDir]]) {
-		if (!fs.existsSync(dir)) {
-			console.error(`${name} directory not found: ${dir}`);
-			process.exit(1);
-		}
+	if (!fs.existsSync(clientDir)) {
+		console.error(`client directory not found: ${clientDir}`);
+		process.exit(1);
+	}
+	if (!dexEnabled) {
+		console.log(dexDir ?
+			`dex directory not found: ${dexDir}\nStarting without the dex.` :
+			`No dexDir in ${CONFIG_FILE}. Starting without the dex.`);
 	}
 
 	process.chdir(serverDir);
@@ -172,16 +178,20 @@ async function main() {
 	console.log("\n=== Starting dev servers ===\n");
 	pids.push(spawnDetached("server", "node", ["pokemon-showdown"], serverDir));
 	pids.push(spawnDetached("client", "npx", ["serve", "-p", "8081"], clientDir));
-	// serve.json rewrites / → testclient.html; do not use -s (that fallback is index.html only)
-	pids.push(spawnDetached("dex", "npx", ["serve", "-p", "8082", "-c", "serve.json"], dexDir));
-	const sslProxy = await startSslProxy();
-	if (sslProxy) pids.push(sslProxy);
+	if (dexEnabled) {
+		// serve.json rewrites / → testclient.html; do not use -s (that fallback is index.html only)
+		pids.push(spawnDetached("dex", "npx", ["serve", "-p", "8082", "-c", "serve.json"], dexDir));
+		const sslProxy = await startSslProxy();
+		if (sslProxy) pids.push(sslProxy);
+	}
 	writePidFile(pids);
 
 	console.log("\nWaiting for servers to come up...");
 	setTimeout(() => {
-		console.log(`Opening Dex at ${DEX_URL}`);
-		openInBrowser(DEX_URL);
+		if (dexEnabled) {
+			console.log(`Opening Dex at ${DEX_URL}`);
+			openInBrowser(DEX_URL);
+		}
 		console.log(`Opening Showdown at ${CLIENT_URL}`);
 		openInBrowser(CLIENT_URL);
 		console.log("\nDev servers are running in the background.");

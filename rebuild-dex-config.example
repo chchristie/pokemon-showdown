@@ -1,4 +1,5 @@
 {
+	"_comment": "Copy this file to rebuild-dex-config (do not rename this file) and edit the copy, which is gitignored.",
 	"PUSH_BRANCH": "master",
 	"clientDir": "/path/to/pokemon-showdown-client",
 	"run_start_dev": true

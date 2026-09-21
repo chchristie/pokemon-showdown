@@ -1,4 +1,5 @@
 {
+	"_comment": "Copy this file to start-dev-config (do not rename this file) and edit the copy, which is gitignored. dexDir is optional: without it, start-dev runs the server and client only.",
 	"clientDir": "/path/to/pokemon-showdown-client",
 	"dexDir": "/path/to/pokemon-showdown-dex"
 }

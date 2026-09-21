@@ -310,6 +310,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 			}
 		},
 		shortDesc: "After an attack, holder gains 1/5 of the damage in HP dealt to other Pokemon.",
+		desc: "After an attack, the holder gains 1/5 of the damage in HP dealt to other Pokemon.",
 		contributors: ["Bryce G."],
 	},
 	bigroot: {
@@ -322,6 +323,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 			}
 		},
 		shortDesc: "Holder gains 1.5x HP from draining/Aqua Ring/Ingrain/Leech Seed/Strength Sap.",
+		desc: "Holder gains 1.5x HP from draining moves/Aqua Ring/Ingrain/Leech Seed/Strength Sap.",
 		contributors: ["Bryce G."],
 	},
 };
