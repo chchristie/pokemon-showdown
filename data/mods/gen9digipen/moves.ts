@@ -615,7 +615,7 @@ export const Moves: import("../../../sim/dex-moves").ModdedMoveDataTable = {
     accuracy: 100,
     basePower: 45,
     category: "Physical",
-    name: "Tackle",
+    name: "Mask Slip",
     pp: 10,
     priority: 0,
     flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
