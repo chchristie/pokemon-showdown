@@ -369,18 +369,14 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		priority: 0,
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
 		secondary: {
-			chance: 50,
-			self: {
-				boosts: {
-					atk: 1,
-				},
-			},
+			chance: 100,
+			volatileStatus: 'bleeding',
 		},
 		target: "normal",
 		type: "Steel",
 		contestType: "Tough",
-		desc: "Has a 50% chance to raise the user's Attack by 1 stage.",
-		shortDesc: "50% chance to raise the user's Attack by 1.",
+		desc: "Causes the target to bleed, losing 1/8 of its maximum HP, rounded down, at the end of each turn. This effect ends when the target is no longer active.",
+		shortDesc: "Target bleeds: loses 1/8 max HP each turn.",
 	},
 	hotcheese: {
 		isNonstandard: "FNAF",
@@ -522,15 +518,15 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		name: "Mystery Box",
 		pp: 20,
 		priority: -6,
-		flags: { reflectable: 1, mirror: 1, allyanim: 1, metronome: 1, noassist: 1, failcopycat: 1 },
+		flags: { reflectable: 1, mirror: 1, bypasssub: 1, allyanim: 1, metronome: 1, noassist: 1, failcopycat: 1 },
 		forceSwitch: true,
 		selfSwitch: true,
 		target: "normal",
 		type: "Normal",
 		zMove: { effect: 'healreplacement' },
 		contestType: "Cool",
-		desc: "If both the user and the target have not fainted, the target is forced to switch out and be replaced with a random unfainted ally. This effect fails if the target used Ingrain previously, has the Suction Cups Ability, or this move hit a substitute. The user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
-		shortDesc: "Forces target to switch to random ally. User switches out.",
+		desc: "The target is forced to switch out and be replaced with a random unfainted ally, unless it is the last unfainted Pokemon in its party, used Ingrain previously, or has the Suction Cups Ability. Then the user switches out, even if it is trapped, and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
+		shortDesc: "Target is forced out; then the user switches out.",
 	},
 	neonwall: {
 		isNonstandard: "FNAF",
@@ -578,7 +574,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Electric",
 		zMove: { boost: { spe: 1 } },
 		contestType: "Beautiful",
-		desc: "For 3 turns, the user and its party members take 0.5x damage from physical and special attacks, or 0.66x damage if in a Double Battle; does not reduce damage further with Reflect, Light Screen, or Aurora Veil. Critical hits ignore this protection. It is removed from the user's side if the user or an ally is successfully hit by Brick Break, Psychic Fangs, or Defog. Brick Break and Psychic Fangs remove the effect before damage is calculated. Lasts for 5 turns if the user is holding Light Clay. Fails unless the weather is Snow.",
+		desc: "For 3 turns, the user and its party members take 0.5x damage from physical and special attacks, or 0.66x damage if in a Double Battle; does not reduce damage further with Reflect, Light Screen, or Aurora Veil. Critical hits ignore this protection. It is removed from the user's side if the user or an ally is successfully hit by Brick Break, Psychic Fangs, or Defog. Brick Break and Psychic Fangs remove the effect before damage is calculated. Lasts for 5 turns if the user is holding Light Clay.",
 		shortDesc: "For 3 turns, damage to allies halved.",
 	},
 	partyfavors: {
@@ -621,7 +617,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		isNonstandard: "FNAF",
 		num: -28,
 		accuracy: 100,
-		basePower: 120,
+		basePower: 15,
 		category: "Physical",
 		name: "Poppers",
 		pp: 10,
@@ -629,35 +625,15 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		flags: { allyanim: 1, metronome: 1, futuremove: 1 },
 		ignoreImmunity: true,
 		onTry(source, target) {
-			if (!target.side.addSlotCondition(target, 'futuremove')) return false;
-			Object.assign(target.side.slotConditions[target.position]['futuremove'], {
-				move: 'poppers',
-				source,
-				moveData: {
-					id: 'poppers',
-					name: "Poppers",
-					accuracy: 100,
-					basePower: 120,
-					category: "Physical",
-					priority: 0,
-					flags: { allyanim: 1, metronome: 1, futuremove: 1 },
-					secondary: {
-						chance: 30,
-						volatileStatus: 'flinch',
-					},
-					ignoreImmunity: false,
-					effectType: 'Move',
-					type: 'Fire',
-				},
-			});
-			this.add('-start', source, 'move: Poppers');
+			// The volleys are dealt by the 'poppers' slot condition (conditions.ts).
+			if (!target.side.addSlotCondition(target, 'poppers', source)) return false;
 			return this.NOT_FAIL;
 		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Clever",
-		desc: "Deals damage two turns after this move is used. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability. Fails if this move or Doom Desire is already in effect for the target's position. Has a 30% chance to make the target flinch when the damage is dealt.",
-		shortDesc: "Hits two turns after being used. 30% chance to flinch.",
+		desc: "At the end of the turn this move is used and at the end of each of the next 2 turns, the Pokemon at the position the target had when the move was used is hit by a 15 base power physical Fire-type attack that strikes 2 to 5 times. Damage is calculated each time it hits; if the user is no longer active, it is calculated based on the user's natural Attack stat, types, and level, with no boosts from its held item or Ability. If the user is holding Loaded Dice, each attack strikes 4 or 5 times. Does not hit the user, or a fainted Pokemon in that position. Fails if this move is already in effect for the target's position.",
+		shortDesc: "3 turns: target's slot hit 2-5 times at end of turn.",
 	},
 	powersong: {
 		isNonstandard: "FNAF",
@@ -836,15 +812,20 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 				break;
 			}
 		},
-		secondary: {
-			chance: 50,
-			volatileStatus: 'flinch',
-		},
+		secondaries: [
+			{
+				chance: 100,
+				volatileStatus: 'bleeding',
+			}, {
+				chance: 30,
+				volatileStatus: 'flinch',
+			},
+		],
 		target: "normal",
 		type: "Steel",
 		contestType: "Tough",
-		desc: "Has a 50% chance to flinch the target. If the weather is Primordial Sea or Rain Dance, this move does not check accuracy",
-		shortDesc: "50% chance to flinch. Can't miss in rain",
+		desc: "Causes the target to bleed, losing 1/8 of its maximum HP, rounded down, at the end of each turn. This effect ends when the target is no longer active. Has a 30% chance to make the target flinch. If the weather is Primordial Sea or Rain Dance, this move does not check accuracy. If this move is used against a Pokemon holding Utility Umbrella, this move's accuracy remains at 70%.",
+		shortDesc: "Target bleeds. 30% flinch. Can't miss in rain.",
 	},
 	toxicballoon: {
 		isNonstandard: "FNAF",
@@ -920,7 +901,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 				return false;
 			}
 		},
-		onDamage(damage, target, source, effect) {
+		// Fixed damage like Seismic Toss: a 0 BP move never reaches a damage calculation, so an
+		// onDamage handler never ran and the move did nothing.
+		damageCallback(pokemon, target) {
 			return target.maxhp;
 		},
 		target: "normal",
@@ -942,11 +925,15 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		self: {
 			volatileStatus: 'lockedmove',
 		},
+		secondary: {
+			chance: 100,
+			volatileStatus: 'bleeding',
+		},
 		target: "randomNormal",
 		type: "Steel",
 		contestType: "Tough",
-		desc: "The user spends two or three turns locked into this move and becomes confused immediately after its move on the last turn of the effect if it is not already. This move targets an opposing Pokemon at random on each turn. If the user is prevented from moving, is asleep at the beginning of a turn, or the attack is not successful against the target on the first turn of the effect or the second turn of a three-turn effect, the effect ends without causing confusion. If this move is called by Sleep Talk and the user is asleep, the move is used for one turn and does not confuse the user.",
-		shortDesc: "Lasts 2-3 turns. Confuses the user afterwards.",
+		desc: "The user spends two or three turns locked into this move and becomes confused immediately after its move on the last turn of the effect if it is not already. This move targets an opposing Pokemon at random on each turn. If the user is prevented from moving, is asleep at the beginning of a turn, or the attack is not successful against the target on the first turn of the effect or the second turn of a three-turn effect, the effect ends without causing confusion. If this move is called by Sleep Talk and the user is asleep, the move is used for one turn and does not confuse the user. Causes the target to bleed, losing 1/8 of its maximum HP, rounded down, at the end of each turn. This effect ends when the target is no longer active.",
+		shortDesc: "Lasts 2-3 turns, then confuses user. Target bleeds.",
 	},
 	jackobomb: {
 		isNonstandard: "FNAF",
@@ -958,15 +945,14 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		pp: 5,
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1, bullet: 1 },
-		secondary: {
-			chance: 10,
-			status: 'brn',
+		onEffectiveness(typeMod, target, type, move) {
+			return typeMod + this.dex.getEffectiveness('Ghost', type);
 		},
 		target: "normal",
 		type: "Fire",
 		contestType: "Beautiful",
-		desc: "Has a 10% chance to burn the target.",
-		shortDesc: "10% chance to burn the target.",
+		desc: "This move combines Ghost in its type effectiveness against the target.",
+		shortDesc: "Combines Ghost in its type effectiveness.",
 	},
 	buzzsaw: {
 		isNonstandard: "FNAF",
@@ -980,11 +966,15 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
 		ignoreEvasion: true,
 		ignoreDefensive: true,
+		secondary: {
+			chance: 50,
+			volatileStatus: 'bleeding',
+		},
 		target: "normal",
 		type: "Steel",
 		contestType: "Cool",
-		desc: "Ignores the target's stat stage changes, including evasiveness.",
-		shortDesc: "Ignores the target's stat stage changes.",
+		desc: "Ignores the target's stat stage changes, including evasiveness. Has a 50% chance to cause the target to bleed, losing 1/8 of its maximum HP, rounded down, at the end of each turn. This effect ends when the target is no longer active.",
+		shortDesc: "Ignores target's stat changes. 50% chance to bleed.",
 	},
 	fourthwall: {
 		isNonstandard: "FNAF",
@@ -1037,6 +1027,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		desc: "Deals damage to the target based on its Defense instead of Special Defense.",
 		shortDesc: "Damages target based on Defense, not Sp. Def.",
 	},
+
 	// Custom moves
 	givegiftsgivelife: {
 		isNonstandard: "FNAF",
@@ -1049,15 +1040,22 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		priority: 0,
 		flags: { reflectable: 1, mirror: 1, metronome: 1 },
 		onHit(target, source, move) {
-			target.setType(target.getTypes(true).map(type => type === "Ghost" ? "???" : type));
-			this.add('-start', target, 'typechange', target.getTypes().join('/'), '[from] move: Give Gifts, Give Life');
+			// Strip the Ghost type first (Ghosts can't be trapped), like Burn Up strips Fire. setType clears
+			// an added type, so a non-Ghost one (Forest's Curse) is put back; Terastallized targets keep theirs.
+			if (target.hasType('Ghost')) {
+				const addedType = target.addedType;
+				if (target.setType(target.getTypes(true).map(type => type === "Ghost" ? "???" : type))) {
+					if (addedType && addedType !== 'Ghost') target.addType(addedType);
+					this.add('-start', target, 'typechange', target.getTypes().join('/'), '[from] move: Give Gifts, Give Life');
+				}
+			}
 			return target.addVolatile('trapped', source, move, 'trapper');
 		},
 		target: "allAdjacentFoes",
 		type: "Ghost",
 		zMove: { boost: { spd: 1 } },
 		contestType: "Beautiful",
-		desc: "Foe's Ghost type becomes typeless. Prevents the target from switching out. The target can still switch out if it is holding Shed Shell or uses Baton Pass, Flip Turn, Parting Shot, Teleport, U-turn, or Volt Switch. The effect ends if either the user or the target leaves the field.",
+		desc: "Each adjacent opposing Pokemon loses its Ghost type, becoming typeless if it was purely Ghost type. Then, each opposing pokemon is prevented from switching out. A Terastallized target keeps its type. The target can still switch out if it is holding Shed Shell or uses Baton Pass, Flip Turn, Parting Shot, Teleport, U-turn, or Volt Switch. The trapping effect ends if either the user or the target leaves the field.",
 		shortDesc: "Foes lose Ghost type and can't switch out.",
 	},
 	vent: {
@@ -1069,7 +1067,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		name: "Vent",
 		pp: 5,
 		priority: 1,
-		flags: { contact: 1, charge: 1, mirror: 1, metronome: 1, nosleeptalk: 1, noassist: 1, failinstruct: 1 },
+		flags: { contact: 1, charge: 1, protect: 1, mirror: 1, metronome: 1, nosleeptalk: 1, noassist: 1, failinstruct: 1 },
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
 				return;
@@ -1085,11 +1083,15 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			duration: 2,
 			onInvulnerability: false,
 		},
+		secondary: {
+			chance: 30,
+			volatileStatus: 'flinch',
+		},
 		target: "normal",
 		type: "Dark",
 		contestType: "Cool",
-		desc: "This attack charges on the first turn and executes on the second. On the first turn, the user avoids all attacks. If the user is holding a Power Herb, the move completes in one turn.",
-		shortDesc: "Usually goes first. Disappears turn 1. Hits turn 2.",
+		desc: "Has a 30% chance to make the target flinch. This attack charges on the first turn and executes on the second, with +1 priority on both turns. On the first turn, the user avoids all attacks. If the user is holding a Power Herb, the move completes in one turn.",
+		shortDesc: "+1 priority. Vanishes turn 1, hits turn 2. 30% flinch.",
 	},
 	distractingvoice: {
 		isNonstandard: "FNAF",
@@ -1128,7 +1130,59 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Fairy",
 		zMove: { effect: 'clearnegativeboost' },
 		contestType: "Clever",
-		desc: "Until the end of the turn, all single-target attacks from the opposing side are redirected to the user. Such attacks are redirected to the user before they can be reflected by Magic Coat or the Magic Bounce Ability, or drawn in by the Lightning Rod or Storm Drain Abilities. Fails if it is not a Double Battle or Battle Royal. This effect is ignored while the user is under the effect of Sky Drop.",
+		desc: "Until the end of the turn, all single-target attacks from the opposing side are redirected to the user. Such attacks are redirected to the user before they can be reflected by Magic Coat or the Magic Bounce Ability, or drawn in by the Lightning Rod or Storm Drain Abilities. Fails if it is not a Double Battle or Battle Royal. This effect is ignored while the user is under the effect of Sky Drop. Attacks from Pokemon with the Soundproof Ability are not redirected.",
 		shortDesc: "The foes' moves target the user on the turn used.",
+	},
+
+	// Moves changes not related to balance changes but rather for implementing some other change
+	brickbreak: {
+		// Implementing the logic for Neon Wall
+		inherit: true,
+		onTryHit(pokemon) {
+			// will shatter screens through sub, before you hit
+			pokemon.side.removeSideCondition('reflect');
+			pokemon.side.removeSideCondition('lightscreen');
+			pokemon.side.removeSideCondition('auroraveil');
+			pokemon.side.removeSideCondition('neonwall');
+		},
+		desc: "If this attack does not miss, the effects of Reflect, Light Screen, Aurora Veil, and Neon Wall end for the target's side of the field before damage is calculated.",
+	},
+	psychicfangs: {
+		// Implementing the logic for Neon Wall
+		inherit: true,
+		onTryHit(pokemon) {
+			// will shatter screens through sub, before you hit
+			pokemon.side.removeSideCondition('reflect');
+			pokemon.side.removeSideCondition('lightscreen');
+			pokemon.side.removeSideCondition('auroraveil');
+			pokemon.side.removeSideCondition('neonwall');
+		},
+		desc: "If this attack does not miss, the effects of Reflect, Light Screen, Aurora Veil, and Neon Wall end for the target's side of the field before damage is calculated.",
+	},
+	defog: {
+		// Implementing the logic for Neon Wall
+		inherit: true,
+		onHit(target, source, move) {
+			let success = false;
+			if (!target.volatiles['substitute'] || move.infiltrates) success = !!this.boost({ evasion: -1 });
+			const removeAll = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+			const removeTarget = ['reflect', 'lightscreen', 'auroraveil', 'neonwall', 'safeguard', 'mist', ...removeAll];
+			for (const targetCondition of removeTarget) {
+				if (target.side.removeSideCondition(targetCondition)) {
+					if (!removeAll.includes(targetCondition)) continue;
+					this.add('-sideend', target.side, this.dex.conditions.get(targetCondition).name, '[from] move: Defog', `[of] ${source}`);
+					success = true;
+				}
+			}
+			for (const sideCondition of removeAll) {
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.dex.conditions.get(sideCondition).name, '[from] move: Defog', `[of] ${source}`);
+					success = true;
+				}
+			}
+			this.field.clearTerrain();
+			return success;
+		},
+		desc: "Lowers the target's evasiveness by 1 stage. If this move is successful and whether or not the target's evasiveness was affected, the effects of Reflect, Light Screen, Aurora Veil, Neon Wall, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the user's side. Ignores a target's substitute, although a substitute will still block the lowering of evasiveness. If there is a terrain active and this move is successful, the terrain will be cleared.",
 	},
 };

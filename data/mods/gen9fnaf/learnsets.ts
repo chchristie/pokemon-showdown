@@ -52,6 +52,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			metalclaw: ["9M"],
 
 			// Freddy unique moves
+			bulkup: ["9M"],
 			perishsong: ["9M"],
 			clangoroussoul: ["9M"],
 			earthpower: ["9M"],
@@ -110,6 +111,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			dualwingbeat: ["9M"],
 			hurricane: ["9M"],
 			uturn: ["9M"],
+			superfang: ["9M"],
 
 			// Chica FNAF World moves
 			cupcake: ["9M"],
@@ -126,6 +128,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			// TODO: copy from freddy
 
 			// Foxy unique moves
+			swordsdance: ["9M"],
 			closecombat: ["9M"],
 			machpunch: ["9M"],
 			agility: ["9M"],
@@ -182,6 +185,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			eerieimpulse: ["9M"],
 
 			// Toy Freddy unique moves
+			bulkup: ["9M"],
 			// TODO: copy from freddy
 
 			// Toy Freddy FNAF World moves
@@ -343,6 +347,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			// TODO: copy from freddy
 
 			// Withered Freddy unique moves
+			bulkup: ["9M"],
 			rockslide: ["9M"],
 			stoneedge: ["9M"],
 			smackdown: ["9M"],
@@ -448,6 +453,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			// TODO: copy from freddy
 
 			// Withered Foxy unique moves
+			swordsdance: ["9M"],
 			flashcannon: ["9M"],
 			agility: ["9M"],
 			finalgambit: ["9M"],
@@ -548,6 +554,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			// TODO: copy from freddy
 
 			// Shadow Freddy unique moves
+			bulkup: ["9M"],
 			followme: ["9M"],
 			knockoff: ["9M"],
 			suckerpunch: ["9M"],
@@ -602,6 +609,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			raindance: ["9M"],
 
 			// Phantom Freddy unique moves
+			bulkup: ["9M"],
 			perishsong: ["9M"],
 			earthquake: ["9M"],
 			highhorsepower: ["9M"],
@@ -651,6 +659,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			// TODO: copy from phantomfreddy
 
 			// Phantom Foxy unique moves
+			swordsdance: ["9M"],
 			closecombat: ["9M"],
 			machpunch: ["9M"],
 			drainpunch: ["9M"],
