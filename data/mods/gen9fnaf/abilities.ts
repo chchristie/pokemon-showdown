@@ -50,7 +50,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		num: -3,
 		rating: 3,
 		shortDesc: "On switch-in, foes' single-target moves target this Pokemon.",
-		desc: "When this Pokemon switches in, it becomes the center of attention until the end of the turn: opposing Pokemon's single-target moves are redirected to it, as if it had used Follow Me. Has no effect in single battles.",
+		desc: "On switch-in, until the end of the turn, all single-target attacks from the opposing side are redirected to this Pokemon. If this Pokemon switches in between turns, such as at the start of the battle or to replace a fainted Pokemon, the effect lasts until the end of the following turn. Attacks are redirected to this Pokemon before they can be reflected by Magic Coat or the Magic Bounce Ability, or drawn in by the Lightning Rod or Storm Drain Abilities. Has no effect if it is not a Double Battle or Battle Royal. This effect is ignored while this Pokemon is under the effect of Sky Drop.",
 	},
 	audiodisturbance: {
 		isNonstandard: "FNAF",
@@ -69,6 +69,6 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		num: -4,
 		rating: 3,
 		shortDesc: "On switch-in, adjacent foes can't use sound moves for 2 turns.",
-		desc: "When this Pokemon switches in, each adjacent opposing Pokemon is prevented from using sound-based moves for 2 turns, including the turn it switched in.",
+		desc: "On switch-in, each adjacent opposing Pokemon becomes unable to use sound-based moves until the end of the next turn, or for the following 2 turns if this Pokemon switches in between turns such as at the start of the battle or to replace a fainted Pokemon. The effect is removed if the affected Pokemon switches out, and it is not given to Pokemon that switch in later. It continues if this Pokemon leaves the field.",
 	},
 };

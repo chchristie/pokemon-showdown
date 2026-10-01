@@ -21,7 +21,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		num: -1,
 		isNonstandard: "FNAF",
 		shortDesc: "Steel and Ghost moves: 1.25x power. Weaker to Fire.",
-		desc: "Holder's Steel- and Ghost-type moves have 1.25x power. The power of Fire-type moves is multiplied by 1.25 when used on the holder.",
+		desc: "Holder's Steel- and Ghost-type moves have 1.25x power. The power of Fire-type moves is multiplied by 1.25x when used on the holder.",
 	},
 	illusiondisc: {
 		name: "Illusion Disc",
@@ -139,7 +139,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		num: -5,
 		isNonstandard: "FNAF",
-		shortDesc: "Blocks first damaging hit. Holder cannot attack.",
+		shortDesc: "Blocks first damaging hit. Holder cannot attack. Single use.",
 		desc: "The first time the holder would take damage from a move, this item is consumed and the holder loses 1/8 of its maximum HP instead of taking the damage. While holding this item, the holder can only select status moves.",
 	},
 };
