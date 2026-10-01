@@ -157,7 +157,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		isNonstandard: "FNAF",
 		num: -9,
 		accuracy: 100,
-		basePower: 25,
+		basePower: 30,
 		category: "Physical",
 		name: "Endo Army",
 		pp: 5,
@@ -475,8 +475,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		priority: 0,
 		flags: { failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1 },
 		onHit(pokemon) {
-			let move: Move | ActiveMove | null = this.lastMove;
-			if (!move) return;
+			// Recorded by the mod's useMoveInner override (scripts.ts).
+			let move: Move | ActiveMove | null = this.formatData.lastAttackingMove || null;
+			if (!move) return false;
 
 			if (move.isMax && move.baseMove) move = this.dex.moves.get(move.baseMove);
 			if (move.flags['failcopycat'] || move.isZ || move.isMax) {
@@ -489,8 +490,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Normal",
 		zMove: { boost: { accuracy: 1 } },
 		contestType: "Cute",
-		desc: "The user uses the last move used by any Pokemon, including itself. Fails if no move has been used, or if the last move used was Assist, Baneful Bunker, Beak Blast, Behemoth Bash, Behemoth Blade, Belch, Bestow, Blazing Torque, Celebrate, Chatter, Circle Throw, Combat Torque, Copycat, Counter, Covet, Destiny Bond, Detect, Dragon Tail, Dynamax Cannon, Endure, Feint, Focus Punch, Follow Me, Helping Hand, Hold Hands, King's Shield, Magical Torque, Mat Block, Me First, Metronome, Mimic, Mirror Move, Nature Power, Noxious Torque, Protect, Rage Powder, Roar, Shell Trap, Sketch, Sleep Talk, Snatch, Spiky Shield, Spotlight, Struggle, Switcheroo, Tera Starstorm, Thief, Transform, Trick, Whirlwind, or Wicked Torque.",
-		shortDesc: "Uses the last move used in the battle.",
+		desc: "The user uses the last attacking move used by any Pokemon, including itself. A move called by another move, such as Metronome, counts as used. Fails if no attacking move has been used, if that move was a Z-Move or Max Move, or if it was Beak Blast, Behemoth Bash, Behemoth Blade, Belch, Blazing Torque, Chatter, Circle Throw, Combat Torque, Counter, Covet, Dragon Tail, Dynamax Cannon, Feint, Focus Punch, Magical Torque, Noxious Torque, Shell Trap, Struggle, Tera Starstorm, Thief, or Wicked Torque.",
+		shortDesc: "Uses the last attacking move used in the battle.",
 	},
 	munchies: {
 		isNonstandard: "FNAF",
@@ -749,8 +750,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Normal",
 		zMove: { boost: { def: 1 } },
 		contestType: "Beautiful",
-		desc: "Each of the user and its allies have 1/16 of their maximum HP, rounded down, restored at the end of each turn while that Pokemon remains active. If Big Root is held by the user or an ally, the HP recovered by that Pokemon is 1.3x normal, rounded half down. If the user or an ally uses Baton Pass, the replacement will receive the healing effect.",
-		shortDesc: "User and Allies recovers 1/16 max HP per turn.",
+		desc: "Each of the user and its allies have 1/16 of their maximum HP, rounded down, restored at the end of each turn while that Pokemon remains active. If Big Root is held by the user or an ally, the HP recovered by that Pokemon is 1.3x normal, rounded half down. If the user or an ally uses Baton Pass, the replacement will receive the healing effect. Allies with the Soundproof Ability are not affected. Fails if the user and all of its allies already have this effect.",
+		shortDesc: "User and allies recover 1/16 max HP per turn.",
 	},
 	sludge: {
 		isNonstandard: "FNAF",
@@ -979,19 +980,20 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	fourthwall: {
 		isNonstandard: "FNAF",
 		num: -43,
-		accuracy: true,
-		basePower: 90,
+		accuracy: 100,
+		basePower: 100,
 		category: "Special",
 		name: "Fourth Wall",
 		pp: 15,
 		priority: 0,
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
 		ignoreDefensive: true,
-		target: "normal",
+		ignoreEvasion: true,
+		target: "allAdjacent",
 		type: "Dark",
 		contestType: "Cool",
-		desc: "Ignores the target's stat stage changes, including evasiveness. This move does not check accuracy.",
-		shortDesc: "Does not check accuracy. Ignores target's stat changes.",
+		desc: "Hits all adjacent Pokemon, including allies. Ignores the targets' stat stage changes, including evasiveness.",
+		shortDesc: "Hits adjacent Pokemon. Ignores targets' stat changes.",
 	},
 	bubblebreath: {
 		isNonstandard: "FNAF",

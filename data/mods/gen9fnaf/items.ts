@@ -142,4 +142,16 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		shortDesc: "Blocks first damaging hit. Holder cannot attack. Single use.",
 		desc: "The first time the holder would take damage from a move, this item is consumed and the holder loses 1/8 of its maximum HP instead of taking the damage. While holding this item, the holder can only select status moves.",
 	},
+
+	// Base-game items changed only so FNAF effects work with them; not rebalances, so no `modified`.
+	bigroot: {
+		// Implementing the logic for Regen Song
+		inherit: true,
+		onTryHeal(damage, target, source, effect) {
+			const heals = ['drain', 'leechseed', 'ingrain', 'aquaring', 'strengthsap', 'regensong'];
+			if (heals.includes(effect.id)) {
+				return this.chainModify([5324, 4096]);
+			}
+		},
+	},
 };
