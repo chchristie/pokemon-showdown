@@ -76,15 +76,14 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		name: "Music Box",
 		spritenum: 0,
 		onSwitchIn(pokemon) {
-			pokemon.trySetStatus('slp', pokemon);
-			if (pokemon.status === 'slp') {
-				this.boost({ atk: 1, spa: 1, spe: 1 }, pokemon);
-			}
+			// Always boosts; the holder also becomes drowsy (the Yawn volatile, same 2-turn countdown).
+			this.boost({ atk: 1, spa: 1, spe: 1 }, pokemon);
+			pokemon.addVolatile('yawn', pokemon);
 		},
 		num: -3,
 		isNonstandard: "FNAF",
-		desc: "When the holder switches in, it falls asleep. Then, its Attack, Special Attack, and Speed rise by 1 stage if it is asleep.",
-		shortDesc: "On switch-in: holder falls asleep; +1 Atk, SpA, and Spe",
+		desc: "When the holder switches in, its Attack, Special Attack, and Speed rise by 1 stage, and it becomes drowsy, as if it were hit by Yawn: at the end of the next turn, it falls asleep. The holder does not fall asleep if it switches out first, already has a non-volatile status condition, or cannot fall asleep.",
+		shortDesc: "Switch-in: +1 Atk, SpA, Spe; holder becomes drowsy.",
 	},
 	missingbeak: {
 		name: "Missing Beak",
@@ -118,9 +117,10 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		onDamagePriority: 1,
 		onDamage(damage, target, source, effect) {
+			// The hit itself is reduced to 1/8 of max HP (rather than dealing the 1/8 separately and
+			// returning 0, which also logged a 0-damage line for the blocked hit).
 			if (effect?.effectType === 'Move' && target.useItem()) {
-				this.damage(target.baseMaxhp / 8, target, target);
-				return 0;
+				return target.baseMaxhp / 8;
 			}
 		},
 		onCriticalHit(target, source, move) {
@@ -143,7 +143,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		desc: "The first time the holder would take damage from a move, this item is consumed and the holder loses 1/8 of its maximum HP instead of taking the damage. While holding this item, the holder can only select status moves.",
 	},
 
-	// Base-game items changed only so FNAF effects work with them; not rebalances, so no `modified`.
+	// Item changes not related to balance changes but rather for implementing some other change
 	bigroot: {
 		// Implementing the logic for Regen Song
 		inherit: true,
@@ -153,5 +153,11 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 				return this.chainModify([5324, 4096]);
 			}
 		},
+	},
+	lightclay: {
+		// Description only: Neon Wall's own duration callback already checks for Light Clay.
+		inherit: true,
+		shortDesc: "Holder's Aurora Veil, Light Screen, Reflect last 8 turns; Neon Wall 5.",
+		desc: "The holder's use of Aurora Veil, Light Screen, or Reflect lasts 8 turns instead of 5, and its use of Neon Wall lasts 5 turns instead of 3.",
 	},
 };

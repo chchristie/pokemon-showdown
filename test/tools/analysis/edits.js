@@ -89,6 +89,25 @@ describe('Analysis state edits', () => {
 		assert.deepEqual(getAnalysisSnapshot(first.battle), getAnalysisSnapshot(second.battle));
 	});
 
+	it('describes each record\'s decision point without changing the replay', () => {
+		const edits = { field: { weather: { id: 'raindance', duration: 3 } }, active: { p1: [1] } };
+		const records = [TEAM_PREVIEW, turnRecord(), turnRecord(edits), { edits: { pokemon: { 'p2:0': { hp: 5 } } } }];
+		const plain = battleFor(records);
+		const output = [];
+		const battle = createAnalysisBattle({ format: 'gen9customgame', team1: TEAM, team2: TEAM, seed: SEED }, output);
+		const described = replayAnalysisRecords(battle, records, b => b.getRequests(b.requestState)).described;
+		battle.sendUpdates();
+		assert.equal(output.join('\n'), plain.output);
+		assert.deepEqual(battle.prng.getSeed(), plain.battle.prng.getSeed());
+		assert.equal(described.length, records.length);
+		assert(described[0][0].teamPreview, 'the Team Preview record answers a Team Preview request');
+		const lead = requests => requests[0].side.pokemon.find(pokemon => pokemon.active).details.split(',')[0];
+		assert.equal(lead(described[1]), 'Magikarp');
+		assert.equal(lead(described[2]), 'Feebas', 'the active swap is an edit, so the request already shows it');
+		assert.equal(described[3][1].side.pokemon[0].condition.split('/')[0], '5');
+		assert.equal(plain.described.length, 0, 'nothing is described unless it is asked for');
+	});
+
 	it('counts turns remaining including the current turn', () => {
 		const edits = { field: { sides: { p2: { reflect: { duration: 2 } } } } };
 		const reflect = battle => battle.sides[1].sideConditions['reflect'];

@@ -34,6 +34,7 @@ type StartRequest = {
 	sandbox?: boolean,
 	/** /analysis/calc: draft choices (`>p1 move 1 +2`) for choice-dependent calc flags and targets */
 	choices?: string[],
+	describeRecords?: boolean,
 };
 
 /**
@@ -310,7 +311,9 @@ function startBattle(request: StartRequest) {
 
 	const output: string[] = [];
 	const battle = createAnalysisBattle(request, output);
-	const { droppedEdits, appliedEdits } = replayAnalysisRecords(battle, request.replayNodes);
+	const { droppedEdits, appliedEdits, described } = replayAnalysisRecords(
+		battle, request.replayNodes, request.describeRecords ? getAnalysisRequests : undefined
+	);
 	battle.sendUpdates();
 	let actionSeed: PRNGSeed | undefined;
 	if (request.inputLog?.length) {
@@ -336,6 +339,7 @@ function startBattle(request: StartRequest) {
 		snapshot: getAnalysisSnapshot(battle),
 		droppedEdits,
 		appliedEdits,
+		recordRequests: request.describeRecords ? described : undefined,
 		editOptions: { field: getFieldEffectOptions(battle) },
 		requestState: battle.requestState,
 		requests: getAnalysisRequests(battle),

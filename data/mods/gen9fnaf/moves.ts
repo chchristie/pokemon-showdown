@@ -458,7 +458,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		onEffectiveness(typeMod, target, type, move) {
 			return typeMod + this.dex.getEffectiveness('Electric', type);
 		},
-		target: "allAdjacentFoes",
+		target: "normal",
 		type: "Steel",
 		contestType: "Tough",
 		desc: "This move combines Electric in its type effectiveness against the target.",
@@ -701,7 +701,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Normal",
 		contestType: "Cool",
-		desc: "A random single-target damaging move that is super effective against the target is selected for use. The move is physical if the user's Attack is higher than its Special Attack, special if its Special Attack is higher, and either if they are equal, including stat stage changes. The selected move can be any such move other than After You, Apple Acid, Armor Cannon, Assist, Astral Barrage, Aura Wheel, Baneful Bunker, Beak Blast, Behemoth Bash, Behemoth Blade, Belch, Bestow, Blazing Torque, Body Press, Branch Poke, Breaking Swipe, Celebrate, Chatter, Chilling Water, Chilly Reception, Clangorous Soul, Collision Course, Combat Torque, Comeuppance, Copycat, Counter, Covet, Crafty Shield, Decorate, Destiny Bond, Detect, Diamond Storm, Doodle, Double Iron Bash, Double Shock, Dragon Ascent, Dragon Energy, Drum Beating, Dynamax Cannon, Electro Drift, Endure, Eternabeam, False Surrender, Feint, Fiery Wrath, Fillet Away, Fleur Cannon, Focus Punch, Follow Me, Freeze Shock, Freezing Glare, Glacial Lance, Grav Apple, Helping Hand, Hold Hands, Hyper Drill, Hyperspace Fury, Hyperspace Hole, Ice Burn, Instruct, Jet Punch, Jungle Healing, King's Shield, Life Dew, Light of Ruin, Magical Torque, Make It Rain, Mat Block, Me First, Meteor Assault, Metronome, Mimic, Mind Blown, Mirror Coat, Mirror Move, Moongeist Beam, Nature Power, Nature's Madness, Noxious Torque, Obstruct, Order Up, Origin Pulse, Overdrive, Photon Geyser, Plasma Fists, Population Bomb, Pounce, Power Shift, Precipice Blades, Protect, Pyro Ball, Quash, Quick Guard, Rage Fist, Rage Powder, Raging Bull, Raging Fury, Relic Song, Revival Blessing, Ruination, Salt Cure, Secret Sword, Shed Tail, Shell Trap, Silk Trap, Sketch, Sleep Talk, Snap Trap, Snarl, Snatch, Snore, Snowscape, Spectral Thief, Spicy Extract, Spiky Shield, Spirit Break, Spotlight, Springtide Storm, Steam Eruption, Steel Beam, Strange Steam, Struggle, Sunsteel Strike, Surging Strikes, Switcheroo, Techno Blast, Tera Starstorm, Thief, Thousand Arrows, Thousand Waves, Thunder Cage, Thunderous Kick, Tidy Up, Trailblaze, Transform, Trick, Twin Beam, V-create, Wicked Blow, Wicked Torque, or Wide Guard.",
+		desc: "A random single-target damaging move that is super effective against the target is selected for use. The move is physical if the user's Attack is higher than its Special Attack, special if its Special Attack is higher, and either if they are equal, including stat stage changes. The selected move can be any such move other than Apple Acid, Armor Cannon, Aura Wheel, Beak Blast, Behemoth Bash, Behemoth Blade, Belch, Blazing Torque, Body Press, Branch Poke, Chilling Water, Collision Course, Combat Torque, Covet, Double Iron Bash, Double Shock, Drum Beating, Dynamax Cannon, Electro Drift, Eternabeam, False Surrender, Feint, Fleur Cannon, Focus Punch, Freeze Shock, Freezing Glare, Grav Apple, Hyper Drill, Hyperspace Fury, Hyperspace Hole, Ice Burn, Jet Punch, Light of Ruin, Magical Torque, Meteor Assault, Moongeist Beam, Nature's Madness, Noxious Torque, Order Up, Photon Geyser, Plasma Fists, Population Bomb, Pounce, Pyro Ball, Rage Fist, Raging Bull, Ruination, Salt Cure, Secret Sword, Snap Trap, Snore, Spectral Thief, Spirit Break, Steam Eruption, Steel Beam, Strange Steam, Sunsteel Strike, Surging Strikes, Techno Blast, Tera Starstorm, Thief, Thunder Cage, Thunderous Kick, Trailblaze, Twin Beam, V-create, Wicked Blow, or Wicked Torque.",
 		shortDesc: "Picks a random super effective single-target move.",
 	},
 	rainyday: {
@@ -986,7 +986,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		name: "Fourth Wall",
 		pp: 15,
 		priority: 0,
-		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
+		flags: { protect: 1, mirror: 1, metronome: 1 },
 		ignoreDefensive: true,
 		ignoreEvasion: true,
 		target: "allAdjacent",
@@ -1028,6 +1028,27 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		contestType: "Beautiful",
 		desc: "Deals damage to the target based on its Defense instead of Special Defense.",
 		shortDesc: "Damages target based on Defense, not Sp. Def.",
+	},
+	hocuspocus: {
+		isNonstandard: "FNAF",
+		num: -49,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Hocus Pocus",
+		pp: 15,
+		priority: 0,
+		flags: { protect: 1, reflectable: 1, mirror: 1, metronome: 1 },
+		onHit(target) {
+			const stat = target.getBestStat(true, true);
+			return !!this.boost({ [stat]: -1 }, target);
+		},
+		target: "allAdjacentFoes",
+		type: "Psychic",
+		zMove: { boost: { spa: 1 } },
+		contestType: "Clever",
+		desc: "Lowers each target's highest stat by 1 stage. Stat stage changes are not considered when determining the highest stat. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order.",
+		shortDesc: "Lowers the foes' highest stat by 1.",
 	},
 
 	// Custom moves
@@ -1186,5 +1207,34 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			return success;
 		},
 		desc: "Lowers the target's evasiveness by 1 stage. If this move is successful and whether or not the target's evasiveness was affected, the effects of Reflect, Light Screen, Aurora Veil, Neon Wall, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the user's side. Ignores a target's substitute, although a substitute will still block the lowering of evasiveness. If there is a terrain active and this move is successful, the terrain will be cleared.",
+	},
+	// Past-generation moves re-enabled because FNAF learnsets use them (no rebalance, so no `modified`).
+	ominouswind: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	skullbash: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	autotomize: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	boltbeak: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	spiderweb: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	healblock: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	assist: {
+		inherit: true,
+		isNonstandard: null,
 	},
 };

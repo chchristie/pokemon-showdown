@@ -287,17 +287,21 @@ export function applyInputLog(battle: Battle, inputLog: string[] | undefined) {
  * Replays records in order: edits first (they must not consume RNG), then reseed and apply that
  * node's choices. `appliedEdits` has one entry per record: what its edits actually changed.
  */
-export function replayAnalysisRecords(battle: Battle, records: AnalysisReplayRecord[] | undefined) {
+export function replayAnalysisRecords<T = never>(
+	battle: Battle, records: AnalysisReplayRecord[] | undefined, describe?: (battle: Battle) => T
+) {
 	const droppedEdits: string[] = [];
 	const appliedEdits: (AnalysisAppliedEdits | null)[] = [];
+	const described: T[] = [];
 	for (const record of records || []) {
 		const result = applyAnalysisEdits(battle, record.edits);
 		droppedEdits.push(...result.droppedEdits);
 		appliedEdits.push(result.applied);
+		if (describe) described.push(describe(battle));
 		if (record.seed) battle.resetRNG(record.seed);
 		applyInputLog(battle, record.inputLog);
 	}
-	return { droppedEdits, appliedEdits };
+	return { droppedEdits, appliedEdits, described };
 }
 
 function snapshotEffectState(state: AnyObject): AnalysisEffectSnapshot {
