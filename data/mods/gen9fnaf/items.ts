@@ -76,7 +76,6 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		name: "Music Box",
 		spritenum: 0,
 		onSwitchIn(pokemon) {
-			// Always boosts; the holder also becomes drowsy (the Yawn volatile, same 2-turn countdown).
 			this.boost({ atk: 1, spa: 1, spe: 1 }, pokemon);
 			pokemon.addVolatile('yawn', pokemon);
 		},
@@ -117,8 +116,6 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		onDamagePriority: 1,
 		onDamage(damage, target, source, effect) {
-			// The hit itself is reduced to 1/8 of max HP (rather than dealing the 1/8 separately and
-			// returning 0, which also logged a 0-damage line for the blocked hit).
 			if (effect?.effectType === 'Move' && target.useItem()) {
 				return target.baseMaxhp / 8;
 			}
@@ -155,7 +152,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 	},
 	lightclay: {
-		// Description only: Neon Wall's own duration callback already checks for Light Clay.
+		// Description only (mention Neon Wall).
 		inherit: true,
 		shortDesc: "Holder's Aurora Veil, Light Screen, Reflect last 8 turns; Neon Wall 5.",
 		desc: "The holder's use of Aurora Veil, Light Screen, or Reflect lasts 8 turns instead of 5, and its use of Neon Wall lasts 5 turns instead of 3.",

@@ -1208,7 +1208,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		},
 		desc: "Lowers the target's evasiveness by 1 stage. If this move is successful and whether or not the target's evasiveness was affected, the effects of Reflect, Light Screen, Aurora Veil, Neon Wall, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the user's side. Ignores a target's substitute, although a substitute will still block the lowering of evasiveness. If there is a terrain active and this move is successful, the terrain will be cleared.",
 	},
-	// Past-generation moves re-enabled because FNAF learnsets use them (no rebalance, so no `modified`).
+	// Past-generation moves re-enabled because FNAF learnsets use them.
 	ominouswind: {
 		inherit: true,
 		isNonstandard: null,
