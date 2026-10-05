@@ -9,6 +9,7 @@
  */
 
 const assert = require('./../assert');
+const common = require('./../common');
 const { CustomMods, getCustomModTiers } = require('../../dist/data/custom-mods');
 const { TeamValidator } = require('../../dist/sim/team-validator');
 
@@ -176,6 +177,74 @@ describe('Custom content mods', () => {
 					);
 				}
 			}
+		}
+	});
+});
+
+describe('FNAF Phantom abilities', () => {
+	// The test helper's per-mod "Custom Game" format doesn't exist for the fork's mods.
+	const FNAF_BATTLE = { formatid: 'gen9fnafsingles@@@!Team Preview' };
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+
+	it("Blackout should lower the target's accuracy when the holder damages it", () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Phantom Balloon Boy', ability: 'blackout', moves: ['airslash', 'tailwind'] },
+		], [
+			{ species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move tailwind', 'move softboiled');
+		assert.statStage(battle.p2.active[0], 'accuracy', 0, 'a status move should not trigger it');
+		battle.makeChoices('move airslash', 'move softboiled');
+		assert.statStage(battle.p2.active[0], 'accuracy', -1);
+	});
+
+	it("Audio Disturbance should lower the target's evasiveness once per move, even if it hits several times", () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Phantom Mangle', ability: 'audiodisturbance', moves: ['bugbuzz', 'pinmissile'] },
+		], [
+			{ species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move bugbuzz', 'move softboiled');
+		assert.statStage(battle.p2.active[0], 'evasion', -1);
+		battle.makeChoices('move pinmissile', 'move softboiled');
+		assert.statStage(battle.p2.active[0], 'evasion', -2);
+	});
+
+	it('Blackout should hit both targets of a spread move, and do nothing through a Substitute', () => {
+		battle = common.createBattle({ formatid: 'gen9fnafvgc' }, [[
+			{ species: 'Phantom Balloon Boy', ability: 'blackout', moves: ['rainyday', 'airslash'] },
+			{ species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] },
+		], [
+			{ species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] },
+			{ species: 'Blissey', ability: 'naturalcure', moves: ['substitute', 'softboiled'] },
+		]]);
+		battle.makeChoices(); // Team Preview
+		battle.makeChoices('move rainyday, move softboiled', 'move softboiled, move substitute');
+		assert.statStage(battle.p2.active[0], 'accuracy', -1);
+		assert.statStage(battle.p2.active[1], 'accuracy', -1);
+		battle.makeChoices('move airslash 2, move softboiled', 'move softboiled, move softboiled');
+		assert.statStage(battle.p2.active[1], 'accuracy', -1, 'a hit on the Substitute should not lower it again');
+	});
+
+	it('Audio Disturbance should be stopped by Clear Body', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Phantom Mangle', ability: 'audiodisturbance', moves: ['bugbuzz'] },
+		], [
+			{ species: 'Metagross', ability: 'clearbody', moves: ['irondefense'] },
+		]]);
+		battle.makeChoices('move bugbuzz', 'move irondefense');
+		assert.statStage(battle.p2.active[0], 'evasion', 0);
+	});
+
+	it('should keep every Phantom below 60 Attack', () => {
+		const dex = Dex.mod('gen9fnaf');
+		for (const species of dex.species.all()) {
+			if (!species.name.startsWith('Phantom ')) continue;
+			assert(species.baseStats.atk < 60, `${species.name} has ${species.baseStats.atk} Attack`);
 		}
 	});
 });

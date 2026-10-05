@@ -73,10 +73,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	bonnie: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Bonnie unique moves
 			extremespeed: ["9M"],
@@ -89,17 +133,61 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 
 			// Bonnie FNAF World moves
 			superbite: ["9M"],
-			bashjam: ["9M"], 
+			bashjam: ["9M"],
 			happyjam: ["9M"],
 		}
 	},
 	chica: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Chica unique moves
 			peck: ["9M"],
@@ -122,10 +210,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	foxy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Foxy unique moves
 			swordsdance: ["9M"],
@@ -145,10 +277,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	goldenfreddy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Golden Freddy unique moves
 			teleport: ["9M"],
@@ -166,12 +342,20 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	toyfreddy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Toy animatronic moves
 			thunderbolt: ["9M"],
 			voltswitch: ["9M"],
-			chargebeam: ["9M"], 
+			chargebeam: ["9M"],
 			metalsound: ["9M"],
 			ironhead: ["9M"],
 			irondefense: ["9M"],
@@ -186,7 +370,16 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 
 			// Toy Freddy unique moves
 			bulkup: ["9M"],
-			// TODO: copy from freddy
+			perishsong: ["9M"],
+			clangoroussoul: ["9M"],
+			earthpower: ["9M"],
+			earthquake: ["9M"],
+			highhorsepower: ["9M"],
+			stompingtantrum: ["9M"],
+			mudslap: ["9M"],
+			echoedvoice: ["9M"],
+			uturn: ["9M"],
+			rockslide: ["9M"],
 
 			// Toy Freddy FNAF World moves
 			mictoss: ["9M"],
@@ -197,13 +390,40 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	toybonnie: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Toy animatronic moves
-			// TODO: copy from toyfreddy
+			thunderbolt: ["9M"],
+			voltswitch: ["9M"],
+			chargebeam: ["9M"],
+			metalsound: ["9M"],
+			ironhead: ["9M"],
+			irondefense: ["9M"],
+			discharge: ["9M"],
+			paraboliccharge: ["9M"],
+			thundershock: ["9M"],
+			lunge: ["9M"],
+			metalclaw: ["9M"],
+			shadowsneak: ["9M"],
+			bite: ["9M"],
+			eerieimpulse: ["9M"],
 
 			// Toy Bonnie unique moves
-			// TODO: copy from bonnie
+			extremespeed: ["9M"],
+			headbutt: ["9M"],
+			skullbash: ["9M"],
+			doubleedge: ["9M"],
+			uturn: ["9M"],
+			swift: ["9M"],
+			boomburst: ["9M"],
 
 			// Toy Bonnie FNAF World moves
 			bashjam: ["9M"],
@@ -217,15 +437,45 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	toychica: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Toy animatronic moves
-			// TODO: copy from toyfreddy
+			thunderbolt: ["9M"],
+			voltswitch: ["9M"],
+			chargebeam: ["9M"],
+			metalsound: ["9M"],
+			ironhead: ["9M"],
+			irondefense: ["9M"],
+			discharge: ["9M"],
+			paraboliccharge: ["9M"],
+			thundershock: ["9M"],
+			lunge: ["9M"],
+			metalclaw: ["9M"],
+			shadowsneak: ["9M"],
+			bite: ["9M"],
+			eerieimpulse: ["9M"],
 
 			// Toy Chica unique moves
 			beakblast: ["9M"],
 			boltbeak: ["9M"],
-			// TODO: copy from chica
+			peck: ["9M"],
+			pluck: ["9M"],
+			drillpeck: ["9M"],
+			fling: ["9M"],
+			featherdance: ["9M"],
+			airslash: ["9M"],
+			dualwingbeat: ["9M"],
+			hurricane: ["9M"],
+			uturn: ["9M"],
+			superfang: ["9M"],
 
 			// Toy Chica FNAF World moves
 			cupcake: ["9M"],
@@ -239,10 +489,31 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	mangle: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Toy animatronic moves
-			// TODO: copy from toyfreddy
+			thunderbolt: ["9M"],
+			voltswitch: ["9M"],
+			chargebeam: ["9M"],
+			metalsound: ["9M"],
+			ironhead: ["9M"],
+			irondefense: ["9M"],
+			discharge: ["9M"],
+			paraboliccharge: ["9M"],
+			thundershock: ["9M"],
+			lunge: ["9M"],
+			metalclaw: ["9M"],
+			shadowsneak: ["9M"],
+			bite: ["9M"],
+			eerieimpulse: ["9M"],
 
 			// Mangle unique moves
 			stickyweb: ["9M"],
@@ -267,7 +538,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	balloonboy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Balloon Boy unique moves
 			alluringvoice: ["9M"],
@@ -292,7 +571,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	jj: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// JJ unique moves
 			reflect: ["9M"],
@@ -341,10 +628,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	freddywithered: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Withered Freddy unique moves
 			bulkup: ["9M"],
@@ -372,10 +703,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	bonniewithered: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Withered Bonnie unique moves
 			tailglow: ["9M"],
@@ -413,10 +788,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	chicawithered: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Withered Chica unique moves
 			peck: ["9M"],
@@ -447,10 +866,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	foxywithered: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Withered Foxy unique moves
 			swordsdance: ["9M"],
@@ -473,7 +936,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	thepuppet: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// The Puppet unique moves
 			revivalblessing: ["9M"],
@@ -524,7 +995,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	paperpals: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Paper Pals unique moves
 			followme: ["9M"],
@@ -532,11 +1011,11 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			encore: ["9M"],
 			taunt: ["9M"],
 			splash: ["9M"],
-			counter: ["9M"], 
-			mirrorcoat: ["9M"], 
-			destinybond: ["9M"], 
+			counter: ["9M"],
+			mirrorcoat: ["9M"],
+			destinybond: ["9M"],
 			safeguard: ["9M"],
-			assist: ["9M"], 
+			assist: ["9M"],
 			metronome: ["9M"],
 
 			// Paper Pals FNAF World moves
@@ -548,10 +1027,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	shadowfreddy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Original animatronic moves
-			// TODO: copy from freddy
+			astonish: ["9M"],
+			bite: ["9M"],
+			shadowball: ["9M"],
+			phantomforce: ["9M"],
+			poltergeist: ["9M"],
+			curse: ["9M"],
+			nightshade: ["9M"],
+			confuseray: ["9M"],
+			shadowsneak: ["9M"],
+			shadowclaw: ["9M"],
+			painsplit: ["9M"],
+			taunt: ["9M"],
+			spite: ["9M"],
+			hex: ["9M"],
+			darkpulse: ["9M"],
+			destinybond: ["9M"],
+			tackle: ["9M"],
+			lunge: ["9M"],
+			metalsound: ["9M"],
+			irondefense: ["9M"],
+			ironhead: ["9M"],
+			ominouswind: ["9M"],
+			smog: ["9M"],
+			imprison: ["9M"],
+			nastyplot: ["9M"],
+			lashout: ["9M"],
+			gunkshot: ["9M"],
+			scaryface: ["9M"],
+			heavyslam: ["9M"],
+			quickattack: ["9M"],
+			discharge: ["9M"],
+			voltswitch: ["9M"],
+			eerieimpulse: ["9M"],
+			conversion: ["9M"],
+			conversion2: ["9M"],
+			pounce: ["9M"],
+			metalclaw: ["9M"],
 
 			// Shadow Freddy unique moves
 			bulkup: ["9M"],
@@ -573,7 +1096,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantomfreddy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
 			acidspray: ["9M"],
@@ -629,10 +1160,48 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantomchica: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
-			// TODO: copy from phantomfreddy
+			acidspray: ["9M"],
+			clearsmog: ["9M"],
+			smog: ["9M"],
+			sludgebomb: ["9M"],
+			sludgewave: ["9M"],
+			venoshock: ["9M"],
+			toxic: ["9M"],
+			toxicspikes: ["9M"],
+			poisongas: ["9M"],
+			gunkshot: ["9M"],
+			haze: ["9M"],
+			smokescreen: ["9M"],
+			disable: ["9M"],
+			willowisp: ["9M"],
+			flamethrower: ["9M"],
+			fireblast: ["9M"],
+			heatwave: ["9M"],
+			shadowball: ["9M"],
+			darkpulse: ["9M"],
+			assurance: ["9M"],
+			painsplit: ["9M"],
+			destinybond: ["9M"],
+			memento: ["9M"],
+			explosion: ["9M"],
+			selfdestruct: ["9M"],
+			curse: ["9M"],
+			spite: ["9M"],
+			taunt: ["9M"],
+			scaryface: ["9M"],
+			sunnyday: ["9M"],
+			raindance: ["9M"],
 
 			// Phantom Chica unique moves
 			thunderbolt: ["9M"],
@@ -653,10 +1222,48 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantomfoxy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
-			// TODO: copy from phantomfreddy
+			acidspray: ["9M"],
+			clearsmog: ["9M"],
+			smog: ["9M"],
+			sludgebomb: ["9M"],
+			sludgewave: ["9M"],
+			venoshock: ["9M"],
+			toxic: ["9M"],
+			toxicspikes: ["9M"],
+			poisongas: ["9M"],
+			gunkshot: ["9M"],
+			haze: ["9M"],
+			smokescreen: ["9M"],
+			disable: ["9M"],
+			willowisp: ["9M"],
+			flamethrower: ["9M"],
+			fireblast: ["9M"],
+			heatwave: ["9M"],
+			shadowball: ["9M"],
+			darkpulse: ["9M"],
+			assurance: ["9M"],
+			painsplit: ["9M"],
+			destinybond: ["9M"],
+			memento: ["9M"],
+			explosion: ["9M"],
+			selfdestruct: ["9M"],
+			curse: ["9M"],
+			spite: ["9M"],
+			taunt: ["9M"],
+			scaryface: ["9M"],
+			sunnyday: ["9M"],
+			raindance: ["9M"],
 
 			// Phantom Foxy unique moves
 			swordsdance: ["9M"],
@@ -669,6 +1276,8 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			agility: ["9M"],
 			finalgambit: ["9M"],
 			shadowsneak: ["9M"],
+			aurasphere: ["9M"],
+			focusblast: ["9M"],
 
 			// Phantom Foxy FNAF World moves
 			jumpscare: ["9M"],
@@ -679,10 +1288,48 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantomballoonboy: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
-			// TODO: copy from phantomfreddy
+			acidspray: ["9M"],
+			clearsmog: ["9M"],
+			smog: ["9M"],
+			sludgebomb: ["9M"],
+			sludgewave: ["9M"],
+			venoshock: ["9M"],
+			toxic: ["9M"],
+			toxicspikes: ["9M"],
+			poisongas: ["9M"],
+			gunkshot: ["9M"],
+			haze: ["9M"],
+			smokescreen: ["9M"],
+			disable: ["9M"],
+			willowisp: ["9M"],
+			flamethrower: ["9M"],
+			fireblast: ["9M"],
+			heatwave: ["9M"],
+			shadowball: ["9M"],
+			darkpulse: ["9M"],
+			assurance: ["9M"],
+			painsplit: ["9M"],
+			destinybond: ["9M"],
+			memento: ["9M"],
+			explosion: ["9M"],
+			selfdestruct: ["9M"],
+			curse: ["9M"],
+			spite: ["9M"],
+			taunt: ["9M"],
+			scaryface: ["9M"],
+			sunnyday: ["9M"],
+			raindance: ["9M"],
 
 			// Phantom Balloon Boy unique moves
 			tailwind: ["9M"],
@@ -704,10 +1351,48 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantommangle: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
-			// TODO: copy from phantomfreddy
+			acidspray: ["9M"],
+			clearsmog: ["9M"],
+			smog: ["9M"],
+			sludgebomb: ["9M"],
+			sludgewave: ["9M"],
+			venoshock: ["9M"],
+			toxic: ["9M"],
+			toxicspikes: ["9M"],
+			poisongas: ["9M"],
+			gunkshot: ["9M"],
+			haze: ["9M"],
+			smokescreen: ["9M"],
+			disable: ["9M"],
+			willowisp: ["9M"],
+			flamethrower: ["9M"],
+			fireblast: ["9M"],
+			heatwave: ["9M"],
+			shadowball: ["9M"],
+			darkpulse: ["9M"],
+			assurance: ["9M"],
+			painsplit: ["9M"],
+			destinybond: ["9M"],
+			memento: ["9M"],
+			explosion: ["9M"],
+			selfdestruct: ["9M"],
+			curse: ["9M"],
+			spite: ["9M"],
+			taunt: ["9M"],
+			scaryface: ["9M"],
+			sunnyday: ["9M"],
+			raindance: ["9M"],
 
 			// Phantom Mangle unique moves
 			stickyweb: ["9M"],
@@ -720,6 +1405,11 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			poisonjab: ["9M"],
 			skittersmack: ["9M"],
 			pounce: ["9M"],
+			strugglebug: ["9M"],
+			infestation: ["9M"],
+			stringshot: ["9M"],
+			ragepowder: ["9M"],
+			toxicthread: ["9M"],
 
 			// Phantom Mangle FNAF World moves
 			toxicbite: ["9M"],
@@ -730,10 +1420,48 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	phantompuppet: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Phantom animatronic moves
-			// TODO: copy from phantomfreddy
+			acidspray: ["9M"],
+			clearsmog: ["9M"],
+			smog: ["9M"],
+			sludgebomb: ["9M"],
+			sludgewave: ["9M"],
+			venoshock: ["9M"],
+			toxic: ["9M"],
+			toxicspikes: ["9M"],
+			poisongas: ["9M"],
+			gunkshot: ["9M"],
+			haze: ["9M"],
+			smokescreen: ["9M"],
+			disable: ["9M"],
+			willowisp: ["9M"],
+			flamethrower: ["9M"],
+			fireblast: ["9M"],
+			heatwave: ["9M"],
+			shadowball: ["9M"],
+			darkpulse: ["9M"],
+			assurance: ["9M"],
+			painsplit: ["9M"],
+			destinybond: ["9M"],
+			memento: ["9M"],
+			explosion: ["9M"],
+			selfdestruct: ["9M"],
+			curse: ["9M"],
+			spite: ["9M"],
+			taunt: ["9M"],
+			scaryface: ["9M"],
+			sunnyday: ["9M"],
+			raindance: ["9M"],
 
 			// Phantom Puppet unique moves
 			moonblast: ["9M"],
@@ -758,7 +1486,15 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 	nightmarionne: {
 		learnset: {
 			// Generic all-pokemon moves
-			// TODO: copy from freddy
+			endure: ["9M"],
+			facade: ["9M"],
+			helpinghand: ["9M"],
+			protect: ["9M"],
+			rest: ["9M"],
+			sleeptalk: ["9M"],
+			substitute: ["9M"],
+			takedown: ["9M"],
+			terablast: ["9M"],
 
 			// Nightmarionne unique moves
 			crunch: ["9M"],

@@ -54,21 +54,32 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 	},
 	audiodisturbance: {
 		isNonstandard: "FNAF",
-		onStart(pokemon) {
-			let activated = false;
-			for (const foe of pokemon.adjacentFoes()) {
-				if (!activated) {
-					this.add('-ability', pokemon, 'Audio Disturbance');
-					activated = true;
-				}
-				foe.addVolatile('audiodisturbance', pokemon);
-			}
+		onSourceDamagingHit(damage, target, source, move) {
+			// Once per target per move, so a multi-hit move doesn't stack the drop
+			if (move.hit > 1 || !target.hp) return;
+			this.add('-ability', source, 'Audio Disturbance');
+			this.boost({ evasion: -1 }, target, source, null, true);
 		},
 		flags: {},
 		name: "Audio Disturbance",
 		num: -4,
 		rating: 3,
-		shortDesc: "On switch-in, adjacent foes can't use sound moves for 2 turns.",
-		desc: "On switch-in, each adjacent opposing Pokemon becomes unable to use sound-based moves until the end of the next turn, or for the following 2 turns if this Pokemon switches in between turns such as at the start of the battle or to replace a fainted Pokemon. The effect is removed if the affected Pokemon switches out, and it is not given to Pokemon that switch in later. It continues if this Pokemon leaves the field.",
+		shortDesc: "This Pokemon's damaging moves lower the target's evasiveness by 1.",
+		desc: "When this Pokemon damages a target with a move, that target's evasiveness is lowered by 1 stage. A multi-hit move lowers it only once per target. Has no effect if the move hits a substitute.",
+	},
+	blackout: {
+		isNonstandard: "FNAF",
+		onSourceDamagingHit(damage, target, source, move) {
+			// Once per target per move, so a multi-hit move doesn't stack the drop
+			if (move.hit > 1 || !target.hp) return;
+			this.add('-ability', source, 'Blackout');
+			this.boost({ accuracy: -1 }, target, source, null, true);
+		},
+		flags: {},
+		name: "Blackout",
+		num: -5,
+		rating: 3.5,
+		shortDesc: "This Pokemon's damaging moves lower the target's accuracy by 1.",
+		desc: "When this Pokemon damages a target with a move, that target's accuracy is lowered by 1 stage. A multi-hit move lowers it only once per target. Has no effect if the move hits a substitute.",
 	},
 };
