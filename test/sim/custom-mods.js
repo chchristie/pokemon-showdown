@@ -12,6 +12,9 @@ const assert = require('./../assert');
 const common = require('./../common');
 const { CustomMods, getCustomModTiers } = require('../../dist/data/custom-mods');
 const { TeamValidator } = require('../../dist/sim/team-validator');
+const { Teams } = require('../../dist/sim/teams');
+const fs = require('fs');
+const path = require('path');
 
 const PERFECT_IVS = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 };
 
@@ -246,5 +249,299 @@ describe('FNAF Phantom abilities', () => {
 			if (!species.name.startsWith('Phantom ')) continue;
 			assert(species.baseStats.atk < 60, `${species.name} has ${species.baseStats.atk} Attack`);
 		}
+	});
+});
+
+describe('Custom mod random battles', () => {
+	const randomMods = CustomMods.filter(mod => mod.randomBattles);
+	const FILES = { randombattle: 'sets.json', randomdoublesbattle: 'doubles-sets.json' };
+	const ONE_HIT_KO = move => !!move.ohko;
+
+	/** Every [format, mod, sets] triple that should exist. */
+	function randomFormats() {
+		const formats = [];
+		for (const mod of randomMods) {
+			for (const [suffix, file] of Object.entries(FILES)) {
+				const sets = require(`../../dist/data/random-battles/${mod.id}/${file}`);
+				formats.push({ mod, sets, format: Dex.formats.get(`gen9${mod.prefix}${suffix}`) });
+			}
+		}
+		return formats;
+	}
+
+	it('should have at least one mod with random battles', () => {
+		assert(randomMods.length > 0);
+	});
+
+	it('should give those mods a singles format without Team Preview and a doubles format that picks four, both with closed sheets and no flat level', () => {
+		for (const { format } of randomFormats()) {
+			assert(format.exists, `missing format ${format.id}`);
+			assert.equal(format.team, 'random');
+			const ruleTable = Dex.formats.getRuleTable(format);
+			const isDoubles = format.gameType === 'doubles';
+			assert.equal(ruleTable.has('teampreview'), isDoubles, `${format.name}: Team Preview`);
+			assert.equal(ruleTable.pickedTeamSize, isDoubles ? 4 : null, `${format.name}: picked team size`);
+			assert(!ruleTable.has('openteamsheets'), `${format.name} has Open Team Sheets`);
+			assert(!ruleTable.adjustLevel && !ruleTable.adjustLevelDown, `${format.name} flattens levels`);
+			assert(!ruleTable.valueRules.get('itemclause'), `${format.name} lists an Item Clause it can't enforce`);
+			assert(ruleTable.has('illusionlevelmod'), `${format.name} is missing Illusion Level Mod`);
+		}
+	});
+
+	it('should only list sets the Pokemon can actually run', () => {
+		for (const { mod, sets, format } of randomFormats()) {
+			const dex = Dex.mod(mod.id);
+			for (const id in sets) {
+				const species = dex.species.get(id);
+				const where = `${format.name}: ${id}`;
+				assert(species.exists && species.id === id, `${where} is not a species id`);
+				assert.equal(species.isNonstandard, mod.label, `${where} is not one of ${mod.label}'s own Pokemon`);
+				assert(sets[id].sets.length > 0, `${where} has no sets`);
+				const learnset = dex.species.getLearnsetData(species.id).learnset ||
+					dex.species.getLearnsetData(dex.species.get(species.changesFrom || species.baseSpecies).id).learnset;
+				const abilities = Object.values(species.abilities).map(name => dex.abilities.get(name).id);
+				for (const set of sets[id].sets) {
+					assert(set.role && set.movepool.length >= 4, `${where} (${set.role}) needs a role and four moves`);
+					for (const moveName of set.movepool) {
+						const move = dex.moves.get(moveName);
+						assert(move.exists && move.name === moveName, `${where}: "${moveName}" is not a move name`);
+						assert(learnset[move.id], `${where} can't learn ${moveName}`);
+						assert(!ONE_HIT_KO(move), `${where}: one-hit KO moves are left out of random battles (${moveName})`);
+					}
+					assert(set.abilities.length > 0, `${where} (${set.role}) lists no abilities`);
+					for (const abilityName of set.abilities) {
+						const ability = dex.abilities.get(abilityName);
+						assert(ability.exists && ability.name === abilityName, `${where}: "${abilityName}" is not an ability name`);
+						assert(abilities.includes(ability.id), `${where} doesn't have ${abilityName}`);
+					}
+					assert(set.teraTypes.length > 0, `${where} (${set.role}) lists no Tera types`);
+					for (const type of set.teraTypes) {
+						assert(dex.types.get(type).exists, `${where}: "${type}" is not a type`);
+					}
+					for (const itemName of set.items || []) {
+						const item = dex.items.get(itemName);
+						assert(item.exists && item.name === itemName, `${where}: "${itemName}" is not an item name`);
+					}
+				}
+			}
+		}
+	});
+
+	it('should always build a full team', function () {
+		this.timeout(0);
+		for (const { format } of randomFormats()) {
+			for (let i = 0; i < 500; i++) {
+				const team = Teams.generate(format, { seed: [i, 2, 3, 4] });
+				assert.equal(team.length, 6, `${format.name}, seed ${i}`);
+				assert.equal(new Set(team.map(set => set.name)).size, 6, `${format.name}, seed ${i}: Species Clause`);
+			}
+		}
+	});
+
+	it('should support Adjust Level', () => {
+		for (const { format } of randomFormats()) {
+			const team = Teams.generate(`${format.id}@@@Adjust Level = 37`, { seed: [1, 2, 3, 4] });
+			for (const set of team) assert.equal(set.level, 37);
+		}
+	});
+
+	it('should keep a mod pivot move off sets that rolled a setup move', () => {
+		const generator = Teams.getGenerator('gen9fnafrandombattle', [1, 2, 3, 4]);
+		const species = Dex.mod('gen9fnaf').species.get('thepuppet');
+		const movePool = ['mysterybox', 'shadowball', 'dazzlinggleam', 'taunt', 'painsplit'];
+		const moves = new Set(['calmmind']);
+		const counter = generator.queryMoves(moves, species, 'Ghost', ['Levitate']);
+		generator.cullMovePool(
+			new Set(species.types), moves, ['Levitate'], counter, movePool, {}, species, false, 'Ghost', 'Setup Sweeper', false
+		);
+		assert(!movePool.includes('mysterybox'));
+	});
+
+	it("should use each of FNAF's own moves and abilities in both formats, apart from the listed exceptions", () => {
+		const dex = Dex.mod('gen9fnaf');
+		// Why each one is an exception is in docs/fakemon/fnaf/random-battle-sets.md.
+		const EXCEPTIONS = {
+			singles: ['Birthday', 'Happy Jam', 'Distracting Voice', 'Regen Song', 'Follow Me'],
+			doubles: ['Hot Cheese', 'Mystery Box', 'Water Hose'],
+			both: ['Esc Key', 'Unscrew', 'Balloons', 'Munchies', 'Poppers', 'Mimic Ball', 'Fourth Wall', 'Bubble Breath'],
+		};
+		const species = dex.species.all().filter(s => s.isNonstandard === 'FNAF');
+		const learnable = move => species.some(s => dex.species.getLearnsetData(s.id).learnset?.[move.id]);
+		const held = ability => species.some(s => Object.values(s.abilities).some(name => dex.abilities.get(name).id === ability.id));
+		const own = [
+			...dex.moves.all().filter(move => move.isNonstandard === 'FNAF' && learnable(move)),
+			...dex.abilities.all().filter(ability => ability.isNonstandard === 'FNAF' && held(ability)),
+		];
+		for (const { mod, sets, format } of randomFormats()) {
+			if (mod.id !== 'gen9fnaf') continue;
+			const which = format.gameType === 'doubles' ? 'doubles' : 'singles';
+			const used = new Set();
+			for (const id in sets) {
+				for (const set of sets[id].sets) {
+					for (const name of [...set.movepool, ...set.abilities]) used.add(name);
+				}
+			}
+			for (const thing of own) {
+				const excepted = EXCEPTIONS[which].includes(thing.name) || EXCEPTIONS.both.includes(thing.name);
+				assert.equal(
+					used.has(thing.name), !excepted,
+					`${thing.name} in ${format.name}: ${excepted ? 'listed as an exception but is used' : 'not in any set'}`
+				);
+			}
+		}
+	});
+
+	it('should let any FNAF set with a setup move roll Freddy Mask in doubles, and none in singles', function () {
+		this.timeout(0);
+		const unlisted = { singles: 0, doubles: 0 };
+		for (const { mod, sets, format } of randomFormats()) {
+			if (mod.id !== 'gen9fnaf') continue;
+			const which = format.gameType === 'doubles' ? 'doubles' : 'singles';
+			const generator = Teams.getGenerator(format, [1, 2, 3, 4]);
+			for (const id in sets) {
+				if (sets[id].sets.some(set => set.items?.includes('Freddy Mask'))) continue;
+				for (let i = 0; i < 60; i++) {
+					const set = generator.randomSet(id, {}, false, which === 'doubles');
+					if (set.item !== 'Freddy Mask') continue;
+					unlisted[which]++;
+					const species = Dex.mod('gen9fnaf').species.get(id);
+					const counter = generator.queryMoves(new Set(set.moves), species, set.teraType, [set.ability]);
+					assert(counter.get('setup') > 0, `${species.name} rolled Freddy Mask with ${set.moves.join(', ')}`);
+				}
+			}
+		}
+		assert.equal(unlisted.singles, 0);
+		assert(unlisted.doubles > 0, 'expected some doubles setup sets to roll Freddy Mask');
+	});
+
+	it('should hand out Choice items about as often as upstream does', function () {
+		this.timeout(0);
+		const choiceShare = formatid => {
+			let choice = 0;
+			let total = 0;
+			for (let i = 0; i < 300; i++) {
+				for (const set of Teams.generate(formatid, { seed: [i, 3, 5, 7] })) {
+					total++;
+					if (set.item.startsWith('Choice ')) choice++;
+				}
+			}
+			return 100 * choice / total;
+		};
+		for (const { format } of randomFormats()) {
+			const upstream = format.gameType === 'doubles' ? 'gen9randomdoublesbattle' : 'gen9randombattle';
+			const ours = choiceShare(format.id);
+			const theirs = choiceShare(upstream);
+			assert(
+				Math.abs(ours - theirs) <= 5,
+				`${format.name} gives Choice items to ${ours.toFixed(1)}% of Pokemon; upstream gives ${theirs.toFixed(1)}%`
+			);
+		}
+	});
+
+	it('should only give Triage to a FNAF set that has a healing move', function () {
+		this.timeout(0);
+		const dex = Dex.mod('gen9fnaf');
+		const hasHealingMove = moves => [...moves].some(moveid => dex.moves.get(moveid).flags['heal']);
+		let seen = 0;
+		for (const { mod, format } of randomFormats()) {
+			if (mod.id !== 'gen9fnaf') continue;
+			const generator = Teams.getGenerator(format, [1, 2, 3, 4]);
+			const isDoubles = format.gameType === 'doubles';
+			for (let i = 0; i < 300; i++) {
+				const set = generator.randomSet('thepuppet', {}, false, isDoubles);
+				if (set.ability !== 'Triage') continue;
+				seen++;
+				assert(hasHealingMove(set.moves), `${format.name}: Triage with ${set.moves.join(', ')}`);
+			}
+			// A set that lists both abilities falls back to the other one without a healing move.
+			const species = dex.species.get('thepuppet');
+			const pick = moves => generator.getAbility(
+				new Set(species.types), new Set(moves), ['Triage', 'Levitate'],
+				generator.queryMoves(new Set(moves), species, 'Fairy', ['Triage', 'Levitate']), {}, species, false, isDoubles, 'Fairy', 'Setup Sweeper'
+			);
+			assert.equal(pick(['calmmind', 'shadowball', 'dazzlinggleam', 'mysticalfire']), 'Levitate');
+		}
+		assert(seen > 0, 'expected The Puppet to roll Triage at least once');
+	});
+
+	it("should only hand out FNAF's items to sets that meet the item's rule", function () {
+		this.timeout(0);
+		const dex = Dex.mod('gen9fnaf');
+		const seen = new Set();
+		for (const { mod, format } of randomFormats()) {
+			if (mod.id !== 'gen9fnaf') continue;
+			for (let i = 0; i < 1500; i++) {
+				const team = Teams.generate(format, { seed: [i, 5, 6, 7] });
+				const discs = team.filter(set => set.item === 'Illusion Disc');
+				assert(discs.length <= 1, `${format.name}, seed ${i}: more than one Illusion Disc`);
+				assert.notEqual(team[team.length - 1].item, 'Illusion Disc', `${format.name}, seed ${i}: Illusion Disc in the last slot`);
+				for (const set of team) {
+					if (dex.items.get(set.item).isNonstandard !== 'FNAF') continue;
+					seen.add(set.item);
+					const moves = set.moves.map(moveid => dex.moves.get(moveid));
+					const damaging = type => moves.some(move => move.category !== 'Status' && move.type === type);
+					const what = `${format.name}, seed ${i}: ${set.species} (${set.role}; ${set.moves.join(', ')}; ${set.ability}) holds ${set.item}`;
+					switch (set.item) {
+					case 'Remnant':
+						assert(damaging('Steel') && damaging('Ghost'), what);
+						break;
+					case 'Music Box':
+						assert([
+							'Insomnia', 'Vital Spirit', 'Comatose', 'Sweet Veil', 'Purifying Salt', 'Early Bird', 'Shed Skin',
+							'Electric Surge', 'Misty Surge',
+						].includes(set.ability), what);
+						break;
+					case 'Missing Beak':
+						assert(set.moves.some(moveid => ['peck', 'drillpeck', 'pluck', 'beakblast', 'boltbeak'].includes(moveid)), what);
+						break;
+					case 'Illusion Disc':
+						assert(!set.role.includes('Setup Sweeper'), what);
+						break;
+					case 'Freddy Mask': {
+						const generator = Teams.getGenerator(format, [1, 2, 3, 4]);
+						const counter = generator.queryMoves(new Set(set.moves), dex.species.get(set.species), set.teraType, [set.ability]);
+						assert(moves.every(move => move.category === 'Status') || counter.get('setup') > 0, what);
+						break;
+					}
+					}
+				}
+			}
+		}
+		for (const item of ['Remnant', 'Music Box', 'Missing Beak', 'Illusion Disc', 'Freddy Mask']) {
+			assert(seen.has(item), `${item} never appeared in a FNAF random battle`);
+		}
+	});
+});
+
+describe('FNAF learnsets', () => {
+	it('should keep same-named shared sections identical in every species that has them', () => {
+		const source = fs.readFileSync(path.resolve(__dirname, '../../data/mods/gen9fnaf/learnsets.ts'), 'utf8');
+		const sections = {};
+		let species = null;
+		let header = null;
+		for (const line of source.split('\n')) {
+			let match;
+			if ((match = /^\t([a-z0-9]+): \{$/.exec(line))) {
+				species = match[1];
+			} else if ((match = /^\t\t\t\/\/ (.+)$/.exec(line))) {
+				header = match[1];
+			} else if ((match = /^\t\t\t([a-z0-9]+): \[/.exec(line)) && species && header) {
+				((sections[header] ||= {})[species] ||= []).push(match[1]);
+			}
+		}
+		let shared = 0;
+		for (const sectionName in sections) {
+			const copies = Object.entries(sections[sectionName]);
+			if (copies.length < 2) continue;
+			shared++;
+			const [firstSpecies, firstMoves] = copies[0];
+			for (const [otherSpecies, otherMoves] of copies) {
+				assert.deepEqual(
+					otherMoves, firstMoves,
+					`"${sectionName}" differs between ${firstSpecies} and ${otherSpecies}`
+				);
+			}
+		}
+		assert(shared >= 4, 'expected to find the shared learnset sections');
 	});
 });

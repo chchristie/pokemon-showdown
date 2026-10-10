@@ -464,6 +464,7 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			eerieimpulse: ["9M"],
 
 			// Toy Chica unique moves
+			agility: ["9M"],
 			beakblast: ["9M"],
 			boltbeak: ["9M"],
 			peck: ["9M"],

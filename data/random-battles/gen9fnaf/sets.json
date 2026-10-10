@@ -1,0 +1,488 @@
+{
+	"freddy": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Earthquake", "Poltergeist", "Shadow Sneak", "Mic Toss", "Pizza Wheel"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Ground", "Ghost"],
+				"items": ["Remnant"]
+			},
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Bulk Up", "Earthquake", "Poltergeist", "Shadow Sneak"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Fairy", "Steel"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Clangorous Soul", "Earthquake", "Poltergeist", "Mic Toss", "Shadow Sneak"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Ground", "Fairy"],
+				"items": ["Remnant", "Freddy Mask", "Leftovers"]
+			}
+		]
+	},
+	"bonnie": {
+		"level": 87,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Nasty Plot", "Boomburst", "Shadow Ball", "Substitute"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Normal", "Ghost"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Double-Edge", "Poltergeist", "Extreme Speed", "U-turn", "Super Bite"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Normal", "Ghost"],
+				"items": ["Illusion Disc"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Boomburst", "Shadow Ball", "Poltergeist", "U-turn"],
+				"abilities": ["Early Bird"],
+				"teraTypes": ["Normal"],
+				"items": ["Music Box"]
+			}
+		]
+	},
+	"chica": {
+		"level": 87,
+		"sets": [
+			{
+				"role": "Bulky Support",
+				"movepool": ["Super Fang", "Night Shade", "Cupcake", "U-turn"],
+				"abilities": ["Parental Bond"],
+				"teraTypes": ["Steel", "Fairy"]
+			},
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Nasty Plot", "Hurricane", "Shadow Ball", "Cupcake"],
+				"abilities": ["Cursed Body"],
+				"teraTypes": ["Steel", "Fairy"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Drill Peck", "Poltergeist", "Cupcake", "U-turn"],
+				"abilities": ["Parental Bond"],
+				"teraTypes": ["Flying", "Steel"],
+				"items": ["Missing Beak"]
+			}
+		]
+	},
+	"foxy": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Close Combat", "Poltergeist", "Hook", "Shadow Sneak"],
+				"abilities": ["Speed Boost"],
+				"teraTypes": ["Fighting", "Ghost"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Close Combat", "Poltergeist", "Hook", "Jumpscare"],
+				"abilities": ["Speed Boost"],
+				"teraTypes": ["Fighting"],
+				"items": ["Illusion Disc"]
+			}
+		]
+	},
+	"goldenfreddy": {
+		"level": 88,
+		"sets": [
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Nasty Plot", "Shadow Ball", "Dark Pulse", "Pain Split", "Hypnosis"],
+				"abilities": ["Shadow Tag"],
+				"teraTypes": ["Dark", "Fairy"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Haunting", "Hex", "Pain Split", "Taunt"],
+				"abilities": ["It's Me"],
+				"teraTypes": ["Dark", "Normal"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Rainy Day", "Foul Play", "Haunting", "Pain Split"],
+				"abilities": ["It's Me"],
+				"teraTypes": ["Dark", "Normal"]
+			}
+		]
+	},
+	"toyfreddy": {
+		"level": 86,
+		"sets": [
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Thunderbolt", "Earth Power", "Volt Switch", "Party Favors", "Mic Toss"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric", "Ground"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Clangorous Soul", "Thunderbolt", "Earth Power", "Party Favors"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric", "Ground"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Speed Song", "Thunderbolt", "Earth Power", "Party Favors"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric", "Ground"]
+			}
+		]
+	},
+	"toybonnie": {
+		"level": 86,
+		"sets": [
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Boomburst", "Thunderbolt", "Bash Jam", "Volt Switch", "Prize Ball"],
+				"abilities": ["Download"],
+				"teraTypes": ["Normal", "Electric"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Double-Edge", "Extreme Speed", "Vent", "U-turn"],
+				"abilities": ["Download"],
+				"teraTypes": ["Normal"]
+			}
+		]
+	},
+	"toychica": {
+		"level": 86,
+		"sets": [
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Bolt Beak", "Drill Peck", "Beak Blast", "U-turn", "Vent"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric", "Flying"],
+				"items": ["Missing Beak"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Thunderbolt", "Hurricane", "Volt Switch", "Cupcake", "Water Hose"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric", "Steel"]
+			}
+		]
+	},
+	"mangle": {
+		"level": 87,
+		"sets": [
+			{
+				"role": "Fast Support",
+				"movepool": ["Sticky Web", "Thunderbolt", "Volt Switch", "Lunge", "U-turn"],
+				"abilities": ["Download"],
+				"teraTypes": ["Electric"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["First Impression", "U-turn", "Thunderbolt", "Vent", "Hook"],
+				"abilities": ["Download"],
+				"teraTypes": ["Bug"],
+				"items": ["Illusion Disc"]
+			}
+		]
+	},
+	"balloonboy": {
+		"level": 91,
+		"sets": [
+			{
+				"role": "Fast Support",
+				"movepool": ["Alluring Voice", "Foul Play", "Thunder Wave", "Volt Switch"],
+				"abilities": ["Hello"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "AV Pivot",
+				"movepool": ["Alluring Voice", "Foul Play", "Volt Switch", "Hot Cheese"],
+				"abilities": ["Hello"],
+				"teraTypes": ["Steel", "Poison"]
+			}
+		]
+	},
+	"jj": {
+		"level": 91,
+		"sets": [
+			{
+				"role": "Bulky Support",
+				"movepool": ["Light Screen", "Reflect", "Parting Shot", "Thunder Wave", "Dazzling Gleam"],
+				"abilities": ["Prankster"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Encore", "Thunder Wave", "Taunt", "Parting Shot"],
+				"abilities": ["Prankster"],
+				"teraTypes": ["Steel", "Poison"],
+				"items": ["Freddy Mask"]
+			}
+		]
+	},
+	"freddywithered": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Stone Edge", "Poltergeist", "Shadow Sneak", "Earthquake", "Mic Toss"],
+				"abilities": ["Sand Stream"],
+				"teraTypes": ["Rock", "Ghost"],
+				"items": ["Remnant"]
+			},
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Bulk Up", "Stone Edge", "Poltergeist", "Earthquake"],
+				"abilities": ["Sand Stream"],
+				"teraTypes": ["Ghost", "Steel"]
+			}
+		]
+	},
+	"bonniewithered": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Tail Glow", "Surf", "Shadow Ball", "Ice Beam", "Eye Beam"],
+				"abilities": ["Stakeout"],
+				"teraTypes": ["Water", "Ghost"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Liquidation", "Poltergeist", "Flip Turn", "Aqua Jet"],
+				"abilities": ["Stakeout"],
+				"teraTypes": ["Water", "Ghost"]
+			}
+		]
+	},
+	"chicawithered": {
+		"level": 86,
+		"sets": [
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Dragon Dance", "Outrage", "Poltergeist", "Cupcake"],
+				"abilities": ["Mold Breaker"],
+				"teraTypes": ["Steel", "Fairy"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Night Shade", "Cupcake", "Taunt", "U-turn"],
+				"abilities": ["Mold Breaker"],
+				"teraTypes": ["Steel", "Fairy"]
+			}
+		]
+	},
+	"foxywithered": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Hook", "Poltergeist", "Close Combat"],
+				"abilities": ["Weak Armor"],
+				"teraTypes": ["Steel", "Fighting"],
+				"items": ["Remnant"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Hook", "Poltergeist", "Close Combat", "Shadow Sneak"],
+				"abilities": ["Unnerve"],
+				"teraTypes": ["Steel", "Ghost"]
+			}
+		]
+	},
+	"thepuppet": {
+		"level": 83,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Calm Mind", "Draining Kiss", "Shadow Ball", "Mystical Fire"],
+				"abilities": ["Triage"],
+				"teraTypes": ["Fairy", "Steel"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Calm Mind", "Shadow Ball", "Dazzling Gleam", "Mystical Fire", "Thunderbolt"],
+				"abilities": ["Levitate"],
+				"teraTypes": ["Ghost", "Fairy"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Give Gifts, Give Life", "Taunt", "Shadow Ball", "Dazzling Gleam"],
+				"abilities": ["Levitate"],
+				"teraTypes": ["Steel", "Poison"]
+			}
+		]
+	},
+	"paperpals": {
+		"level": 92,
+		"sets": [
+			{
+				"role": "Bulky Support",
+				"movepool": ["Counter", "Mirror Coat", "Encore", "Destiny Bond"],
+				"abilities": ["Shadow Tag"],
+				"teraTypes": ["Ghost"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Encore", "Taunt", "Destiny Bond", "Mystery Box"],
+				"abilities": ["Shadow Tag"],
+				"teraTypes": ["Ghost"],
+				"items": ["Freddy Mask"]
+			}
+		]
+	},
+	"shadowfreddy": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Bulk Up", "Knock Off", "Poltergeist", "Sucker Punch"],
+				"abilities": ["Infiltrator"],
+				"teraTypes": ["Dark", "Fairy"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Knock Off", "Poltergeist", "Will-O-Wisp", "Pain Split", "Sucker Punch"],
+				"abilities": ["Infiltrator"],
+				"teraTypes": ["Steel", "Fairy"]
+			}
+		]
+	},
+	"phantomfreddy": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Earth Power", "Sludge Wave", "Fire Blast", "Shadow Ball"],
+				"abilities": ["Poison Point"],
+				"teraTypes": ["Ground", "Poison"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Earth Power", "Sludge Bomb", "Toxic Spikes", "Will-O-Wisp", "Pain Split", "Gloom Song"],
+				"abilities": ["Poison Point"],
+				"teraTypes": ["Water", "Flying"]
+			}
+		]
+	},
+	"phantomchica": {
+		"level": 87,
+		"sets": [
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Pain Split"],
+				"abilities": ["Merciless"],
+				"teraTypes": ["Poison", "Electric"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Toxic Spikes", "Sludge Bomb", "Thunderbolt", "Pain Split", "Sludge"],
+				"abilities": ["Merciless"],
+				"teraTypes": ["Water", "Flying"]
+			},
+			{
+				"role": "AV Pivot",
+				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Volt Switch"],
+				"abilities": ["Merciless"],
+				"teraTypes": ["Poison", "Electric"]
+			}
+		]
+	},
+	"phantomfoxy": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Aura Sphere", "Sludge Bomb", "Shadow Ball", "Fire Blast", "Focus Blast"],
+				"abilities": ["Corrosion"],
+				"teraTypes": ["Fighting", "Poison"],
+				"items": ["Illusion Disc"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Toxic", "Venoshock", "Aura Sphere", "Taunt"],
+				"abilities": ["Corrosion"],
+				"teraTypes": ["Steel", "Dark"]
+			}
+		]
+	},
+	"phantomballoonboy": {
+		"level": 89,
+		"sets": [
+			{
+				"role": "Bulky Support",
+				"movepool": ["Toxic Balloon", "Gloom Balloon", "Roost", "Parting Shot", "Taunt"],
+				"abilities": ["Blackout"],
+				"teraTypes": ["Steel", "Water"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Hurricane", "Sludge Bomb", "Roost", "Parting Shot"],
+				"abilities": ["Blackout"],
+				"teraTypes": ["Steel", "Flying"]
+			}
+		]
+	},
+	"phantommangle": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Fast Support",
+				"movepool": ["Sticky Web", "Bug Buzz", "Toxic Spikes", "Toxic Thread", "U-turn"],
+				"abilities": ["Audio Disturbance"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Bug Buzz", "Sludge Bomb", "Fire Blast", "Shadow Ball"],
+				"abilities": ["Audio Disturbance"],
+				"teraTypes": ["Bug", "Poison"]
+			}
+		]
+	},
+	"phantompuppet": {
+		"level": 82,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Nasty Plot", "Moonblast", "Sludge Bomb", "Mystical Fire", "Psyshock"],
+				"abilities": ["Toxic Chain"],
+				"teraTypes": ["Fairy", "Steel"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Moonblast", "Sludge Bomb", "Mystical Fire", "Shadow Ball", "Hot Cheese"],
+				"abilities": ["Toxic Chain"],
+				"teraTypes": ["Fairy", "Poison"]
+			}
+		]
+	},
+	"nightmarionne": {
+		"level": 83,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Poltergeist", "Knock Off", "Sucker Punch"],
+				"abilities": ["Tough Claws"],
+				"teraTypes": ["Ghost", "Dark"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Hypnosis", "Swords Dance", "Poltergeist", "Knock Off"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Ghost", "Dark"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Shadow Claw"],
+				"abilities": ["Tough Claws"],
+				"teraTypes": ["Ghost", "Dark"]
+			}
+		]
+	}
+}

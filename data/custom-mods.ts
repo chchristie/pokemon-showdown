@@ -1,21 +1,4 @@
-/**
- * DigiPen fork: the registry of custom content ("fakemon") mods.
- *
- * This is the single place that knows which fakemon mods exist. Tags, existence tags, tier names,
- * the generated format list, the client's teambuilder tables and the dex's mod switcher are all
- * driven from it, so adding a mod should mean adding an entry here plus a folder under
- * `data/mods/`, not editing a dozen switch statements.
- *
- * Adding a mod:
- *   1. Add an entry below.
- *   2. Add `data/mods/<id>/` with `scripts.ts` (`inherit: 'gen9modbase'`) and its data files.
- *   3. Add the label to `CustomModName` in `sim/global-types.ts` — the one place the type system
- *      needs a literal, since `Nonstandard` and `TierTypes.Other` are derived from it.
- *   4. Add the id to `CLIENT_MODS` in the client's `build-tools/build-translations` so the client
- *      ships its data.
- *
- * Nothing else should need to change. See `docs/fakemon/` in the workspace for the whole picture.
- */
+// Registry of the custom content ("fakemon") mods.
 
 export interface CustomModInfo {
 	/** Mod id, i.e. the folder name under `data/mods/`. */
@@ -33,11 +16,13 @@ export interface CustomModInfo {
 	fullName: string;
 	/** Format-id and tag prefix. Always `toID(label)`. */
 	prefix: string;
+	/** Whether the mod has random battle formats. Needs `data/random-battles/<id>/`. */
+	randomBattles?: boolean;
 }
 
 export const CustomMods: CustomModInfo[] = [
 	{ id: 'gen9digipen', label: 'DigiPen', fullName: 'DigiPen', prefix: 'digipen' },
-	{ id: 'gen9fnaf', label: 'FNAF', fullName: "Five Nights at Freddy's", prefix: 'fnaf' },
+	{ id: 'gen9fnaf', label: 'FNAF', fullName: "Five Nights at Freddy's", prefix: 'fnaf', randomBattles: true },
 ];
 
 /** The mod whose exclusive content is marked with this `isNonstandard` value, if any. */

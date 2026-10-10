@@ -3,31 +3,7 @@
 
 import { CustomMods, type CustomModInfo } from '../data/custom-mods';
 
-/**
- * DigiPen fork: every custom content mod gets the same eight formats, generated here.
- *
- * Adding a mod to `data/custom-mods.ts` is what adds its formats; there is nothing to write by
- * hand. Keeping the set identical across mods is also what lets the client map a format to a
- * teambuilder table from its name alone, instead of a `case` per format.
- *
- * Mechanics, which are less obvious than they look:
- *
- * - **Mega Evolution and Z-Moves** are not banned by any ruleset. Mega stones and Z-crystals are
- *   simply `isNonstandard: "Past"` items, so every format here runs `NatDex Mod` to allow them.
- * - **Terastallization** stays on because none of these inherit `[Gen 9] National Dex`, which is
- *   what adds `Terastal Clause`. `NatDex Mod` separately turns Tera off for Mega, Primal and Ultra
- *   formes, which is the real-game behaviour.
- * - **Dynamax** needs no ban: `sim/side.ts` disables it outside gen 8, and Gmax formes are
- *   `natDexTier: "Illegal"`, which `NatDex Mod` rejects.
- * - **`+Future`** has to be explicit — `NatDex Mod` grants `+Unobtainable` and `+Past` only. The
- *   Champions Pokémon it lets in also need the National Dex tiers that `gen9modbase` gives them.
- * - **`+Light of Ruin`** is what makes Mega Floette usable. Upstream's National Dex check flags
- *   that move by id no matter what, but honours `+move:` on it.
- * - **Mod-only formats** (`Singles`, `VGC`) ban `All Pokemon` and unban the mod. Mega and armoured
- *   formes still work, because the ban check runs against the forme the item produces, which is
- *   the mod's own species.
- */
-
+/** The formats every custom content mod gets. */
 function customModFormats(mod: CustomModInfo): import('../sim/dex-formats').FormatList {
 	const label = mod.label;
 	// The National Dex mechanics every format here shares.
@@ -41,11 +17,32 @@ function customModFormats(mod: CustomModInfo): import('../sim/dex-formats').Form
 	const vgc = [...vgcBase, ...withMod];
 	const doubles = { mod: mod.id, searchShow: false, gameType: 'doubles' as const, bestOfDefault: true };
 
+	const randomSingles: import('../sim/dex-formats').FormatList = !mod.randomBattles ? [] : [{
+		name: `[Gen 9 ${label}] Random Battle`,
+		desc: `Randomized teams of ${mod.fullName} Pok&eacute;mon with sets that are generated to be competitively viable.`,
+		mod: mod.id,
+		team: 'random',
+		searchShow: false,
+		bestOfDefault: true,
+		ruleset: [`[Gen 9 ${label}] Singles`, '!Team Preview', 'Illusion Level Mod'],
+	}];
+	const randomDoubles: import('../sim/dex-formats').FormatList = !mod.randomBattles ? [] : [{
+		name: `[Gen 9 ${label}] Random Doubles Battle`,
+		desc: `Randomized teams of ${mod.fullName} Pok&eacute;mon for doubles: bring six, pick four.`,
+		...doubles,
+		team: 'random',
+		ruleset: [
+			`[Gen 9 ${label}] VGC`, '!Open Team Sheets', '!Adjust Level', '!Adjust Level Down', '!Item Clause',
+			'Illusion Level Mod',
+		],
+	}];
+
 	return [
 		{
 			section: `${mod.fullName} Singles`,
 			column: 1,
 		},
+		...randomSingles,
 		{
 			// Only the mod's own Pokémon, and all of them.
 			name: `[Gen 9 ${label}] Singles`,
@@ -73,6 +70,7 @@ function customModFormats(mod: CustomModInfo): import('../sim/dex-formats').Form
 			section: `${mod.fullName} Doubles`,
 			column: 1,
 		},
+		...randomDoubles,
 		{
 			// Only the mod's own Pokémon, and all of them.
 			name: `[Gen 9 ${label}] VGC`,
