@@ -75,6 +75,39 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	phantompuppet: {
 		isNonstandard: "FNAF",
 	},
+	nightmarefreddy: {
+		isNonstandard: "FNAF",
+	},
+	nightmarebonnie: {
+		isNonstandard: "FNAF",
+	},
+	nightmarechica: {
+		isNonstandard: "FNAF",
+	},
+	nightmarefoxy: {
+		isNonstandard: "FNAF",
+	},
+	nightmaremangle: {
+		isNonstandard: "FNAF",
+	},
+	nightmareballoonboy: {
+		isNonstandard: "FNAF",
+	},
+	plushtrap: {
+		isNonstandard: "FNAF",
+	},
+	jackobonnie: {
+		isNonstandard: "FNAF",
+	},
+	jackochica: {
+		isNonstandard: "FNAF",
+	},
+	nightmarefredbear: {
+		isNonstandard: "FNAF",
+	},
+	nightmare: {
+		isNonstandard: "FNAF",
+	},
 	nightmarionne: {
 		isNonstandard: "FNAF",
 	},

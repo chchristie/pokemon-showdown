@@ -252,6 +252,186 @@ describe('FNAF Phantom abilities', () => {
 	});
 });
 
+describe('FNAF Nightmare abilities', () => {
+	const FNAF_BATTLE = { formatid: 'gen9fnafsingles@@@!Team Preview' };
+	const JOLTEON = { species: 'Jolteon', ability: 'voltabsorb', moves: ['calmmind', 'thunderbolt', 'swift'] };
+	const CHANSEY = { species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] };
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+	// Makes the choices, then returns the side ('p1' or 'p2') whose Pokemon moved first that turn.
+	function firstMover(p1choice, p2choice) {
+		const logStart = battle.log.length;
+		battle.makeChoices(p1choice, p2choice);
+		const line = battle.log.slice(logStart).find(entry => entry.startsWith('|move|'));
+		return line.split('|')[2].slice(0, 2);
+	}
+
+	it('Fun with Plushtrap should give status moves +1 priority for the turn after one in which no foe singled it out', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Plushtrap', ability: 'funwithplushtrap', moves: ['synthesis', 'seedbomb'] },
+		], [JOLTEON]]);
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p2', 'there is no previous turn on turn 1');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p1');
+		assert.equal(firstMover('move seedbomb', 'move thunderbolt'), 'p2', 'an attack should not be boosted');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p2', 'it was targeted last turn');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p1', 'it should come back after a quiet turn');
+	});
+
+	it('Fun with Balloon Boy should give attacking moves +1 priority instead', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Nightmare Balloon Boy', ability: 'funwithballoonboy', moves: ['flatter', 'aerialace'] },
+		], [JOLTEON]]);
+		assert.equal(firstMover('move flatter', 'move calmmind'), 'p2');
+		assert.equal(firstMover('move aerialace', 'move calmmind'), 'p1');
+		assert.equal(firstMover('move flatter', 'move calmmind'), 'p2', 'a status move should not be boosted');
+	});
+
+	it('should count a move that was blocked by Protect', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Plushtrap', ability: 'funwithplushtrap', moves: ['synthesis', 'protect'] },
+		], [JOLTEON]]);
+		battle.makeChoices('move protect', 'move thunderbolt');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p2');
+	});
+
+	it('should not count a move that struck more than one Pokemon, or a side or field move', () => {
+		battle = common.createBattle({ formatid: 'gen9fnafvgc' }, [[
+			{ species: 'Plushtrap', ability: 'funwithplushtrap', moves: ['synthesis'] },
+			CHANSEY,
+		], [
+			{ species: 'Jolteon', ability: 'voltabsorb', moves: ['thunderbolt', 'swift', 'stealthrock', 'raindance'] },
+			CHANSEY,
+		]]);
+		battle.makeChoices(); // Team Preview
+		battle.makeChoices('move synthesis, move softboiled', 'move swift, move softboiled');
+		assert.equal(firstMover('move synthesis, move softboiled', 'move stealthrock, move softboiled'), 'p1');
+		assert.equal(firstMover('move synthesis, move softboiled', 'move raindance, move softboiled'), 'p1');
+		assert.equal(firstMover('move synthesis, move softboiled', 'move thunderbolt 1, move softboiled'), 'p1');
+		assert.equal(firstMover('move synthesis, move softboiled', 'move swift, move softboiled'), 'p2', 'it was singled out last turn');
+	});
+
+	it('should count a spread move that could only reach it', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			{ species: 'Plushtrap', ability: 'funwithplushtrap', moves: ['synthesis'] },
+		], [JOLTEON]]);
+		battle.makeChoices('move synthesis', 'move swift');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p2');
+	});
+
+	it('should not count the turn it switched in on', () => {
+		battle = common.createBattle(FNAF_BATTLE, [[
+			CHANSEY,
+			{ species: 'Plushtrap', ability: 'funwithplushtrap', moves: ['synthesis'] },
+		], [JOLTEON]]);
+		battle.makeChoices('switch 2', 'move calmmind');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p2');
+		assert.equal(firstMover('move synthesis', 'move calmmind'), 'p1');
+	});
+});
+
+describe('FNAF Toxic Bite', () => {
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+
+	it('should set a layer of Toxic Spikes on the opposing side each time it hits', () => {
+		battle = common.createBattle({ formatid: 'gen9fnafsingles@@@!Team Preview', forceRandomChance: true }, [[
+			{ species: 'Nightmare Fredbear', ability: 'intimidate', moves: ['toxicbite'] },
+		], [
+			{ species: 'Chansey', ability: 'serenegrace', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move toxicbite', 'move softboiled');
+		assert.equal(battle.p2.sideConditions['toxicspikes'].layers, 1);
+		assert.equal(battle.p2.active[0].status, '', 'the hit itself should not poison');
+		battle.makeChoices('move toxicbite', 'move softboiled');
+		assert.equal(battle.p2.sideConditions['toxicspikes'].layers, 2);
+	});
+});
+
+describe('FNAF Sludge', () => {
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+
+	it("should poison its target and lower its Speed", () => {
+		battle = common.createBattle({ formatid: 'gen9fnafsingles@@@!Team Preview' }, [[
+			{ species: 'Phantom Chica', ability: 'merciless', moves: ['sludge'] },
+		], [
+			{ species: 'Chansey', ability: 'serenegrace', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move sludge', 'move softboiled');
+		assert.equal(battle.p2.active[0].status, 'psn');
+		assert.statStage(battle.p2.active[0], 'spe', -1);
+	});
+});
+
+describe('FNAF Poison Puppeteer', () => {
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+
+	it('should confuse a target that Phantom Puppet poisons with a move', () => {
+		battle = common.createBattle({ formatid: 'gen9fnafsingles@@@!Team Preview' }, [[
+			{ species: 'Phantom Puppet', ability: 'poisonpuppeteer', moves: ['toxic'] },
+		], [
+			{ species: 'Chansey', ability: 'serenegrace', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move toxic', 'move softboiled');
+		assert.equal(battle.p2.active[0].status, 'tox');
+		assert(battle.p2.active[0].volatiles['confusion']);
+	});
+});
+
+describe('FNAF Fear Gas', () => {
+	let battle;
+	afterEach(() => {
+		battle?.destroy();
+		battle = null;
+	});
+
+	it('should make both foes drowsy, then put them to sleep, except Poison and Steel types', () => {
+		const chansey = { species: 'Chansey', ability: 'naturalcure', moves: ['softboiled'] };
+		battle = common.createBattle({ formatid: 'gen9fnafvgcnonrestricted', forceRandomChance: true }, [[
+			{ species: 'Nightmare Freddy', ability: 'intimidate', moves: ['feargas', 'protect'] },
+			chansey,
+		], [
+			chansey,
+			{ species: 'Weezing', ability: 'neutralizinggas', moves: ['protect'] },
+			{ species: 'Metagross', ability: 'clearbody', moves: ['irondefense'] },
+			chansey,
+		]]);
+		battle.makeChoices('team 12', 'team 1234');
+		battle.makeChoices('move feargas, move softboiled', 'move softboiled, switch 3');
+		assert(battle.p2.active[0].volatiles['yawn']);
+		assert(!battle.p2.active[1].volatiles['yawn'], 'a Steel type should be immune');
+		battle.makeChoices('move protect, move softboiled', 'move softboiled, switch 3');
+		assert.equal(battle.p2.active[0].status, 'slp');
+		battle.makeChoices('move feargas, move softboiled', 'move softboiled, move protect');
+		battle.makeChoices('move feargas, move softboiled', 'move softboiled, move protect');
+		assert(!battle.p2.active[1].volatiles['yawn'], 'a Poison type should be immune');
+	});
+
+	it('should fail against a target that already has a status condition', () => {
+		battle = common.createBattle({ formatid: 'gen9fnafsingles@@@!Team Preview', forceRandomChance: true }, [[
+			{ species: 'Nightmare Freddy', ability: 'intimidate', moves: ['feargas', 'toxic'] },
+		], [
+			{ species: 'Chansey', ability: 'serenegrace', moves: ['softboiled'] },
+		]]);
+		battle.makeChoices('move toxic', 'move softboiled');
+		battle.makeChoices('move feargas', 'move softboiled');
+		assert(!battle.p2.active[0].volatiles['yawn']);
+	});
+});
+
 describe('Custom mod random battles', () => {
 	const randomMods = CustomMods.filter(mod => mod.randomBattles);
 	const FILES = { randombattle: 'sets.json', randomdoublesbattle: 'doubles-sets.json' };
@@ -361,9 +541,9 @@ describe('Custom mod random battles', () => {
 		const dex = Dex.mod('gen9fnaf');
 		// Why each one is an exception is in docs/fakemon/fnaf/random-battle-sets.md.
 		const EXCEPTIONS = {
-			singles: ['Birthday', 'Happy Jam', 'Distracting Voice', 'Regen Song', 'Follow Me'],
+			singles: ['Birthday', 'Happy Jam', 'Distracting Voice', 'Regen Song', 'Follow Me', 'Fear Gas'],
 			doubles: ['Hot Cheese', 'Mystery Box', 'Water Hose'],
-			both: ['Esc Key', 'Unscrew', 'Balloons', 'Munchies', 'Poppers', 'Mimic Ball', 'Fourth Wall', 'Bubble Breath'],
+			both: ['Esc Key', 'Unscrew', 'Slasher', 'Buzzsaw', 'Munchies', 'Poppers', 'Mimic Ball', 'Fourth Wall', 'Bubble Breath'],
 		};
 		const species = dex.species.all().filter(s => s.isNonstandard === 'FNAF');
 		const learnable = move => species.some(s => dex.species.getLearnsetData(s.id).learnset?.[move.id]);

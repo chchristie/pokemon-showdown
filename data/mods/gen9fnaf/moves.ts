@@ -44,7 +44,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	balloons: {
 		isNonstandard: "FNAF",
 		num: -3,
-		accuracy: 90,
+		accuracy: 100,
 		basePower: 50,
 		category: "Physical",
 		name: "Balloons",
@@ -756,8 +756,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	sludge: {
 		isNonstandard: "FNAF",
 		num: -33,
-		accuracy: 95,
-		basePower: 55,
+		accuracy: 100,
+		basePower: 40,
 		category: "Special",
 		name: "Sludge",
 		pp: 15,
@@ -765,15 +765,16 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		flags: { protect: 1, mirror: 1, metronome: 1 },
 		secondary: {
 			chance: 100,
+			status: 'psn',
 			boosts: {
 				spe: -1,
 			},
 		},
-		target: "allAdjacentFoes",
+		target: "normal",
 		type: "Poison",
 		contestType: "Beautiful",
-		desc: "Has a 100% chance to lower the target's Speed by 1 stage.",
-		shortDesc: "100% chance to lower the foe(s) Speed by 1.",
+		desc: "Has a 100% chance to poison the target and lower its Speed by 1 stage.",
+		shortDesc: "100% chance to poison the target and lower Speed by 1.",
 	},
 	speedsong: {
 		isNonstandard: "FNAF",
@@ -851,22 +852,33 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	toxicbite: {
 		isNonstandard: "FNAF",
 		num: -37,
-		accuracy: 100,
-		basePower: 50,
-		category: "Special",
+		accuracy: 90,
+		basePower: 65,
+		category: "Physical",
 		name: "Toxic Bite",
-		pp: 20,
+		pp: 15,
 		priority: 0,
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1 },
-		secondary: {
-			chance: 100,
-			status: 'psn',
+		onAfterHit(target, source, move) {
+			if (!move.hasSheerForce) {
+				for (const side of source.side.foeSidesWithConditions()) {
+					side.addSideCondition('toxicspikes');
+				}
+			}
 		},
+		onAfterSubDamage(damage, target, source, move) {
+			if (!move.hasSheerForce && source.hp) {
+				for (const side of source.side.foeSidesWithConditions()) {
+					side.addSideCondition('toxicspikes');
+				}
+			}
+		},
+		secondary: {}, // Sheer Force-boosted
 		target: "normal",
 		type: "Poison",
 		contestType: "Tough",
-		desc: "Has a 100% chance to poison the target.",
-		shortDesc: "100% chance to poison the target.",
+		desc: "If this move is successful, it sets up a hazard on the opposing side of the field, poisoning each opposing Pokemon that switches in, unless it is a Flying-type Pokemon or has the Levitate Ability. A maximum of two layers may be set, and opponents become poisoned with one layer and badly poisoned with two layers. Can be removed from the opposing side if any Pokemon uses Tidy Up, or if any opposing Pokemon uses Mortal Spin, Rapid Spin, or Defog successfully, is hit by Defog, or a grounded Poison-type Pokemon switches in.",
+		shortDesc: "Sets a layer of Toxic Spikes on the opposing side.",
 	},
 	unscrew: {
 		isNonstandard: "FNAF",
@@ -1208,6 +1220,30 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		},
 		desc: "Lowers the target's evasiveness by 1 stage. If this move is successful and whether or not the target's evasiveness was affected, the effects of Reflect, Light Screen, Aurora Veil, Neon Wall, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, and Sticky Web end for the user's side. Ignores a target's substitute, although a substitute will still block the lowering of evasiveness. If there is a terrain active and this move is successful, the terrain will be cleared.",
 	},
+	feargas: {
+		isNonstandard: "FNAF",
+		num: -50,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		name: "Fear Gas",
+		pp: 10,
+		priority: 0,
+		flags: { protect: 1, reflectable: 1, mirror: 1, metronome: 1 },
+		onTryImmunity(target) {
+			return !target.hasType(['Poison', 'Steel']);
+		},
+		onHit(target, source) {
+			if (target.status || !target.runStatusImmunity('slp')) return false;
+			return target.addVolatile('yawn', source);
+		},
+		target: "allAdjacentFoes",
+		type: "Poison",
+		zMove: { boost: { spe: 1 } },
+		contestType: "Clever",
+		desc: "Causes the target to fall asleep at the end of the next turn. Fails when used if the target cannot fall asleep or if it already has a non-volatile status condition. At the end of the next turn, if the target is still active, does not have a non-volatile status condition, and can fall asleep, it falls asleep. If the target becomes affected, this effect cannot be prevented by Safeguard or a substitute, or by falling asleep and waking up during the effect. Poison-type and Steel-type Pokemon are immune to this move.",
+		shortDesc: "Puts non-Poison/Steel foe(s) to sleep after 1 turn.",
+	},
 	// Past-generation moves re-enabled because FNAF learnsets use them.
 	ominouswind: {
 		inherit: true,
@@ -1234,6 +1270,13 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		isNonstandard: null,
 	},
 	assist: {
+		inherit: true,
+		isNonstandard: null,
+	},	nightmare: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	trickortreat: {
 		inherit: true,
 		isNonstandard: null,
 	},

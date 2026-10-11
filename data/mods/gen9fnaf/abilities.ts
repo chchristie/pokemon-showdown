@@ -82,4 +82,75 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		shortDesc: "This Pokemon's damaging moves lower the target's accuracy by 1.",
 		desc: "When this Pokemon damages a target with a move, that target's accuracy is lowered by 1 stage. A multi-hit move lowers it only once per target. Has no effect if the move hits a substitute.",
 	},
+	funwithplushtrap: {
+		isNonstandard: "FNAF",
+		onStart(pokemon) {
+			this.effectState.targeted = false;
+			this.effectState.unwatched = false;
+		},
+		onTryHitPriority: 10,
+		onTryHit(target, source, move) {
+			if (target !== source && !target.isAlly(source) && !move.spreadHit) this.effectState.targeted = true;
+		},
+		onResidualOrder: 29,
+		onResidual(pokemon) {
+			// Only a full turn on the field counts
+			this.effectState.unwatched = !this.effectState.targeted && pokemon.activeTurns > 0;
+			this.effectState.targeted = false;
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (this.effectState.unwatched && move?.category === 'Status') {
+				this.add('-activate', pokemon, 'ability: Fun with Plushtrap');
+				return priority + 1;
+			}
+		},
+		flags: {},
+		name: "Fun with Plushtrap",
+		num: -6,
+		rating: 3.5,
+		shortDesc: "If no foe's move targeted only this Pokemon last turn, its Status moves get +1 priority.",
+		desc: "If this Pokemon was not the only target of a move used by an opposing Pokemon during the previous turn, its non-damaging moves have their priority increased by 1. Has no effect unless this Pokemon was on the field for the full previous turn. A move used on this Pokemon is still counted if it missed or was blocked by a protection move.",
+	},
+	funwithballoonboy: {
+		isNonstandard: "FNAF",
+		onStart(pokemon) {
+			this.effectState.targeted = false;
+			this.effectState.unwatched = false;
+		},
+		onTryHitPriority: 10,
+		onTryHit(target, source, move) {
+			if (target !== source && !target.isAlly(source) && !move.spreadHit) this.effectState.targeted = true;
+		},
+		onResidualOrder: 29,
+		onResidual(pokemon) {
+			// Only a full turn on the field counts
+			this.effectState.unwatched = !this.effectState.targeted && pokemon.activeTurns > 0;
+			this.effectState.targeted = false;
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (this.effectState.unwatched && move?.category !== 'Status') {
+				this.add('-activate', pokemon, 'ability: Fun with Balloon Boy');
+				return priority + 1;
+			}
+		},
+		flags: {},
+		name: "Fun with Balloon Boy",
+		num: -7,
+		rating: 3.5,
+		shortDesc: "If no foe's move targeted only this Pokemon last turn, its attacks get +1 priority.",
+		desc: "If this Pokemon was not the only target of a move used by an opposing Pokemon during the previous turn, its damaging moves have their priority increased by 1. Has no effect unless this Pokemon was on the field for the full previous turn. A move used on this Pokemon is still counted if it missed or was blocked by a protection move.",
+	},
+	// Base-game ability opened up to Phantom Puppet.
+	poisonpuppeteer: {
+		inherit: true,
+		onAnyAfterSetStatus(status, target, source, effect) {
+			if (!['Pecharunt', 'Phantom Puppet'].includes(source.baseSpecies.name)) return;
+			if (source !== this.effectState.target || target === source || effect.effectType !== 'Move') return;
+			if (status.id === 'psn' || status.id === 'tox') {
+				target.addVolatile('confusion');
+			}
+		},
+		desc: "If this Pokemon is a Pecharunt or a Phantom Puppet and poisons or badly poisons a target, the target also becomes confused.",
+		shortDesc: "Pecharunt/Phantom Puppet: If this Pokemon poisons a target, it also becomes confused.",
+	},
 };

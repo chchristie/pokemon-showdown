@@ -342,13 +342,13 @@
 			{
 				"role": "Bulky Setup",
 				"movepool": ["Bulk Up", "Knock Off", "Poltergeist", "Sucker Punch"],
-				"abilities": ["Infiltrator"],
+				"abilities": ["Dark Aura"],
 				"teraTypes": ["Dark", "Fairy"]
 			},
 			{
 				"role": "Bulky Attacker",
 				"movepool": ["Knock Off", "Poltergeist", "Will-O-Wisp", "Pain Split", "Sucker Punch"],
-				"abilities": ["Infiltrator"],
+				"abilities": ["Dark Aura"],
 				"teraTypes": ["Steel", "Fairy"]
 			}
 		]
@@ -359,13 +359,13 @@
 			{
 				"role": "Fast Attacker",
 				"movepool": ["Earth Power", "Sludge Wave", "Fire Blast", "Shadow Ball"],
-				"abilities": ["Poison Point"],
+				"abilities": ["Toxic Chain"],
 				"teraTypes": ["Ground", "Poison"]
 			},
 			{
 				"role": "Bulky Support",
 				"movepool": ["Earth Power", "Sludge Bomb", "Toxic Spikes", "Will-O-Wisp", "Pain Split", "Gloom Song"],
-				"abilities": ["Poison Point"],
+				"abilities": ["Toxic Chain"],
 				"teraTypes": ["Water", "Flying"]
 			}
 		]
@@ -375,7 +375,7 @@
 		"sets": [
 			{
 				"role": "Bulky Attacker",
-				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Pain Split"],
+				"movepool": ["Sludge", "Venoshock", "Thunderbolt", "Pain Split"],
 				"abilities": ["Merciless"],
 				"teraTypes": ["Poison", "Electric"]
 			},
@@ -387,7 +387,7 @@
 			},
 			{
 				"role": "AV Pivot",
-				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Volt Switch"],
+				"movepool": ["Sludge", "Venoshock", "Thunderbolt", "Volt Switch"],
 				"abilities": ["Merciless"],
 				"teraTypes": ["Poison", "Electric"]
 			}
@@ -399,7 +399,7 @@
 			{
 				"role": "Fast Attacker",
 				"movepool": ["Aura Sphere", "Sludge Bomb", "Shadow Ball", "Fire Blast", "Focus Blast"],
-				"abilities": ["Corrosion"],
+				"abilities": ["Well-Baked Body"],
 				"teraTypes": ["Fighting", "Poison"],
 				"items": ["Illusion Disc"]
 			},
@@ -451,14 +451,255 @@
 			{
 				"role": "Setup Sweeper",
 				"movepool": ["Nasty Plot", "Moonblast", "Sludge Bomb", "Mystical Fire", "Psyshock"],
-				"abilities": ["Toxic Chain"],
+				"abilities": ["Levitate", "Well-Baked Body"],
 				"teraTypes": ["Fairy", "Steel"]
 			},
 			{
 				"role": "Fast Attacker",
 				"movepool": ["Moonblast", "Sludge Bomb", "Mystical Fire", "Shadow Ball", "Hot Cheese"],
-				"abilities": ["Toxic Chain"],
+				"abilities": ["Levitate", "Well-Baked Body"],
 				"teraTypes": ["Fairy", "Poison"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Toxic", "Venoshock", "Moonblast", "Mystical Fire"],
+				"abilities": ["Poison Puppeteer"],
+				"teraTypes": ["Fairy", "Steel"]
+			}
+		]
+	},
+	"nightmarefreddy": {
+		"level": 82,
+		"sets": [
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Freddles", "Bone Rush", "Rock Blast", "Sucker Punch"],
+				"abilities": ["Skill Link"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Bulk Up", "Freddles", "Bone Rush", "Rock Blast"],
+				"abilities": ["Skill Link"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Earthquake", "Super Bite", "Knock Off", "Sucker Punch", "Taunt"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Fairy"]
+			}
+		]
+	},
+	"nightmarebonnie": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Double-Edge", "Super Bite", "Drain Punch", "U-turn"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Normal", "Dark"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Double-Edge", "Knock Off", "Drain Punch"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Normal", "Dark"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Knock Off", "Super Fang", "U-turn", "Taunt", "Encore", "Pizza Wheel"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Fairy"]
+			}
+		]
+	},
+	"nightmarechica": {
+		"level": 83,
+		"sets": [
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Dragon Dance", "Super Bite", "Dragon Claw", "Roost"],
+				"abilities": ["Multiscale"],
+				"teraTypes": ["Steel", "Fairy"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Super Bite", "Outrage", "Bad Pizza", "Roost"],
+				"abilities": ["Multiscale"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Roost", "Dragon Tail", "Knock Off", "Bad Pizza", "Taunt", "Water Hose"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Steel", "Poison"]
+			}
+		]
+	},
+	"nightmarefoxy": {
+		"level": 82,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Close Combat", "Super Bite", "Sucker Punch"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Fast Attacker",
+				"movepool": ["Close Combat", "Knock Off", "Super Bite", "Mach Punch", "Hook"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Hypnosis", "Swords Dance", "Close Combat", "Super Bite"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Dark", "Fighting"]
+			}
+		]
+	},
+	"nightmaremangle": {
+		"level": 85,
+		"sets": [
+			{
+				"role": "Fast Support",
+				"movepool": ["Sticky Web", "U-turn", "Knock Off", "Bug Buzz", "Taunt"],
+				"abilities": ["Tangling Hair"],
+				"teraTypes": ["Poison", "Steel"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["First Impression", "Super Bite", "Sucker Punch", "U-turn", "Leech Life"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Bug", "Dark"]
+			}
+		]
+	},
+	"nightmareballoonboy": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Mega Bite", "Brave Bird", "Balloons", "U-turn", "Sucker Punch"],
+				"abilities": ["Fun with Balloon Boy"],
+				"teraTypes": ["Dark", "Flying"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Parting Shot", "Will-O-Wisp", "Knock Off", "Balloons"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"plushtrap": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Bulky Support",
+				"movepool": ["Spore", "Knock Off", "Horn Leech", "Synthesis", "Leech Seed"],
+				"abilities": ["Fun with Plushtrap"],
+				"teraTypes": ["Poison", "Steel"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Spore", "Leech Seed", "Substitute", "Knock Off"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"jackobonnie": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Tera Blast user",
+				"movepool": ["Jack-O-Bomb", "Leaf Storm", "Giga Drain", "Tera Blast"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Fairy", "Water"]
+			},
+			{
+				"role": "Tera Blast user",
+				"movepool": ["Sunny Day", "Jack-O-Bomb", "Solar Beam", "Tera Blast"],
+				"abilities": ["Solar Power"],
+				"teraTypes": ["Fairy", "Ground"]
+			},
+			{
+				"role": "Fast Support",
+				"movepool": ["Jack-O-Bomb", "Giga Drain", "Will-O-Wisp", "Haunting"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Fire", "Steel"]
+			}
+		]
+	},
+	"jackochica": {
+		"level": 84,
+		"sets": [
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Jack-O-Bomb", "Solar Beam", "Roost", "Will-O-Wisp"],
+				"abilities": ["Drought"],
+				"teraTypes": ["Fire", "Grass"]
+			},
+			{
+				"role": "Bulky Support",
+				"movepool": ["Roost", "Will-O-Wisp", "Jack-O-Bomb", "Giga Drain"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Steel", "Water"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Trick Room", "Jack-O-Bomb", "Solar Beam", "Roost"],
+				"abilities": ["Drought"],
+				"teraTypes": ["Fire", "Grass"]
+			}
+		]
+	},
+	"nightmarefredbear": {
+		"level": 79,
+		"sets": [
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Mega Bite", "Toxic Bite", "Psychic Fangs", "Fire Fang"],
+				"abilities": ["Strong Jaw"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Bulky Setup",
+				"movepool": ["Bulk Up", "Mega Bite", "Psychic Fangs", "Toxic Bite"],
+				"abilities": ["Strong Jaw"],
+				"teraTypes": ["Dark", "Poison"]
+			},
+			{
+				"role": "Bulky Attacker",
+				"movepool": ["Mega Bite", "Earthquake", "Toxic Bite", "Taunt"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"nightmare": {
+		"level": 79,
+		"sets": [
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Swords Dance", "Mega Bite", "Sucker Punch", "Toxic Bite"],
+				"abilities": ["Dark Aura"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Wallbreaker",
+				"movepool": ["Mega Bite", "Sucker Punch", "Toxic Bite", "Superpower"],
+				"abilities": ["Dark Aura"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Setup Sweeper",
+				"movepool": ["Hypnosis", "Swords Dance", "Mega Bite", "Earthquake"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Dark", "Ground"]
 			}
 		]
 	},
@@ -467,7 +708,7 @@
 		"sets": [
 			{
 				"role": "Setup Sweeper",
-				"movepool": ["Swords Dance", "Poltergeist", "Knock Off", "Sucker Punch"],
+				"movepool": ["Swords Dance", "Poltergeist", "Knock Off", "Prize Ball"],
 				"abilities": ["Tough Claws"],
 				"teraTypes": ["Ghost", "Dark"]
 			},
@@ -479,7 +720,7 @@
 			},
 			{
 				"role": "Fast Attacker",
-				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Shadow Claw"],
+				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Prize Ball"],
 				"abilities": ["Tough Claws"],
 				"teraTypes": ["Ghost", "Dark"]
 			}

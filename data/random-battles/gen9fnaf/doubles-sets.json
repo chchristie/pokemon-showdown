@@ -159,18 +159,10 @@
 			},
 			{
 				"role": "Choice Item user",
-				"movepool": ["Thunderbolt", "Hurricane", "Volt Switch", "Prize Ball"],
+				"movepool": ["Thunderbolt", "Hurricane", "Volt Switch", "Bolt Beak"],
 				"abilities": ["Download"],
 				"teraTypes": ["Electric", "Flying"]
-			},
-			{
-				"role": "Choice Item user",
-				"movepool": ["Bolt Beak", "Hurricane", "Volt Switch", "Prize Ball"],
-				"abilities": ["Download"],
-				"teraTypes": ["Electric"],
-				"items": ["Choice Scarf"]
 			}
-
 		]
 	},
 	"mangle": {
@@ -184,11 +176,19 @@
 			},
 			{
 				"role": "Offensive Protect",
-				"movepool": ["First Impression", "Thunderbolt", "Protect", "U-turn"],
+				"movepool": ["First Impression", "Thunderbolt", "Protect", "U-turn", "Prize Ball"],
 				"abilities": ["Download"],
 				"teraTypes": ["Bug"],
 				"items": ["Illusion Disc"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Thunderbolt", "Struggle Bug", "Electroweb", "Prize Ball"],
+				"abilities": ["Download"],
+				"teraTypes": ["Bug"],
+				"items": ["Choice Scarf"]
 			}
+
 		]
 	},
 	"balloonboy": {
@@ -321,7 +321,7 @@
 			},
 			{
 				"role": "Offensive Protect",
-				"movepool": ["Dazzling Gleam", "Shadow Ball", "Mystical Fire", "Protect", "Thunderbolt"],
+				"movepool": ["Dazzling Gleam", "Shadow Ball", "Mystical Fire", "Protect", "Thunderbolt", "Prize Ball"],
 				"abilities": ["Soul-Heart"],
 				"teraTypes": ["Fairy", "Ghost"],
 				"items": ["Illusion Disc"]
@@ -331,7 +331,14 @@
 				"movepool": ["Revival Blessing", "Life Dew", "Draining Kiss", "Give Gifts, Give Life"],
 				"abilities": ["Triage"],
 				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Mystical Fire", "Dazzling Gleam", "Shadow Ball", "Prize Ball"],
+				"abilities": ["Soul-Heart"],
+				"teraTypes": ["Fairy", "Ghost"]
 			}
+
 		]
 	},
 	"paperpals": {
@@ -364,7 +371,7 @@
 			{
 				"role": "Doubles Wallbreaker",
 				"movepool": ["Trick Room", "Poltergeist", "Knock Off", "Protect"],
-				"abilities": ["Infiltrator"],
+				"abilities": ["Dark Aura"],
 				"teraTypes": ["Dark", "Ghost"]
 			}
 		]
@@ -375,19 +382,19 @@
 			{
 				"role": "Doubles Bulky Attacker",
 				"movepool": ["Earth Power", "Sludge Bomb", "Heat Wave", "Protect"],
-				"abilities": ["Poison Point"],
+				"abilities": ["Toxic Chain"],
 				"teraTypes": ["Ground", "Water"]
 			},
 			{
 				"role": "Bulky Protect",
-				"movepool": ["Earth Power", "Sludge", "Gloom Song", "Protect"],
-				"abilities": ["Poison Point"],
+				"movepool": ["Earth Power", "Gloom Song", "Rainy Day", "Heat Wave", "Protect"],
+				"abilities": ["Toxic Chain"],
 				"teraTypes": ["Water", "Steel"]
 			},
 			{
 				"role": "Choice Item user",
-				"movepool": ["Earth Power", "Sludge Bomb", "Heat Wave", "Shadow Ball"],
-				"abilities": ["Poison Point"],
+				"movepool": ["Earth Power", "Sludge Bomb", "Heat Wave", "Gloom Song"],
+				"abilities": ["Toxic Chain"],
 				"teraTypes": ["Ground", "Poison"]
 			}
 		]
@@ -397,13 +404,13 @@
 		"sets": [
 			{
 				"role": "Doubles Bulky Attacker",
-				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Protect"],
+				"movepool": ["Sludge", "Venoshock", "Thunderbolt", "Protect"],
 				"abilities": ["Merciless"],
 				"teraTypes": ["Poison", "Electric"]
 			},
 			{
 				"role": "Doubles Bulky Attacker",
-				"movepool": ["Toxic Bite", "Venoshock", "Thunderbolt", "Electroweb"],
+				"movepool": ["Sludge", "Venoshock", "Thunderbolt", "Electroweb"],
 				"abilities": ["Merciless"],
 				"teraTypes": ["Poison", "Electric"]
 			}
@@ -415,14 +422,14 @@
 			{
 				"role": "Doubles Fast Attacker",
 				"movepool": ["Aura Sphere", "Sludge Bomb", "Heat Wave", "Protect", "Shadow Ball"],
-				"abilities": ["Corrosion"],
+				"abilities": ["Well-Baked Body"],
 				"teraTypes": ["Fighting", "Poison"],
 				"items": ["Illusion Disc"]
 			},
 			{
 				"role": "Doubles Wallbreaker",
 				"movepool": ["Jumpscare", "Aura Sphere", "Sludge Bomb", "Heat Wave"],
-				"abilities": ["Corrosion"],
+				"abilities": ["Well-Baked Body"],
 				"teraTypes": ["Fighting", "Poison"]
 			}
 		]
@@ -467,20 +474,268 @@
 			{
 				"role": "Offensive Protect",
 				"movepool": ["Dazzling Gleam", "Sludge Bomb", "Heat Wave", "Protect", "Moonblast"],
-				"abilities": ["Toxic Chain"],
+				"abilities": ["Levitate", "Well-Baked Body"],
 				"teraTypes": ["Fairy", "Poison"]
 			},
 			{
 				"role": "Doubles Setup Sweeper",
 				"movepool": ["Nasty Plot", "Moonblast", "Sludge Bomb", "Protect"],
-				"abilities": ["Toxic Chain"],
+				"abilities": ["Levitate", "Well-Baked Body"],
 				"teraTypes": ["Fairy", "Steel"]
 			},
 			{
 				"role": "Choice Item user",
 				"movepool": ["Dazzling Gleam", "Moonblast", "Sludge Bomb", "Heat Wave"],
-				"abilities": ["Toxic Chain"],
+				"abilities": ["Levitate", "Well-Baked Body"],
 				"teraTypes": ["Fairy", "Poison"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Poison Gas", "Venoshock", "Dazzling Gleam", "Protect"],
+				"abilities": ["Poison Puppeteer"],
+				"teraTypes": ["Fairy", "Steel"]
+			}
+		]
+	},
+	"nightmarefreddy": {
+		"level": 49,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Freddles", "Bone Rush", "Rock Blast", "Protect"],
+				"abilities": ["Skill Link"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Freddles", "Bone Rush", "Rock Blast", "Arm Thrust"],
+				"abilities": ["Skill Link"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Doubles Bulky Attacker",
+				"movepool": ["High Horsepower", "Super Bite", "Knock Off", "Sucker Punch", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Fear Gas", "High Horsepower", "Knock Off", "Protect"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"nightmarebonnie": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Doubles Fast Attacker",
+				"movepool": ["Fake Out", "Double-Edge", "Super Bite", "Protect"],
+				"abilities": ["Unseen Fist"],
+				"teraTypes": ["Normal", "Dark"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Double-Edge", "Super Bite", "Knock Off", "Drain Punch", "U-turn"],
+				"abilities": ["Unseen Fist"],
+				"teraTypes": ["Normal", "Dark"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Fake Out", "Knock Off", "Super Fang", "Taunt", "Encore", "U-turn"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Ghost"]
+			}
+		]
+	},
+	"nightmarechica": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Doubles Bulky Attacker",
+				"movepool": ["Super Bite", "Dragon Claw", "Bad Pizza", "Breaking Swipe", "Protect"],
+				"abilities": ["Multiscale"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Tailwind", "Cupcake", "Breaking Swipe", "Knock Off", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Steel", "Poison"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Fear Gas", "Tailwind", "Knock Off", "Protect"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Steel", "Poison"]
+			}
+		]
+	},
+	"nightmarefoxy": {
+		"level": 49,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Jumpscare", "Close Combat", "Super Bite", "Protect"],
+				"abilities": ["Stalwart"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Close Combat", "Super Bite", "Knock Off", "Mach Punch", "Hook", "Final Gambit"],
+				"abilities": ["Stalwart"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Jumpscare", "Wide Guard", "Close Combat", "Knock Off", "Coaching"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"nightmaremangle": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Doubles Support",
+				"movepool": ["Snarl", "Electroweb", "Struggle Bug", "Taunt", "Protect"],
+				"abilities": ["Tangling Hair"],
+				"teraTypes": ["Poison", "Steel"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Snarl", "Electroweb", "U-turn", "Struggle Bug"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"],
+				"items": ["Choice Scarf"]
+			}
+		]
+	},
+	"nightmareballoonboy": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Mega Bite", "Balloons", "Brave Bird", "Protect"],
+				"abilities": ["Fun with Balloon Boy"],
+				"teraTypes": ["Dark", "Flying"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Tailwind", "Parting Shot", "Will-O-Wisp", "Balloons", "Mega Bite", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"plushtrap": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Doubles Support",
+				"movepool": ["Spore", "Rage Powder", "Sucker Punch", "Horn Leech"],
+				"abilities": ["Fun with Plushtrap", "Intimidate", "Bad Dreams"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"jackobonnie": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Heat Wave", "Jack-O-Bomb", "Will-O-Wisp", "Giga Drain", "Leaf Storm", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Fire", "Grass"]
+			},
+			{
+				"role": "Doubles Wallbreaker",
+				"movepool": ["Sunny Day", "Heat Wave", "Solar Beam", "Protect"],
+				"abilities": ["Solar Power"],
+				"teraTypes": ["Fire", "Grass"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Will-O-Wisp", "Haunting", "Heat Wave", "Snarl", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Fire", "Steel"]
+			}
+		]
+	},
+	"jackochica": {
+		"level": 50,
+		"sets": [
+			{
+				"role": "Doubles Bulky Attacker",
+				"movepool": ["Heat Wave", "Jack-O-Bomb", "Solar Beam", "Protect"],
+				"abilities": ["Drought"],
+				"teraTypes": ["Fire", "Grass"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Tailwind", "Heat Wave", "Will-O-Wisp", "Protect"],
+				"abilities": ["Drought"],
+				"teraTypes": ["Steel", "Water"]
+			},
+			{
+				"role": "Doubles Wallbreaker",
+				"movepool": ["Trick Room", "Heat Wave", "Solar Beam", "Protect"],
+				"abilities": ["Drought"],
+				"teraTypes": ["Fire", "Grass"]
+			}
+		]
+	},
+	"nightmarefredbear": {
+		"level": 47,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Mega Bite", "Toxic Bite", "Psychic Fangs", "Protect"],
+				"abilities": ["Strong Jaw"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Mega Bite", "Toxic Bite", "Fire Fang", "Psychic Fangs"],
+				"abilities": ["Strong Jaw"],
+				"teraTypes": ["Dark", "Ground"]
+			},
+			{
+				"role": "Doubles Bulky Attacker",
+				"movepool": ["Mega Bite", "High Horsepower", "Rock Slide", "Protect"],
+				"abilities": ["Intimidate"],
+				"teraTypes": ["Poison", "Steel"]
+			}
+		]
+	},
+	"nightmare": {
+		"level": 47,
+		"sets": [
+			{
+				"role": "Offensive Protect",
+				"movepool": ["Mega Bite", "Sucker Punch", "Superpower", "Protect"],
+				"abilities": ["Dark Aura"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Doubles Setup Sweeper",
+				"movepool": ["Swords Dance", "Mega Bite", "Sucker Punch", "Protect"],
+				"abilities": ["Dark Aura"],
+				"teraTypes": ["Dark", "Poison"]
+			},
+			{
+				"role": "Choice Item user",
+				"movepool": ["Mega Bite", "Sucker Punch", "Superpower", "Toxic Bite"],
+				"abilities": ["Dark Aura"],
+				"teraTypes": ["Dark", "Fighting"]
+			},
+			{
+				"role": "Doubles Support",
+				"movepool": ["Fear Gas", "Mega Bite", "Superpower", "Protect"],
+				"abilities": ["Bad Dreams"],
+				"teraTypes": ["Poison", "Steel"]
 			}
 		]
 	},
@@ -489,7 +744,7 @@
 		"sets": [
 			{
 				"role": "Offensive Protect",
-				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Protect"],
+				"movepool": ["Poltergeist", "Prize Ball", "Sucker Punch", "Protect"],
 				"abilities": ["Tough Claws"],
 				"teraTypes": ["Ghost", "Dark"],
 				"items": ["Illusion Disc"]
@@ -502,7 +757,7 @@
 			},
 			{
 				"role": "Choice Item user",
-				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Shadow Claw"],
+				"movepool": ["Poltergeist", "Knock Off", "Sucker Punch", "Prize Ball"],
 				"abilities": ["Tough Claws"],
 				"teraTypes": ["Ghost", "Dark"]
 			}
