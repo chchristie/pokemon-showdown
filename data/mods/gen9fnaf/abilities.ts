@@ -140,7 +140,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		shortDesc: "If no foe's move targeted only this Pokemon last turn, its attacks get +1 priority.",
 		desc: "If this Pokemon was not the only target of a move used by an opposing Pokemon during the previous turn, its damaging moves have their priority increased by 1. Has no effect unless this Pokemon was on the field for the full previous turn. A move used on this Pokemon is still counted if it missed or was blocked by a protection move.",
 	},
-	// Base-game ability opened up to Phantom Puppet.
+	// Allow Phantom Puppet to have the ability.
 	poisonpuppeteer: {
 		inherit: true,
 		onAnyAfterSetStatus(status, target, source, effect) {
